@@ -2,7 +2,7 @@
 title: "Yusuf Imaad Khan"
 ---
 
-This is a Quarto website.
+Hi this is my website built with Quarto. It's currently under construction!
 
 To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
 
