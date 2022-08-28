@@ -12,7 +12,7 @@ website:
         text: Home
       - href: blog.qmd
         text: Rogue Analysis
-      #- about.qmd
+      #- about.qmd - replace this with resources
     right:
       - icon: github
         href: https://github.com/yusufimaadkhan
