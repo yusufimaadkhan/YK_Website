@@ -1,5 +1,5 @@
 ---
-title: "My Blog - Rogue Analysis"
+title: "Rogue Analysis (Blog)"
 listing:
   contents: posts
   sort: "date desc"

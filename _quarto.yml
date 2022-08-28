@@ -12,18 +12,21 @@ website:
         text: Home
       - href: blog.qmd
         text: Rogue Analysis
+      - resources.qmd
       #- about.qmd - replace this with resources
     right:
-      - icon: github
-        href: https://github.com/yusufimaadkhan
-        aria-label: GitHub
-      - icon: twitter
-        href: https://twitter.com/yusuf_i_k 
-        aria-label: Twitter
-      - href: https://philpeople.org/profiles/yusuf-imaad-khan
-        text: PhilPeople
+      - text: "Connect"
+        menu:
+          - icon: twitter
+            href: https://twitter.com/yusuf_i_k 
+            aria-label: Twitter
+          - icon: github
+            href: https://github.com/yusufimaadkhan
+            aria-label: GitHub
+          - href: https://philpeople.org/profiles/yusuf-imaad-khan
+            text: PhilPeople
   page-footer:
-    right: "This website was built with [Quarto](https://quarto.org/), [GitHub](https://github.com/), and deployed with [Netlify](https://netlify.com/). License: [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)."
+    right: "This website was built with [Quarto](https://quarto.org/), [GitHub](https://github.com/), and [Netlify](https://netlify.com/). License: [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)."
 
 
 format:
