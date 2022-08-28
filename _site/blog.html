@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Yusuf Imaad Khan - Home</title>
+<title>Yusuf Imaad Khan - My Blog - Rogue Analysis</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -24,6 +24,8 @@ ul.task-list{list-style: none;}
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -54,12 +56,36 @@ ul.task-list{list-style: none;}
     "search-submit-button-title": "Submit"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-listing .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-date','listing-title','listing-author','listing-image','listing-description','listing-categories',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-date-sort'] },{ data: ['listing-file-modified-sort'] }],
+      
+      searchColumns: ["listing-date","listing-title","listing-author","listing-image","listing-description","listing-categories"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-listing'] = new List('listing-listing', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+  </script>
+
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed fullcontent">
+<body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -74,10 +100,10 @@ ul.task-list{list-style: none;}
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page">Home</a>
+    <a class="nav-link" href="./index.html">Home</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blog.html">Rogue Analysis</a>
+    <a class="nav-link active" href="./blog.html" aria-current="page">Rogue Analysis</a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
@@ -104,38 +130,82 @@ ul.task-list{list-style: none;}
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<header id="title-block-header" class="quarto-title-block default page-columns page-full">
+  <div class="quarto-title-banner page-columns page-full">
+    <div class="quarto-title column-body">
+      <h1 class="title">My Blog - Rogue Analysis</h1>
+                </div>
+  </div>
+    
+  
+
+
+
+  <div class="quarto-title-meta">
+
+      
+      
+    </div>
+    
+  
+  </header><div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(1)</span></div><div class="category" data-category="stuff">stuff <span class="quarto-category-count">(1)</span></div></div></div>
 <!-- main -->
-<div class="quarto-about-solana column-body">
-  <div class="about-entity">
-    <div class="entity-contents">
-      <header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Home</h1>
-</div>
-<div class="quarto-title-meta">
-  </div>
-</header> <div class="about-links">
-  <a href="https://github.com/yusufimaadkhan" class="about-link">GitHub</a>
-  <a href="https://twitter.com/yusuf_i_k" class="about-link">Twitter</a>
-  <a href="https://philpeople.org/profiles/yusuf-imaad-khan" class="about-link">PhilPeople</a>
-</div>
-      <div class="about-contents"><main class="content" id="quarto-document-content">
-<p>I am about to start an <a href="https://www.lse.ac.uk/study-at-lse/Graduate/degree-programmes-2022/MResPhD-Political-Science">MRes/PhD</a> in the <a href="https://www.lse.ac.uk/government">Department of Government at the London School of Economics</a>. My plan is to work somewhere between political philosophy and social epistemology.</p>
-<p>I completed my <a href="https://www.lse.ac.uk/study-at-lse/Graduate/degree-programmes-2022/MSc-Philosophy-of-the-Social-Sciences">MSc in the Philosophy of the Social Sciences</a> at the LSE in the <a href="https://www.lse.ac.uk/philosophy/">Department of Philosophy, Logic, and Scientific Method</a>. Before that, I completed my <a href="https://www.cardiff.ac.uk/study/undergraduate/courses/course/philosophy-and-economics-ba">BA in Philosophy and Economics</a> at <a href="https://www.cardiff.ac.uk/">Cardiff University</a>.</p>
-<p>In between my studies, I worked in the <a href="https://www.gov.uk/government/organisations/civil-service-government-economic-service">government economic service</a> in a few roles including international climate finance and local policy analysis.</p>
+<main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
 
-</main></div>
-    </div>
-    <img src="profile_large.jpg" class="about-image
-  rounded " style="width: 15em;">
-  </div>
+
+
+
+
+
+
+<div class="quarto-listing quarto-listing-container-default" id="listing-listing">
+<div class="list quarto-listing-default">
+<div class="quarto-post image-right" data-index="0" data-categories="stuff" data-listing-date-sort="1661382000000" data-listing-file-modified-sort="1661645365925" data-listing-reading-time-sort="0.06">
+<div class="thumbnail">
+<p><a href="./posts/welcome/index.html"> <img src="./posts/welcome/images/Aivazovsky_-_View_of_Constantinople_and_the_Bosphorus.jpg" class="thumnail-image"> </a></p>
 </div>
- <!-- /main -->
+<div class="body">
+<a href="./posts/welcome/index.html">
+<h3 class="no-anchor listing-title">
+Welcome
+</h3>
+<div class="listing-subtitle">
+
+</div>
+</a>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('stuff'); return false;">
+stuff
+</div>
+</div>
+<a href="./posts/welcome/index.html">
+<div class="listing-description">
+I’ll fill this in properly in a bit. For now…a nice pic:
+</div>
+</a>
+</div>
+<div class="metadata">
+<a href="./posts/welcome/index.html">
+<div class="listing-date">
+Aug 25, 2022
+</div>
+<div class="listing-author">
+Yusuf Imaad Khan
+</div>
+</a>
+</div>
+</div>
+</div>
+<div class="listing-no-matching d-none">
+No matching items
+</div>
+</div></main> <!-- /main -->
 <script type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const disableStylesheet = (stylesheets) => {

@@ -1,0 +1,10 @@
+---
+title: "Welcome"
+author: "Yusuf Imaad Khan"
+date: "2022-08-25"
+categories: [stuff]
+---
+
+I'll fill this in properly in a bit. For now...a nice pic:
+
+![](images/Aivazovsky_-_View_of_Constantinople_and_the_Bosphorus.jpg){fig-align="center"}

@@ -1,5 +1,7 @@
 project:
   type: website
+  resources: 
+    - "_redirects"
 
 website:
   title: "Yusuf Imaad Khan"
@@ -8,6 +10,8 @@ website:
     left:
       - href: index.qmd
         text: Home
+      - href: blog.qmd
+        text: Rogue Analysis
       #- about.qmd
     right:
       - icon: github
