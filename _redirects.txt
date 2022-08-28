@@ -3,3 +3,4 @@
 http://blog.yusufimaadkhan.com/* https://www.yusufimaadkhan.com/posts/:splat 301!
 https://blog.yusufimaadkhan.com/* https://www.yusufimaadkhan.com/posts/:splat 301!
 https://blog.yusufimaadkhan.com https://www.yusufimaadkhan.com/blog :splat 301!
+https://www.yusufimaadkhan.com/blog/* https://www.yusufimaadkhan.com/blog/:splat 301!
