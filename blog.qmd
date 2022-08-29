@@ -5,8 +5,8 @@ listing:
   sort: "date desc"
   type: default
   categories: true
-  sort-ui: false
-  filter-ui: false
+  sort-ui: true #false
+  filter-ui: true #false
 page-layout: full
-title-block-banner: true
+#title-block-banner: true
 ---

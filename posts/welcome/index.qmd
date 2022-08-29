@@ -1,16 +1,115 @@
 ---
-title: "Welcome"
+title: "Welcome to Rogue Analysis"
 author: "Yusuf Imaad Khan"
 date: "2022-08-28"
-categories: [stuff]
+categories: [Introductions]
+code-fold: true
 ---
 
-I'll fill this in properly in a bit. For now...a nice pic:
+## Introduction
 
-![](images/Aivazovsky_-_View_of_Constantinople_and_the_Bosphorus.jpg){fig-align="center"}
+Hi. I'm Yusuf and this is my blog - [***"Rogue Analysis"***]{.underline}. I'd like to join the community of philosophy blogs, practice my writing, and clarify a few thoughts.
 
-*View of Constantinople and the Bosphorus -*
+## Why is my blog called that?
 
-*Ivan Aivazovsky*
+So why the *edgy* blog name? Well beyond it being a fun name, and feeling like I wasn't embarrassingly edgy enough on the internet in my younger years:
 
-*Айвазовский / 1856*
+1.  I've just resigned from being an analyst in the civil service to go and do some research in political philosophy
+
+2.  The name came from a colleague remarking it would be great if there was some unit called "Rogue Analysis" that undertook analytical work with little oversight and a wide remit
+
+3.  It seemed like a suitably capacious name to cover things I'd like to write about:
+
+-   Political Philosophy
+
+-   Social Epistemology
+
+-   Philosophy of Social Science
+
+-   Public Policy
+
+-   Data Visualisation
+
+-   Mario Kart (okay I'm hoping to put some lighthearted stuff here too)
+
+## A note on form
+
+I'd like to use this space to experiment with combining visuals/text/literate programming in a way that supports openness and clarity[^1]. To achieve this, my website is built with an open source publishing system called [Quarto](https://quarto.org/). With Quarto you can do stuff like easily chuck this interactive visual of [Schelling's model of segregation](https://en.wikipedia.org/wiki/Schelling%27s_model_of_segregation) built by [Graham McNeil](https://observablehq.com/@gjmcn/atomic-agents-schellings-model-of-segregation?collection=@gjmcn/atomic-agents)[^2] right into your blog[^3]:
+
+[^1]: I've spent some time studying data visualisation because I like how it embodies these ideals. It would be cool if I can combine that with my philosophical interests.
+
+[^2]: I've literally just copy and pasted Graham's excellent code from [here](https://observablehq.com/@gjmcn/atomic-agents-schellings-model-of-segregation?collection=@gjmcn/atomic-agents) with a few minor edits
+
+[^3]: Now this isn't particularly novel - I've seen it done with Javascript and Mathematica elsewhere. Its just that Quarto makes it easier to integrate stuff using multiple languages into one polished piece.
+
+```{ojs}
+viewof seed = Inputs.range([0.01, 0.99], {value: 0.01, step: 0.01, label: "random seed"})
+
+viewof squaresPerSide = Inputs.range([10, 120], {value: 80, step: 1, label: "squares per side"});
+
+viewof fractionEmpty = Inputs.range([0.01, 0.1], {value: 0.02, step: 0.01, label: "fraction empty"});
+
+viewof moveThreshold = Inputs.range([0, 1], {value: 0.3, step: 0.01, label: "move threshold"})
+```
+
+```{ojs}
+
+AA = import('https://cdn.skypack.dev/@gjmcn/atomic-agents@0.1.6?min');
+
+AV = import('https://cdn.skypack.dev/@gjmcn/atomic-agents-vis@0.4.1?min')
+
+{
+  
+  // simulation
+  AA.random.seed(seed);
+  const sim = new AA.Simulation({
+    width: squaresPerSide * 5,
+    height: squaresPerSide * 5,
+    gridStep: 5
+  });
+  invalidation.then(() => sim.end());
+  
+  // initialise each square to land type 0, 1 or 2 (empty)
+  const nEmpty = Math.round(sim.squares.size * fractionEmpty);
+  for (let [i, sq] of AA.shuffle([...sim.squares]).entries()) {
+    sq.label('land', i < nEmpty ?  2 : i % 2);
+  }
+  
+  // get unhappy
+  const unhappy = () => sim.squares.filter(sq => {
+    const land = sq.label('land');
+    if (land === 2) return false;
+    const layer = sq.layer();
+    return layer.reduce((count, neb) => count + (neb.label('land') === land), 0) / 
+           layer.reduce((count, neb) => count + (neb.label('land') !== 2), 0)
+             < moveThreshold;
+  }, true);
+
+  // each tick, move unhappy to random empty
+  const rand = AA.random.int(nEmpty);
+  sim.beforeTick = () => {
+    for (let sq of AA.shuffle(unhappy())) {
+      [...sim.withLabel('land', 2)][rand()]  // clunky - copying xset to array each step
+        .label('land', sq.label('land'));
+      sq.label('land', 2);
+    }
+  };
+  
+  // vis
+  const tints = [AV.colors.blue, AV.colors.orange, 0xbbbbbb];
+  sim.squares.forEach(sq => {
+    sq.zIndex = -Infinity
+    sq.vis({tint: sq => tints[sq.label('land')]});
+  });
+  return AV.visObs(sim, {
+    stats: true,
+    backParticles: true,
+  });
+}
+
+
+```
+
+The code button even lets you see the underlying code used to make it! I'm hoping to experiment a bit further with this stuff, but I don't want to get carried away with shiny things.
+
+Anyway I think that's long enough for an intro post. Here's to hoping it will go okay!

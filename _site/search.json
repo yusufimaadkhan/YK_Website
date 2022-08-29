@@ -18,7 +18,7 @@
     "href": "blog.html",
     "title": "Rogue Analysis (Blog)",
     "section": "",
-    "text": "stuff\n\n\n\n\n\n\n\n\n\n\n\nAug 28, 2022\n\n\nYusuf Imaad Khan\n\n\n\n\n\n\nNo matching items"
+    "text": "Order By\n       Default\n         \n          Title\n        \n         \n          Date - Oldest\n        \n         \n          Date - Newest\n        \n         \n          Author\n        \n     \n  \n    \n      \n      \n    \n\n\n\n\n\n\n\n\n\n\n\n\nIntroductions\n\n\n\n\n\n\n\n\n\n\n\nAug 28, 2022\n\n\nYusuf Imaad Khan\n\n\n\n\n\n\nNo matching items"
   },
   {
     "objectID": "posts/post-with-code/index.html",
@@ -30,9 +30,9 @@
   {
     "objectID": "posts/welcome/index.html",
     "href": "posts/welcome/index.html",
-    "title": "Welcome",
+    "title": "Welcome to Rogue Analysis",
     "section": "",
-    "text": "View of Constantinople and the Bosphorus -\nIvan Aivazovsky\nАйвазовский / 1856"
+    "text": "Hi. I’m Yusuf and this is my blog - “Rogue Analysis”. I’d like to join the community of philosophy blogs, practice my writing, and clarify a few thoughts."
   },
   {
     "objectID": "resources.html",
@@ -40,5 +40,47 @@
     "title": "Resources",
     "section": "",
     "text": "Will fill this in shortly!"
+  },
+  {
+    "objectID": "posts/mario/index.html",
+    "href": "posts/mario/index.html",
+    "title": "Analysis of Mario Kart",
+    "section": "",
+    "text": "USE THE LINE UP THING FROM OBSERVABLE"
+  },
+  {
+    "objectID": "posts/welcome/index.html#why-is-your-blog-called-that",
+    "href": "posts/welcome/index.html#why-is-your-blog-called-that",
+    "title": "Welcome to Rogue Analysis",
+    "section": "Why is your blog called that?",
+    "text": "Why is your blog called that?\nSo why the edgy blog name? Well beyond it being a fun name, and feeling like I missed out on my chance to be embarrassingly edgy on the internet in my formative years:\n\nI’ve just resigned from being an analyst in the civil service to go and do some research in political philosophy.\nThe name came from a colleague remarking it would be great if there was some unit called “Rogue Analysis” that undertook analytical work with little oversight and a wide remit\nIt seemed like a suitably capacious name to cover things I’d like to write about:\n\n\nPolitical Philosophy\nSocial Epistemology\nPhilosophy of Social Science\nData Visualisation\nMario Kart\nWhy the government are:\n\n\nimport {checkbox} from \"@jashkenas/inputs\"\nviewof ch = checkbox([\"Stupid\", \"Cruel\", \"Insane\"])"
+  },
+  {
+    "objectID": "posts/welcome/index.html#deeper-motivations",
+    "href": "posts/welcome/index.html#deeper-motivations",
+    "title": "Welcome to Rogue Analysis",
+    "section": "Deeper Motivations",
+    "text": "Deeper Motivations"
+  },
+  {
+    "objectID": "posts/welcome/index.html#why-is-my-blog-called-that",
+    "href": "posts/welcome/index.html#why-is-my-blog-called-that",
+    "title": "Welcome to Rogue Analysis",
+    "section": "Why is my blog called that?",
+    "text": "Why is my blog called that?\nSo why the edgy blog name? Well beyond it being a fun name, and feeling like I wasn’t embarrassingly edgy enough on the internet in my younger years:\n\nI’ve just resigned from being an analyst in the civil service to go and do some research in political philosophy\nThe name came from a colleague remarking it would be great if there was some unit called “Rogue Analysis” that undertook analytical work with little oversight and a wide remit\nIt seemed like a suitably capacious name to cover things I’d like to write about:\n\n\nPolitical Philosophy\nSocial Epistemology\nPhilosophy of Social Science\nPublic Policy\nData Visualisation\nMario Kart (okay I’m hoping to put some lighthearted stuff here too)"
+  },
+  {
+    "objectID": "posts/welcome/index.html#some-further-motivations",
+    "href": "posts/welcome/index.html#some-further-motivations",
+    "title": "Welcome to Rogue Analysis",
+    "section": "Some further motivations",
+    "text": "Some further motivations\n\nRuthless criticism\nOn further reflection there are a few more strands of thought that tie in to what I hope to weave here. For one, Marx’s well known call for “ruthless criticism”:\n\n“If we have no business with the construction of the future or with organizing it for all time, there can still be no doubt about the task confronting us at present: the ruthless criticism of the existing order, ruthless in that it will shrink neither from its own discoveries, nor from conflict with the powers that be.”\n(Letter from Marx to Ruge - September 1843 - Accessible here.)\n\nI like the spirit here, and of particular interest to me is “conflict with the powers that be”. I am moving from a role that required political impartiality, to work that should be about far-reaching social and political criticism. Its a bit of a jarring transition, but its what I want to do. Reflecting on Marx’s words reminds me to resist slipping back into a weird political existence where policy is happening close by, but the range of acceptable criticism is minuscule.\n\n\nPhilosophy and public policy\nAnother strand of thought is the role of philosophy in public policy. I hope to write on matters of public policy. But here I agree with Chomsky that professional training in philosophy does not confer any “specific competence” to critique public policy, but it is a concern for philosophy:\n\n“There is no profession that can claim with greater authenticity that its concern is the intellectual culture of the society or that it possesses the tools for the analysis of ideology and the critique of social knowledge and its use.”\n\nThat said.\n\n\nThe open source community and its tools\nA final strand of thought is the open source community and its tools. I am quite taken"
+  },
+  {
+    "objectID": "posts/welcome/index.html#a-note-on-form",
+    "href": "posts/welcome/index.html#a-note-on-form",
+    "title": "Welcome to Rogue Analysis",
+    "section": "A note on form",
+    "text": "A note on form\nI’d like to use this space to experiment with combining visuals/text/literate programming in a way that supports openness and clarity1. To achieve this, my website is built with an open source publishing system called Quarto. With Quarto you can do stuff like easily chuck this interactive visual of Schelling’s model of segregation built by Graham McNeil2 right into your blog3:\n\n\nCode\nviewof seed = Inputs.range([0.01, 0.99], {value: 0.01, step: 0.01, label: \"random seed\"})\n\nviewof squaresPerSide = Inputs.range([10, 120], {value: 80, step: 1, label: \"squares per side\"});\n\nviewof fractionEmpty = Inputs.range([0.01, 0.1], {value: 0.02, step: 0.01, label: \"fraction empty\"});\n\nviewof moveThreshold = Inputs.range([0, 1], {value: 0.3, step: 0.01, label: \"move threshold\"})\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nCode\nAA = import('https://cdn.skypack.dev/@gjmcn/atomic-agents@0.1.6?min');\n\nAV = import('https://cdn.skypack.dev/@gjmcn/atomic-agents-vis@0.4.1?min')\n\n{\n  \n  // simulation\n  AA.random.seed(seed);\n  const sim = new AA.Simulation({\n    width: squaresPerSide * 5,\n    height: squaresPerSide * 5,\n    gridStep: 5\n  });\n  invalidation.then(() => sim.end());\n  \n  // initialise each square to land type 0, 1 or 2 (empty)\n  const nEmpty = Math.round(sim.squares.size * fractionEmpty);\n  for (let [i, sq] of AA.shuffle([...sim.squares]).entries()) {\n    sq.label('land', i < nEmpty ?  2 : i % 2);\n  }\n  \n  // get unhappy\n  const unhappy = () => sim.squares.filter(sq => {\n    const land = sq.label('land');\n    if (land === 2) return false;\n    const layer = sq.layer();\n    return layer.reduce((count, neb) => count + (neb.label('land') === land), 0) / \n           layer.reduce((count, neb) => count + (neb.label('land') !== 2), 0)\n             < moveThreshold;\n  }, true);\n\n  // each tick, move unhappy to random empty\n  const rand = AA.random.int(nEmpty);\n  sim.beforeTick = () => {\n    for (let sq of AA.shuffle(unhappy())) {\n      [...sim.withLabel('land', 2)][rand()]  // clunky - copying xset to array each step\n        .label('land', sq.label('land'));\n      sq.label('land', 2);\n    }\n  };\n  \n  // vis\n  const tints = [AV.colors.blue, AV.colors.orange, 0xbbbbbb];\n  sim.squares.forEach(sq => {\n    sq.zIndex = -Infinity\n    sq.vis({tint: sq => tints[sq.label('land')]});\n  });\n  return AV.visObs(sim, {\n    stats: true,\n    backParticles: true,\n  });\n}\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nThe code button even lets you see the underlying code used to make it! I’m hoping to experiment a bit further with this stuff, but I don’t want to get carried away with shiny things.\nAnyway I think that’s long enough for an intro post. Here’s to hoping it will go okay!"
   }
 ]

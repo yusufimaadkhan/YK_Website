@@ -13,7 +13,6 @@ website:
       - href: blog.qmd
         text: Rogue Analysis
       - resources.qmd
-      #- about.qmd - replace this with resources
     right:
       - text: "Connect"
         menu:
@@ -26,7 +25,7 @@ website:
           - href: https://philpeople.org/profiles/yusuf-imaad-khan
             text: PhilPeople
   page-footer:
-    right: "This website was built with [Quarto](https://quarto.org/), [GitHub](https://github.com/), and [Netlify](https://netlify.com/). License: [CC BY-SA 2.0](https://creativecommons.org/licenses/by-sa/2.0/)."
+    right: "This website was built with [Quarto](https://quarto.org/), [GitHub](https://github.com/), and [Netlify](https://netlify.com/)."
 
 
 format:
