@@ -1,7 +1,7 @@
 project:
   type: website
-  resources: 
-    - "_redirects"
+  #resources: 
+    #- "_redirects"
 
 website:
   title: "Yusuf Imaad Khan"
