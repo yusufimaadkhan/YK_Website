@@ -4,9 +4,6 @@ image: profile_large.jpg
 about:
   template: solana
   links:
-    - icon: envelope 
-      text: Email
-      href: yusuf.imaad.khan@gmail.com
     - icon: twitter
       text: Twitter
       href: https://twitter.com/yusuf_i_k 
