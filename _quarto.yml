@@ -11,19 +11,26 @@ website:
       - href: index.qmd
         text: Home
       - href: blog.qmd
-        text: Rogue Analysis
-      - resources.qmd
+        text: Blog - Rogue Analysis
+      - href: resources.qmd
+        text: Resources 
     right:
       - text: "Connect"
         menu:
+          - icon: envelope
+            text: Email
+            href: yusuf.imaad.khan@gmail.com
           - icon: twitter
+            text: Twitter
             href: https://twitter.com/yusuf_i_k 
             aria-label: Twitter
           - icon: github
+            text: Github
             href: https://github.com/yusufimaadkhan
             aria-label: GitHub
-          - href: https://philpeople.org/profiles/yusuf-imaad-khan
+          - icon: person  
             text: PhilPeople
+            href: https://philpeople.org/profiles/yusuf-imaad-khan
   page-footer:
     right: "This website was built with [Quarto](https://quarto.org/), [GitHub](https://github.com/), and [Netlify](https://netlify.com/)."
 
@@ -35,6 +42,6 @@ format:
       dark: cyborg #darkly
     css: styles.css
     toc: true
-
+    
 editor: visual
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-0.9.328">
+<meta name="generator" content="quarto-1.1.251">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -11,30 +11,36 @@
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
-span.underline{text-decoration: underline;}
-div.column{display: inline-block; vertical-align: top; width: 50%;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
 div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1.6em;
+  vertical-align: middle;
+}
 </style>
+
 
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
-<meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-search/autocomplete.umd.js"></script>
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link class="quarto-color-scheme" id="quarto-text-highlighting-styles" href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet">
-<link class="quarto-color-scheme quarto-color-alternate" rel="prefetch" id="quarto-text-highlighting-styles" href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link class="quarto-color-scheme" href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet">
-<link class="quarto-color-scheme quarto-color-alternate" rel="prefetch" href="site_libs/bootstrap/bootstrap-dark.min.css">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -65,9 +71,11 @@ ul.task-list{list-style: none;}
   <header id="quarto-header" class="headroom fixed-top">
     <nav class="navbar navbar-expand-lg navbar-dark ">
       <div class="navbar-container container-fluid">
-      <a class="navbar-brand" href="./index.html">
+      <div class="navbar-brand-container">
+    <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Yusuf Imaad Khan</span>
-  </a>
+    </a>
+  </div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -77,7 +85,7 @@ ul.task-list{list-style: none;}
     <a class="nav-link" href="./index.html">Home</a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./blog.html">Rogue Analysis</a>
+    <a class="nav-link" href="./blog.html">Blog - Rogue Analysis</a>
   </li>  
   <li class="nav-item">
     <a class="nav-link active" href="./resources.html" aria-current="page">Resources</a>
@@ -88,17 +96,23 @@ ul.task-list{list-style: none;}
     <a class="nav-link dropdown-toggle" href="#" id="nav-menu-connect" role="button" data-bs-toggle="dropdown" aria-expanded="false">Connect</a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-connect">    
         <li>
+    <a class="dropdown-item" href="./yusuf.imaad.khan@gmail.com"><i class="bi bi-envelope" role="img">
+</i> 
+ <span class="dropdown-text">Email</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="https://twitter.com/yusuf_i_k"><i class="bi bi-twitter" role="img" aria-label="Twitter">
 </i> 
- <span class="dropdown-text"></span></a>
+ <span class="dropdown-text">Twitter</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="https://github.com/yusufimaadkhan"><i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
- <span class="dropdown-text"></span></a>
+ <span class="dropdown-text">Github</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://philpeople.org/profiles/yusuf-imaad-khan">
+    <a class="dropdown-item" href="https://philpeople.org/profiles/yusuf-imaad-khan"><i class="bi bi-person" role="img">
+</i> 
  <span class="dropdown-text">PhilPeople</span></a>
   </li>  
     </ul>
@@ -117,7 +131,31 @@ ul.task-list{list-style: none;}
 <!-- sidebar -->
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#what-is-this" id="toc-what-is-this" class="nav-link active" data-scroll-target="#what-is-this">What is this?</a></li>
+  <li><a href="#workflow" id="toc-workflow" class="nav-link" data-scroll-target="#workflow">Workflow</a>
+  <ul class="collapse">
+  <li><a href="#plain-text" id="toc-plain-text" class="nav-link" data-scroll-target="#plain-text">Plain Text?</a></li>
+  <li><a href="#taking-notes" id="toc-taking-notes" class="nav-link" data-scroll-target="#taking-notes">Taking Notes</a></li>
+  </ul></li>
+  <li><a href="#grad-school-in-philosophypolitical-theory" id="toc-grad-school-in-philosophypolitical-theory" class="nav-link" data-scroll-target="#grad-school-in-philosophypolitical-theory">Grad School in Philosophy/Political Theory</a>
+  <ul class="collapse">
+  <li><a href="#mentoring" id="toc-mentoring" class="nav-link" data-scroll-target="#mentoring">Mentoring</a></li>
+  <li><a href="#networks" id="toc-networks" class="nav-link" data-scroll-target="#networks">Networks</a></li>
+  <li><a href="#philosophy-grad-school-tips" id="toc-philosophy-grad-school-tips" class="nav-link" data-scroll-target="#philosophy-grad-school-tips">Philosophy Grad School Tips</a></li>
+  </ul></li>
+  <li><a href="#data-visualisation" id="toc-data-visualisation" class="nav-link" data-scroll-target="#data-visualisation">Data Visualisation</a>
+  <ul class="collapse">
+  <li><a href="#websites" id="toc-websites" class="nav-link" data-scroll-target="#websites">Websites</a></li>
+  <li><a href="#books" id="toc-books" class="nav-link" data-scroll-target="#books">Books</a></li>
+  <li><a href="#videos" id="toc-videos" class="nav-link" data-scroll-target="#videos">Videos</a></li>
+  </ul></li>
+  <li><a href="#making-a-website" id="toc-making-a-website" class="nav-link" data-scroll-target="#making-a-website">Making a Website</a></li>
+  </ul>
+</nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -126,8 +164,6 @@ ul.task-list{list-style: none;}
 <div class="quarto-title">
 <h1 class="title">Resources</h1>
 </div>
-
-
 
 
 
@@ -140,16 +176,133 @@ ul.task-list{list-style: none;}
 
 </header>
 
-<p>Will fill this in shortly!</p>
-<blockquote class="blockquote">
-<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-</blockquote>
+<section id="what-is-this" class="level2">
+<h2 class="anchored" data-anchor-id="what-is-this">What is this?</h2>
+<p>Here are a bunch of resources that <em>might</em> be handy for somebody looking to get into philosophy/political theory, or generally interested in the content I’ve put on Rogue Analysis (okay <em>plan</em> to put on Rogue Analysis). It isn’t meant to be exhaustive, just stuff I’ve personally found useful.</p>
+<p><strong>CAVEATS:</strong></p>
+<ul>
+<li><p>I have yet to use some of these resources fully, but they seem useful to share</p></li>
+<li><p>This page may be a bit of a “living document”, so potentially there will be changes</p></li>
+<li><p>Possibly not even worth saying, but none/some/all of this may or may not be helpful</p></li>
+</ul>
+<p>In any case:</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="images/Collage_2022-09-09_14_32_45.jpg" class="img-fluid figure-img" width="398"></p>
+</figure>
+</div>
+</section>
+<section id="workflow" class="level2">
+<h2 class="anchored" data-anchor-id="workflow">Workflow</h2>
+<p>I am trying to sort all my tools out now so I can just focus on reading/writing without unnecessary headaches. I vacillate between thinking I should just return to pen + paper or use fancy tools because they might have cool epistemic benefits. You can skip this part if you’re happy with your set up.</p>
+<section id="plain-text" class="level3">
+<h3 class="anchored" data-anchor-id="plain-text">Plain Text?</h3>
+<p>I hadn’t really given my workflow much thought until recently. After a bit of browsing I came across <a href="https://kieranhealy.org/publications/plain-person-text/">“The Plain Person’s Guide to Plain Text Social Science.” by Kieran Healy</a>. This is addressed at new grad students deciding what software to use for their work. Healy makes the case for using tools that <em>“give you more control over the process of data analysis and writing”</em>. This seems like a good idea.</p>
+<p>Now I’m not following this guide to the letter, but its convinced me to implement some decent version control, use open source tools where possible, and write papers in markdown for easier formatting. Worth a look, but no use upending your workflow if you have a system that works for you.</p>
+</section>
+<section id="taking-notes" class="level3">
+<h3 class="anchored" data-anchor-id="taking-notes">Taking Notes</h3>
+<p>Okay a confession - I do not have a good set up for <em>digital</em> note taking. I want to experiment a bit and see what works. Maybe it seems ridiculous that I haven’t sorted this out yet, but there are umpteen note taking apps that do cool things and could help me out.</p>
+<p>Generally I want to move to some kind of plain text set up because it enables a focus on content rather than format, would enable easy conversion to other formats, and allow for easy version control. <a href="https://plaintext-productivity.net/2-01-why-plaintext-for-notes.html">See here for some benefits of plain text notes</a>. Currently I’m messing with some horrible mix of:</p>
+<ul>
+<li><p>OneNote (not plain text)</p></li>
+<li><p>Simplenote</p></li>
+<li><p>Obsidian</p></li>
+<li><p>GitJournal</p></li>
+</ul>
+</section>
+</section>
+<section id="grad-school-in-philosophypolitical-theory" class="level2">
+<h2 class="anchored" data-anchor-id="grad-school-in-philosophypolitical-theory">Grad School in Philosophy/Political Theory</h2>
+<section id="mentoring" class="level3">
+<h3 class="anchored" data-anchor-id="mentoring">Mentoring</h3>
+<p>The Minorities and Philosophy UK branch offer a <a href="https://www.mapforthegap.org.uk/our-mentor-scheme">mentoring scheme for marginalised people</a> in academic philosophy. This is for any UK philosophy student or researcher who consider themselves to be members of a marginalised group.</p>
+</section>
+<section id="networks" class="level3">
+<h3 class="anchored" data-anchor-id="networks">Networks</h3>
+<p>It can be helpful to join some philosophy networks to stay in the loop for papers/discussions/developments/conferences. I’ve found these networks to be useful:</p>
+<ul>
+<li><p>Philosophy twitter</p></li>
+<li><p><a href="https://philpeople.org/news">PhilPeople</a></p></li>
+<li><p>The community being created by the wonderful people at <a href="https://philosophyexchange.org/">Philosophy Exchange</a></p></li>
+<li><p><a href="https://www.liverpool.ac.uk/philosophy/philos-l/">Liverpool List email list</a></p></li>
+</ul>
+</section>
+<section id="philosophy-grad-school-tips" class="level3">
+<h3 class="anchored" data-anchor-id="philosophy-grad-school-tips">Philosophy Grad School Tips</h3>
+<p>We’ll see how well this pans out, but I came across these two pieces that gave me suggestions to consider and a bit of reassurance:</p>
+<ul>
+<li><p><a href="http://liz-jackson.com/wp-content/uploads/2020/07/12-tips-for-philosophy-grad-school.pdf">12 Tips for Success in Philosophy Graduate School</a> - Liz Jackson</p></li>
+<li><p><a href="http://justice-everywhere.org/academia/6-tips-for-graduate-political-theory-students/" title="6 Tips for Graduate Political Theory Students">6 Tips for Graduate Political Theory Students</a> - Bruno Leipold</p></li>
+</ul>
+</section>
+</section>
+<section id="data-visualisation" class="level2">
+<h2 class="anchored" data-anchor-id="data-visualisation">Data Visualisation</h2>
+<section id="websites" class="level3">
+<h3 class="anchored" data-anchor-id="websites">Websites</h3>
+<p>Some great sources for R visuals:</p>
+<ul>
+<li><p><a href="https://www.r-graph-gallery.com/index.html">R Graph Gallery</a> - great examples and ideas. Absolutely brilliant site that taught me a lot</p></li>
+<li><p><a href="https://www.data-to-viz.com/">Data to Viz</a>- even more great ideas and examples</p></li>
+<li><p><a href="http://gallery.htmlwidgets.org/">htmlwidgets for R</a> - cool interactivey stuff</p></li>
+</ul>
+<p>and D3/Observable:</p>
+<ul>
+<li><p><a href="https://d3-graph-gallery.com/">D3 Graph Gallery</a></p></li>
+<li><p><a href="https://observablehq.com/explore">Observable</a> (how do more people not use this?)</p></li>
+</ul>
+</section>
+<section id="books" class="level3">
+<h3 class="anchored" data-anchor-id="books">Books</h3>
+<ul>
+<li><p><a href="https://r4ds.had.co.nz/">R for Data Science</a></p></li>
+<li><p><a href="https://ggplot2-book.org/">ggplot2: Elegant Graphics for Data Analysis</a></p></li>
+<li><p><a href="https://socviz.co/">Data Visualization: A Practical Introduction</a></p></li>
+<li><p><a href="https://urbanspatial.github.io/PublicPolicyAnalytics/index.html#">Public Policy Analytics: Code &amp; Context for Data Science in Government</a></p></li>
+<li><p><a href="http://www.hdip-data-analytics.com/_media/resources/interactive_data_visualization_for_the_web_2nd_edition.pdf">Scott Murray’s Interactive Data Visualization for the Web</a></p></li>
+</ul>
+</section>
+<section id="videos" class="level3">
+<h3 class="anchored" data-anchor-id="videos">Videos</h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=HPJn1CMvtmI">A channel with some great videos on ggplot</a></li>
+</ul>
+</section>
+</section>
+<section id="making-a-website" class="level2">
+<h2 class="anchored" data-anchor-id="making-a-website">Making a Website</h2>
+<p>I made this website using Quarto, Github, and Netlify. I found these resources useful to get going:</p>
+<ul>
+<li><p><a href="https://quarto.org/docs/websites/">Quarto Documentation</a></p></li>
+<li><p><a href="https://beamilz.com/posts/2022-06-05-creating-a-blog-with-quarto/en/">Creating a blog with Quarto in 10 steps</a> - Beatriz Milz</p></li>
+<li><p><a href="https://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide.html">The ultimate guide to starting a Quarto blog</a> - Albert Rapp</p></li>
+</ul>
 
 
+</section>
 
 </main> <!-- /main -->
-<script type="application/javascript">
+<script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
   const disableStylesheet = (stylesheets) => {
     for (let i=0; i < stylesheets.length; i++) {
       const stylesheet = stylesheets[i];
@@ -179,8 +332,14 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     manageTransitions('#quarto-margin-sidebar .nav-link', false);
     if (alternate) {
       enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
     } else {
       disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
     }
     manageTransitions('#quarto-margin-sidebar .nav-link', true);
     // Switch the toggles
@@ -194,6 +353,16 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
           toggle.classList.remove("alternate");
         }
       }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
     }
   }
   const isFileUrl = () => { 
@@ -296,7 +465,8 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   for (var i=0; i<noterefs.length; i++) {
     const ref = noterefs[i];
     tippyHover(ref, function() {
-      let href = ref.getAttribute('href');
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);

@@ -1,0 +1,770 @@
+---
+title: "Visualising Truss's Dodgy Donor Network _(and a Brief Look at UK Political Donations)_"
+author: "Yusuf Imaad Khan"
+date: "2022-10-9"
+categories: [Networks, Corruption, Politics, Money, Budget]
+code-fold: true
+code-tools: true
+#code-copy: true
+---
+
+The recent £45bn "mini-budget"[^1] was a disaster in both [content](https://mainlymacro.blogspot.com/2022/09/a-budget-that-harms-everyone-except.html) and [consequence](https://www.ft.com/content/1ace8d42-f3ee-4fdd-a103-5cd4234e8c42). This is [widely understood](https://yougov.co.uk/topics/politics/articles-reports/2022/09/27/mini-budget-gets-worst-reception-any-financial-sta). To believe it was about growth is beyond a joke. The government claimed that **tax cuts for the rich** will somehow lead to growth that will boost wages and support public services. This is either [unsupported by the evidence](https://academic.oup.com/ser/article/20/2/539/6500315), or the [opposite is true.](https://www.opendemocracy.net/en/truss-kwarteng-tax-cuts-rich-growth/) *Shockingly*, it turns out that tax cuts for the rich (who spend less and save more as a proportion of their income) will just benefit the rich.
+
+[^1]: See the [IFS Mini-Budget response](https://ifs.org.uk/articles/mini-budget-response) pointing out the scale of the cuts and how ridiculous it is to call mini. "*Today's 'mini-budget' is anything but mini. In fact, it represents the biggest tax cut to the planned level of tax of any budget since 1972, outdoing even Nigel Lawson's 1988 Budget in which the top rate of income tax was reduced from 60% to 40%*". A move intended to sideline the OBR so they wouldn't release gloomy forecasts accompanying the fiscal event.
+
+[The government then U-turned](https://www.ft.com/content/29ebdd94-8c13-48fa-8718-4c86cce902a8) on plans to abolish the 45p additional rate of tax. For now, this still leaves [roughly £43bn](https://assets.publishing.service.gov.uk/government/uploads/system/uploads/attachment_data/file/1105965/Table_4.2_The_Growth_Plan_policy_decisions.xlsx) (by 2026-27) of tax cuts such as the cancelled increase in corporation tax from 19% to 25%, the reversal of the temporary increase in national insurance, and the cancellation of the Health and Social Care Levy[^2].
+
+[^2]: Which still ought to be criticised for meeting the tax burden through national insurance. Other options included a windfall tax on corporations who made excess profits during COVID, raising corporation tax in general, and crucially [new wealth taxes](https://commonslibrary.parliament.uk/research-briefings/cdp-2022-0105/).
+
+So why are the government doing this? Simple. **Truss and her cabinet are sock puppets for corporate power to further their own interests** - not a novel feature of politics. Perhaps they genuinely believe, against the evidence, that tax cuts will create growth and prosperity for all. If so, we should pity them and their ideological delusions - not partake in them.
+
+A [recent article in the Byline Times](https://bylinetimes.com/2022/09/09/truss-network-who-are-the-new-prime-ministers-donors-and-advisors/) highlights the influence of corporate power by investigating Truss's donors who collectively gave £424,349 to her campaign. [The Guardian updated this figure](https://www.theguardian.com/politics/2022/oct/05/liz-truss-raised-500000-for-bid-to-be-leader-register-of-interests-reveals) with new information taking the donation amounts to over £500,000. These articles draw on the [MP's register of interests](https://publications.parliament.uk/pa/cm/cmregmem/220905/Updates%20-%209%20August%20-%205%20September%202022.pdf) and reveal a dodgy network of billionaires, hedge fund managers, investment bankers, and others that will use the government to enrich themselves at the expense of everyone else.
+
+**If the remaining tax cuts in the "mini-budget" pass, this will concentrate the wealth of this dodgy network further, and give them even more power to buy off the government.**
+
+In this post, I wanted to explore a way of visualising this network of dodgy donors, and explore the landscape of UK political donations more generally.
+
+## Truss's Dodgy Network of Donors
+
+### **Two individuals were able to donate 2/3rds of Truss's campaign spending limit**[^3] **of £300k**
+
+[^3]: The UK has limits on campaign spending [but not on donations in most cases](https://www.idea.int/data-tools/country-view/137/55).
+
+*Hover over circles for information.*
+
+```{ojs}
+
+key = Swatches(chart.scales.color)
+
+graph = FileAttachment("trussj.json").json() // scraped and cleaned from byline times article
+
+//byline
+
+chart = ForceGraph(graph, {
+  nodeId: d => d.id,
+  nodeGroup: d => d.group,
+  nodeText: d => d.info,
+  nodeTitle: d => `${d.id} (${d.group}) ${d.info}`,
+  linkStrokeWidth: l => Math.sqrt(l.value)/20,
+  nodeRadius: l => Math.sqrt(l.value)/10,
+  nodeStrength: -1500, // n => (Math.sqrt(n.value, 1))*-1,
+  width,
+  height: 400,
+  invalidation // a promise to stop the simulation when the cell is re-run
+});
+
+// Fixing it
+
+// Copyright 2021 Observable, Inc. - some edits from YK
+// Released under the ISC license.
+// https://observablehq.com/@d3/disjoint-force-directed-graph
+function ForceGraph({
+  nodes, // an iterable of node objects (typically [{id}, …])
+  links // an iterable of link objects (typically [{source, target}, …])
+}, {
+  nodeId = d => d.id, // given d in nodes, returns a unique identifier (string)
+  nodeGroup, // given d in nodes, returns an (ordinal) value for color
+  nodeGroups, // an array of ordinal values representing the node groups
+  nodeTitle, // given d in nodes, a title string
+  nodeText,
+  nodeFill = "currentColor", // node stroke fill (if not using a group color encoding)
+  nodeStroke = "#fff", // node stroke color
+  nodeStrokeWidth = 0, // node stroke width, in pixels
+  nodeStrokeOpacity = 1, // node stroke opacity
+  nodeRadius = 100, // node radius, in pixels
+  nodeStrength, // = -900,
+  linkSource = ({source}) => source, // given d in links, returns a node identifier string
+  linkTarget = ({target}) => target, // given d in links, returns a node identifier string
+  linkStroke = "#999", // link stroke color
+  linkStrokeOpacity = 0.6, // link stroke opacity
+  linkStrokeWidth = 1.5, // given d in links, returns a stroke width in pixels
+  linkStrokeLinecap = "round", // link stroke linecap
+  linkStrength,
+  colors = d3.schemeTableau10, // an array of color strings, for the node groups
+  width = 640, // outer width, in pixels
+  height = 400, // outer height, in pixels
+  invalidation // when this promise resolves, stop the simulation
+} = {}) {
+  // Compute values.
+  const N = d3.map(nodes, nodeId).map(intern);
+  const LS = d3.map(links, linkSource).map(intern);
+  const LT = d3.map(links, linkTarget).map(intern);
+  if (nodeTitle === undefined) nodeTitle = (_, i) => N[i];
+  const T = nodeTitle == null ? null : d3.map(nodes, nodeTitle);
+  const G = nodeGroup == null ? null : d3.map(nodes, nodeGroup).map(intern);
+  const NT = nodeText == null ? null : d3.map(nodes, nodeText).map(intern);
+  const W = typeof linkStrokeWidth !== "function" ? null : d3.map(links, linkStrokeWidth);
+  const R = typeof nodeRadius !== "function" ? null : d3.map(links, nodeRadius);
+  const NS = typeof nodeStrength !== "function" ? null : d3.map(links, nodeStrength);
+
+  // Replace the input nodes and links with mutable objects for the simulation.
+  nodes = d3.map(nodes, (_, i) => ({id: N[i]}));
+  links = d3.map(links, (_, i) => ({source: LS[i], target: LT[i]}));
+
+  // Compute default domains.
+  if (G && nodeGroups === undefined) nodeGroups = d3.sort(G);
+
+  // Construct the scales.
+  const color = nodeGroup == null ? null : d3.scaleOrdinal(nodeGroups, colors);
+
+  // Construct the forces.
+  const forceNode = d3.forceManyBody();
+  const forceLink = d3.forceLink(links).id(({index: i}) => N[i]);
+  if (nodeStrength !== undefined) forceNode.strength(nodeStrength);
+  if (linkStrength !== undefined) forceLink.strength(linkStrength);
+
+  const simulation = d3.forceSimulation(nodes)
+      .force("link", forceLink)
+      .force("charge", forceNode)
+      .force("x", d3.forceX())
+      .force("y", d3.forceY())
+      .on("tick", ticked);
+
+  const svg = d3.create("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .attr("viewBox", [-width / 2, -height / 2, width, height])
+      .attr("style", "max-width: 100%; height: auto; height: intrinsic;");
+
+  const link = svg.append("g")
+      .attr("stroke", linkStroke)
+      .attr("stroke-opacity", linkStrokeOpacity)
+      .attr("stroke-width", typeof linkStrokeWidth !== "function" ? linkStrokeWidth : null)
+      .attr("stroke-linecap", linkStrokeLinecap)
+    .selectAll("line")
+    .data(links)
+    .join("line");
+
+  if (W) link.attr("stroke-width", ({index: i}) => W[i]);
+
+  const node = svg.append("g")
+      .attr("fill", nodeFill)
+      .attr("stroke", nodeStroke)
+      .attr("stroke-opacity", nodeStrokeOpacity)
+      .attr("stroke-width", nodeStrokeWidth)
+    .selectAll("circle")
+    .data(nodes)
+    .join("circle")
+      //.attr("r", nodeRadius)
+      .attr("r", typeof nodeRadius !== "function" ? nodeRadius : null)
+      .call(drag(simulation));
+
+  if (G) node.attr("fill", ({index: i}) => color(G[i]));
+  if (T) node.append("title").text(({index: i}) => T[i]);
+  if (R) node.attr("r", ({index: i}) => R[i]);
+  if (NS) node.attr("node-strength", ({index: i}) => NS[i]);
+
+  // Handle invalidation.
+  if (invalidation != null) invalidation.then(() => simulation.stop());
+
+  function intern(value) {
+    return value !== null && typeof value === "object" ? value.valueOf() : value;
+  }
+
+  function ticked() {
+    link
+      .attr("x1", d => d.source.x)
+      .attr("y1", d => d.source.y)
+      .attr("x2", d => d.target.x)
+      .attr("y2", d => d.target.y)
+      .attr("r", d => d.value);
+
+    node
+      .attr("cx", d => d.x)
+      .attr("cy", d => d.y);
+  }
+
+  function drag(simulation) {    
+    function dragstarted(event) {
+      if (!event.active) simulation.alphaTarget(0.3).restart();
+      event.subject.fx = event.subject.x;
+      event.subject.fy = event.subject.y;
+    }
+    
+    function dragged(event) {
+      event.subject.fx = event.x;
+      event.subject.fy = event.y;
+    }
+    
+    function dragended(event) {
+      if (!event.active) simulation.alphaTarget(0);
+      event.subject.fx = null;
+      event.subject.fy = null;
+    }
+    
+    return d3.drag()
+      .on("start", dragstarted)
+      .on("drag", dragged)
+      .on("end", dragended);
+  }
+
+  return Object.assign(svg.node(), {scales: {color}});
+}
+
+import {howto} from "@d3/example-components"
+
+import {Swatches} from "@d3/color-legend"
+
+```
+
+Here's what I've got. I scraped the Byline Times article and just visualised the information (full credit to them). The orange circle in the center is Truss. The blue circles in orbit are each of the donors. The circles and links are scaled by the £ amount of their donation. In the interest of time, I haven't got information on the additional donors mentioned in the Guardian here. So this covers £424,349 of donations.
+
+The two largest blue circles each represent £100k of donations from Fitriani Hay and Natasha Barnaba. You can hover over to see more information about them. Also of note is Andrew Law (smaller circle - southeast) - who donated £5,127. [Law hosted a champagne reception after the mini budget with Kwasi Kwarteng in attendance](https://www.ft.com/content/7f5fc97a-0446-480d-ac9a-2a5f503c7622).
+
+Anyway there is much to be improved here[^4], but I think it serves to illustrate the dodgy financing network surrounding Truss and co. In the future, I hope to return to this sort of representation after some improvement. [Obvious props to Sophie E. Hill's "My Little Crony"](https://www.sophie-e-hill.com/slides/my-little-crony/) for inspiration. Lets take it a bit further.
+
+[^4]: I really tried to make a better tooltip. But for whatever reason I can't make my better tooltip work with Quarto right now
+
+## A Brief Look at UK Political Donations
+
+So we've seen the recent donors surrounding Truss. But how do things look beyond just Truss's donors? **What does the landscape of political donations in the UK look like?** For some good general breakdowns - see the [Electoral Commissions visuals](https://www.electoralcommission.org.uk/who-we-are-and-what-we-do/financial-reporting/donations-and-loans/view-donations-and-loans/information-about-donors). For a general report on the influence of big finance on democracy in the UK, [see this report published by Positive Money over the summer](https://positivemoney.org/wp-content/uploads/2022/06/Positive-Money-The-Power-of-Big-Finance-Report-June-2022.pdf). This is an incredibly comprehensive report, and they suggest a number of recommendations that you'd think would already be implemented as common sense.
+
+Anyway, to have my own look at the landscape, I've taken data from the [Electoral Commission website](http://search.electoralcommission.org.uk/?currentPage=1&rows=10&sort=AcceptedDate&order=desc&tab=1&open=filter&et=pp&et=ppm&et=tp&et=perpar&et=rd&isIrishSourceYes=true&isIrishSourceNo=true&date=Reported&from=&to=&quarters=2022Q1234&prePoll=false&postPoll=true&register=gb&register=ni&register=none&optCols=Register&optCols=CampaigningName&optCols=AccountingUnitsAsCentralParty&optCols=IsSponsorship&optCols=IsIrishSource&optCols=RegulatedDoneeType&optCols=CompanyRegistrationNumber&optCols=Postcode&optCols=NatureOfDonation&optCols=PurposeOfVisit&optCols=DonationAction&optCols=ReportedDate&optCols=IsReportedPrePoll&optCols=ReportingPeriodName&optCols=IsBequest&optCols=IsAggregation)[^5] for political donations *reported*[^6] in 2022 to date. I am focusing on Con/Lab/Lib/SNP, and I've tidied it up like so:
+
+[^5]: I really don't blame you if you're sceptical of this source. There is probably so much more we don't know as well, but we at least have this.
+
+[^6]: You can also get the dates it was received or accepted by the donee. I've just gone for when it was reported to the commission because I have less faith in the other dates and wanted some consistency even if it comes with lag.
+
+```{r}
+#| echo: true
+#| message: false
+
+library(tidyverse)
+library(readr)
+library(scales)
+
+
+# Get list of MPs and donations from 2022
+
+mps <- read_csv("mps.csv")
+
+don <- read_csv("2022-electoral-commission-donations.csv")
+
+# Cleaning donation names
+
+don <- don %>% 
+  mutate(RegulatedEntityName = str_remove_all(RegulatedEntityName, "Dr |Ms |Mrs |Mr |The Rt Hon |Rt Hon | MP| MP |Dame |Sir ")) %>% 
+  select(DonorName,DonorStatus,RegulatedEntityName,RegulatedDoneeType,Value)
+
+
+# Merge first and last name in MPs so we can make a lookup to party
+
+mps <- mps %>%
+  select(`First name`,`Last name`, Party) %>% 
+  mutate(`Full name` = paste(`First name`,`Last name`, sep = " "))
+
+# Join donation data and MP/party lookup
+
+don_by_party <- don %>% 
+  full_join(mps, by=c("RegulatedEntityName"="Full name")) %>% 
+  filter(!is.na(Value)) %>% # get rid of no donations
+
+# Classify the donations that go to parties rather than individuals. Grepl should catch this. But you need to be careful here as it could just catch stuff like the "Labour" in SDLP - Social Democratic and Labour Party and then classify it as Labour. In fact, filter them here:
+  
+  filter(!grepl("SDLP",RegulatedEntityName)) %>% 
+  
+  mutate(Party_Name = case_when(
+    
+    # Most individual donations
+    
+    RegulatedDoneeType=="MP - Member of Parliament" ~ Party,
+    RegulatedDoneeType=="Leadership Candidate" ~ Party,
+    
+    # Party donations
+    
+    grepl("Liberal Democrat",RegulatedEntityName) ~ "Liberal Democrats",
+    grepl("Conservative",RegulatedEntityName) ~ "Conservative",
+    grepl("Labour",RegulatedEntityName) ~ "Labour",
+    grepl("Green Party",RegulatedEntityName) ~ "Green",
+    grepl("Scottish National Party",RegulatedEntityName) ~ "Scottish National Party",
+    grepl("Sinn Féin",RegulatedEntityName) ~ "Sinn Féin",
+    grepl("Plaid",RegulatedEntityName) ~ "Plaid Cymru",
+    grepl("Democratic Unionist Party",RegulatedEntityName) ~ "Democratic Unionist Party",
+    
+    # I am making no distinction between labour and the cooperative party because due tp their pact and organisation, I reckon its functionally the same 
+    
+    grepl("Co-operative Party",RegulatedEntityName) ~ "Labour")) %>% 
+    
+    # There are a few MPs who evade classification due to missing data in donation register or because of name spelling and lookup (e.g. Tom vs Thomas). Fix this manually :(
+  
+  mutate(
+      
+      Party_Name = if_else(grepl("David Lammy|Jamie Driscoll|Stephen McCabe",
+                                 RegulatedEntityName), "Labour", Party_Name),
+      
+      Party_Name = if_else(grepl("Tom Tugendhat|Andy Street|Steve Baker|Crispin Jeremy Rupert Blunt|Christopher Grayling",
+                                 RegulatedEntityName), "Conservative", Party_Name),
+      
+    # Fix that issue where one donation has been classified as labour and coop
+      
+      Party_Name = if_else(grepl("Labour/Co-operative",Party_Name),"Labour",Party_Name)
+        )
+
+# tbh I was only going to look at Con/Lab/Lib/SNP so...
+
+don_by_party_indiv <- don_by_party %>% 
+  select(Party_Name,DonorName,DonorStatus,Value) %>% 
+  mutate(Value = str_remove_all(Value, "£|,"),
+         Value = as.numeric(Value)) %>% 
+  group_by(Party_Name,DonorName,DonorStatus) %>% 
+  summarise(Value = sum(Value)) %>% ungroup() %>% 
+  filter(grepl("Labour|Conservative|Liberal Democrats|Scottish National Party",Party_Name))
+
+don_by_party <- don_by_party_indiv %>% # be careful here - you mean to say non-agg, not the individual donor category
+  group_by(Party_Name,DonorStatus) %>% 
+  summarise(Value = sum(Value)) %>% ungroup() 
+
+glimpse(don_by_party_indiv)
+```
+
+[You can download the csv I've used here.](2022-electoral-commission-donations.csv)
+
+A few things to note:
+
+-   I have taken donations to individual MPs within parties and donations to parties themselves. I sum these and aggregate to get the total donations going towards the party. I have checked, and I don't think this double counts. Do let me know if you reckon otherwise.
+
+-   I've summed the value of cash and non-cash donations. Yes this is crude and it relies on them reliably stating the value of any in-kind transfers. Not sure what to do otherwise. Also I'm sure there are so many other unmonetised benefits that accrue from the social aspects of networks (I'm not using this as an excuse, just pointing it out)
+
+### **Most of the Conservative Party and MP donations comes from individuals and companies**
+
+*Political donations to the major parties broken down by donor status. Figures given for donations reported in 2022 so far.*
+
+```{r}
+#| message: false
+#| echo: false
+#| fig-height: 6
+#| fig-width: 7.5
+
+# Ok I didn't use D3/Observable to make this - I am sorry for being lazy. This R wrapper works fine for present purposes. 
+
+# sankey ---- https://www.r-graph-gallery.com/sankey-diagram.html
+
+# Relevant libraries
+library(networkD3) # Sankeys and other cool stuff
+library(htmlwidgets) # Need this to edit the javascript/d3 because the labels will be bad
+
+don_by_party <- don_by_party %>% 
+  arrange(factor(DonorStatus, levels=c("Individual", "Public Fund", "Company", "Trade Union", "Unincorporated Association", "Other", "Friendly Society", "Registered Political Party", "Trust", "Limited Liability Partnership", "Impermissible Donor")))
+
+
+# Create a df with everything involved in the flow
+nodes <- data.frame(
+  name=c(as.character(don_by_party$DonorStatus), as.character(don_by_party$Party_Name)) %>% 
+    unique()
+)
+
+
+# With networkD3, connection must be provided using id, not using real name like in the links dataframe.. So we need to reformat it.
+don_by_party$IDsource=match(don_by_party$DonorStatus, nodes$name)-1 
+don_by_party$IDtarget=match(don_by_party$Party_Name, nodes$name)-1
+
+# Add a 'group' column to each connection:
+don_by_party <- don_by_party%>%
+  mutate(group=as.factor(DonorStatus))
+
+# Add a 'group' column to each node. 
+nodes$group <- as.factor(c("my_unique_group")) 
+
+# Give a color for each group:
+my_color <- 'd3.scaleOrdinal().range(["#ffa500", "#fe871b", "#f8692c", "#ed4a3a", "#dd2946", "#c80050", "#af0058", "#92005e", "#710061", "#4d0061", "#1f005c", "#FFFFFF"])' # I use a diverging colour scale from here https://learnui.design/tools/gradient-generator.html - settings: Linear, HCL, 90 degrees, no easing. They explain why its good. But the network d3 package ends up making it a bit lighter. 
+
+# Make the Network
+region_sankey <- sankeyNetwork(Links = don_by_party, Nodes = nodes,
+                               Source = "IDsource", Target = "IDtarget", 
+                               Value = "Value", NodeID = "name", units = "£", 
+                               colourScale=my_color, LinkGroup="group", NodeGroup="group",
+                               margin = list(right = 100, top=-120), sinksRight=FALSE, nodeWidth=40, nodePadding=20,
+                               fontSize=20, fontFamily = "sans-serif", iterations = 0) 
+
+# If you set "iterations" > 0 it will reorganise the visual to reduce overlaps where possible. This could overwrite your factor reordering.  
+
+# You can choose whether the nodes or the flows will be coloured (or both by editing your nodes$group var) - see here for example https://www.data-to-viz.com/graph/sankey.html
+
+# The default labelling with the package isn't great. Using the htmlwidgets package - this code is just editing the position of the labels using some d3/javascript (sorry its verbose, I couldn't figure out the OR operator.)
+
+region_sankey <- onRender(
+  region_sankey,
+  '
+  function(el,x){
+  // select all our node text
+  d3.select(el)
+  .selectAll(".node text")
+  .filter(function(d) { return d.name.endsWith("Fund"); })
+  .attr("x", x.options.nodeWidth - 50)
+  .attr("text-anchor", "end");
+  }
+  '
+)
+
+region_sankey <- onRender(
+  region_sankey,
+  '
+  function(el,x){
+  // select all our node text
+  d3.select(el)
+  .selectAll(".node text")
+  .filter(function(d) { return d.name.endsWith("Individual"); })
+  .attr("x", x.options.nodeWidth - 50)
+  .attr("text-anchor", "end");
+  }
+  '
+)
+
+region_sankey <- onRender(
+  region_sankey,
+  '
+  function(el,x){
+  // select all our node text
+  d3.select(el)
+  .selectAll(".node text")
+  .filter(function(d) { return d.name.endsWith("Company"); })
+  .attr("x", x.options.nodeWidth - 50)
+  .attr("text-anchor", "end");
+  }
+  '
+)
+
+region_sankey <- onRender(
+  region_sankey,
+  '
+  function(el,x){
+  // select all our node text
+  d3.select(el)
+  .selectAll(".node text")
+  .filter(function(d) { return d.name.endsWith("Union"); })
+  .attr("x", x.options.nodeWidth - 50)
+  .attr("text-anchor", "end");
+  }
+  '
+)
+
+region_sankey <- onRender(
+  region_sankey,
+  '
+  function(el,x){
+  // select all our node text
+  d3.select(el)
+  .selectAll(".node text")
+  .filter(function(d) { return d.name.endsWith("Association"); })
+  .attr("x", x.options.nodeWidth - 50)
+  .attr("text-anchor", "end");
+  }
+  '
+)
+
+region_sankey <- onRender(
+  region_sankey,
+  '
+  function(el,x){
+  // select all our node text
+  d3.select(el)
+  .selectAll(".node text")
+  .filter(function(d) { return d.name.endsWith("Other"); })
+  .attr("x", x.options.nodeWidth - 50)
+  .attr("text-anchor", "end");
+  }
+  '
+)
+
+region_sankey <- onRender(
+  region_sankey,
+  '
+  function(el,x){
+  // select all our node text
+  d3.select(el)
+  .selectAll(".node text")
+  .filter(function(d) { return d.name.endsWith("Society"); })
+  .attr("x", x.options.nodeWidth - 50)
+  .attr("text-anchor", "end");
+  }
+  '
+)
+
+region_sankey <- onRender(
+  region_sankey,
+  '
+  function(el,x){
+  // select all our node text
+  d3.select(el)
+  .selectAll(".node text")
+  .filter(function(d) { return d.name.endsWith("Political Party"); })
+  .attr("x", x.options.nodeWidth - 50)
+  .attr("text-anchor", "end");
+  }
+  '
+)
+
+region_sankey <- onRender(
+  region_sankey,
+  '
+  function(el,x){
+  // select all our node text
+  d3.select(el)
+  .selectAll(".node text")
+  .filter(function(d) { return d.name.endsWith("Trust"); })
+  .attr("x", x.options.nodeWidth - 50)
+  .attr("text-anchor", "end");
+  }
+  '
+)
+
+region_sankey <- onRender(
+  region_sankey,
+  '
+  function(el,x){
+  // select all our node text
+  d3.select(el)
+  .selectAll(".node text")
+  .filter(function(d) { return d.name.endsWith("Partnership"); })
+  .attr("x", x.options.nodeWidth - 50)
+  .attr("text-anchor", "end");
+  }
+  '
+)
+
+region_sankey <- onRender(
+  region_sankey,
+  '
+  function(el,x){
+  // select all our node text
+  d3.select(el)
+  .selectAll(".node text")
+  .filter(function(d) { return d.name.endsWith("Donor"); })
+  .attr("x", x.options.nodeWidth - 50)
+  .attr("text-anchor", "end");
+  }
+  '
+)
+
+region_sankey
+```
+
+Roughly £14m of the £17m in donations received by the Conservative Parties so far this year has been from *individuals and companies*. Not hugely surprising, but interesting to compare to the donation sources of the other parties. Its worth mentioning that opposition parties receive the bulk of public funding through the ["Short Money" payment](https://en.wikipedia.org/wiki/Short_Money)[^7] to fund their activities.
+
+[^7]: See here too - <https://www.parliament.uk/site-information/foi/transparency-publications/hoc-transparency-publications/financial-information/financial-assistance-to-opposition-parties/>
+
+So that's a broad look at the types of donors and quantums involved for the major parties. As individual and company donations are proving so lucrative for the Conservative Party, lets zoom in a bit on them.
+
+### **The top 10% of individual Conservative Party and MP donors make up 38% of their total donations\...**
+
+*Hover over circles for information.*
+
+::: panel-tabset
+### Jitter
+
+*Dashed line represents median of all donations from individuals to the major parties: **£10,000***
+
+```{r}
+#| message: false
+#| echo: true
+#| warning: false
+#| fig.height: 6
+#| fig-subcap: Individual here means individuals registered on a UK electoral register. Figures given for 2022 so far.
+
+library(plotly)
+
+# Nah change this to ordered points - the jitter is too dense - if its ordered points I can put the median there too.
+
+median_indiv_don <- don_by_party_indiv %>% 
+  filter(DonorStatus=="Individual") 
+
+median_indiv_don <- median(median_indiv_don$Value)
+
+sum_party <- don_by_party_indiv %>%
+  group_by(Party_Name) %>% 
+  summarise(sum(Value)) %>% 
+  rename(total_don = `sum(Value)`)
+
+don_top_dec <- don_by_party_indiv %>% 
+  filter(DonorStatus=="Individual") %>% 
+  group_by(Party_Name) %>% 
+  mutate(decile=ntile(Value,n=10)) %>% 
+  ungroup() %>% 
+  group_by(decile,Party_Name) %>% 
+  summarise(sum(Value)) %>% 
+  ungroup()
+
+title_stat <- don_top_dec %>% 
+  left_join(sum_party,by="Party_Name") %>% 
+  mutate(perc = `sum(Value)`/total_don)
+
+# should I chuck all my theming stuff in a function? Yes. Will I do it? ...soon
+
+p <- don_by_party_indiv %>% 
+  filter(grepl("Individual",DonorStatus)) %>% 
+  ggplot(aes(Party_Name,Value,label=DonorName,fill=Party_Name)) +
+  geom_jitter(alpha=0.6,size=2,grouponX=TRUE,colour="black") +
+  scale_y_continuous(label=comma) +
+  theme_minimal()+
+  theme(legend.position = "none",
+        axis.text = element_text(face="bold",size = 10),
+        axis.title = element_text(face="bold",size = 12)) +
+  coord_flip()+
+  geom_hline(yintercept = 10000,linetype="dashed") +
+  scale_fill_manual(values=c("navy","red","gold","yellow")) +
+  xlab("") + ylab("Donation Amount (£)")
+
+
+ggplotly(p)
+
+```
+
+### Ordered dots
+
+::: callout-warning
+I have used a log scale here to better view the distribution and ordering. Also I don't like how the ordered points obscure the density/overplotting. The jitter is probably better here.
+:::
+
+```{r}
+#| message: false
+#| echo: true
+#| warning: false
+#| fig.height: 6
+#| fig-subcap: Individual here means individuals registered on a UK electoral register. Figures given for 2022 so far.
+
+
+p<-don_by_party_indiv[order(don_by_party_indiv$Value),] %>%
+ filter(DonorStatus=="Individual") %>% 
+ ggplot(aes(x=seq(Value), y=Value, lab=DonorName,fill=Party_Name)) +
+  geom_point(alpha=0.5,size=3.5) +
+  theme_bw() +
+  scale_y_continuous(labels = comma, trans="log10") + 
+  theme(axis.text.x=element_blank(),
+  panel.spacing.x = unit(1.5, "lines"),
+  panel.spacing.y = unit(1.5, "lines"),
+  axis.ticks.x=element_blank(),
+  legend.position="none",
+  axis.text = element_text(face="bold",size = 10),
+  axis.title = element_text(face="bold",size = 12)) +
+  xlab("Individual donors ordered by £") +
+  ylab("Donation Amount (£)") +
+  facet_wrap(~Party_Name) +
+  geom_hline(yintercept = 10000,linetype="dashed") +
+  scale_fill_manual(values=c("navy","red","gold","yellow"))
+
+p<-ggplotly(p)
+
+p
+```
+:::
+
+Now this is quite mad. The top 10% of individual donors providing 38% of total donations to the Conservative party! The equivalent stat for Labour is 7% (but due to the use of Short Money, I wasn't sure if that was a fair comparison). In any case, the distribution is quite telling. Lets take a closer look at some of these donors.
+
+-   That small dot to the right is Christopher Charles Sheriff Harborne - a businessman and tech investor who has given **£1,015,000** so far this year. Harborne was [a massive donor to the Brexit party](https://twitter.com/carolecadwalla/status/1308311789390696448?lang=en) and had been a regular donor to the Conservative Party in previous years.
+
+-   Next to Christopher is Mark J Bamford - the chairman of the machinery manufacturer JCB who has given **£973,000** so far this year. Another big supporter of Brexit.
+
+-   In third place its Malcom S Healey - an entrepreneur/businessman/rich person (if only there was some word for sitting around and accumulating wealth because you own things) who has donated **£550,000** so far this year
+
+I'd encourage you to hover over the names and do some googling. If there's a concern that I'm unfairly singling out the Conservative donors whilst ignoring the large donations from individuals to other parties:
+
+1.  These other parties are not currently in power - so I'm less focused on them
+
+2.  Large political donations and the capture of politics by wealth is a problem for any party/organisation/etc. - e.g. see the failure of Labour under Blair to push the matter of capping political donations early in their first term, the [Cash-for-Honours scandal](https://en.wikipedia.org/wiki/Cash-for-Honours_scandal), and then the failure of Labour, the Lib Dems, and Conservatives to [agree to the suggestions in the Phillips review](https://www.theguardian.com/politics/2007/mar/15/partyfunding.uk)
+
+We can do the same comparisons for donations from companies.
+
+### **More companies give larger donations to the Conservative Party than the other parties. However, the maximum donations from companies are still smaller than donations from some individuals**
+
+*Hover over circles for information.*
+
+::: panel-tabset
+### Jitter
+
+*Dashed line represents median of all donations from companies to the major parties: **£10,000** (yes I believe this is also £10k like the indiv. donations)*
+
+```{r}
+#| message: false
+#| echo: true
+#| warning: false
+#| fig.height: 6
+#| fig-subcap: Company refers to a UK-registered company which is incorporated in the UK and carries on business in the UK. Figures given for 2022 so far.
+
+
+# Nah change this to ordered points - the jitter is too dense - if its ordered points I can put the median there too.
+
+median_comp_don <- don_by_party_indiv %>% 
+  filter(DonorStatus=="Company") 
+
+median_comp_don <- median(median_comp_don$Value)
+
+
+p <- don_by_party_indiv %>% 
+  filter(grepl("Company",DonorStatus)) %>% 
+  ggplot(aes(Party_Name,Value,label=DonorName,fill=Party_Name)) +
+  geom_jitter(alpha=0.6,size=2,grouponX=TRUE,colour="black") +
+  scale_y_continuous(label=comma) +
+  theme_minimal()+
+  theme(legend.position = "none",
+        axis.text = element_text(face="bold",size = 10),
+        axis.title = element_text(face="bold",size = 12)) +
+  coord_flip()+
+  geom_hline(yintercept = 10000,linetype="dashed") +
+  scale_fill_manual(values=c("navy","red","gold","yellow")) +
+  xlab("") + ylab("Donation Amount (£)")
+
+
+ggplotly(p)
+
+```
+
+### Ordered dots
+
+::: callout-warning
+I have used a log scale here to better view the distribution and ordering. Also I don't like how the ordered points obscure the density/overplotting. The jitter is probably better here.
+:::
+
+```{r}
+#| message: false
+#| echo: true
+#| warning: false
+#| fig.height: 6
+#| fig-subcap: Company refers to a UK-registered company which is incorporated in the UK and carries on business in the UK. Figures given for 2022 so far.
+
+
+p<-don_by_party_indiv[order(don_by_party_indiv$Value),] %>%
+ filter(DonorStatus=="Company") %>% 
+ ggplot(aes(x=seq(Value), y=Value, lab=DonorName,fill=Party_Name)) +
+  geom_point(alpha=0.5,size=3.5) +
+  theme_bw() +
+  scale_y_continuous(labels = comma, trans="log10") + 
+  theme(axis.text.x=element_blank(),
+  panel.spacing.x = unit(1.5, "lines"),
+  panel.spacing.y = unit(1.5, "lines"),
+  axis.ticks.x=element_blank(),
+  legend.position="none",
+  axis.text = element_text(face="bold",size = 10),
+  axis.title = element_text(face="bold",size = 12)) +
+  xlab("Company donors ordered by £") +
+  ylab("Donation Amount (£)") +
+  facet_wrap(~Party_Name) +
+  geom_hline(yintercept = 10000,linetype="dashed") +
+  scale_fill_manual(values=c("navy","red","gold","yellow"))
+
+p<-ggplotly(p)
+
+p
+```
+:::
+
+Feel free to hover over the names and have a google.
+
+Okay so that is a brief look at political donations to the main parties in 2022 so far. Do tweet with any feedback or suggestions.
+
+## Donation Time Series? Maybe next time
+
+I wanted to close by looking at the trend of political donations over time broken down by donor status. **Unfortunately this is not exactly straightforward and I might revisit this another time.**
+
+The main issue I'm having is attaching party classifications for donations to MPs and the parties themselves. The goal would then be to aggregate things up at the party level to see donations towards a particular party (regardless of whether it was to an MP in that party or the party itself).
+
+Also, another issue - the Electoral Commission database apparently tracks donations going back to 2001 but for MPs it seems a bit gappy? E.g. I can't find donations to Tony Blair specifically from the early 2000s. This strikes me as odd enough to investigate further before doing anymore analysis on it.
+
+Also, I'll probably do some extra stuff like deflating the donation amounts and making sure to pick out where in the time series the Conservative Party are no longer eligible for [Short Money](https://en.wikipedia.org/wiki/Short_Money) etc.
+
+So there you have it. I really wanted to close this piece with a fun quip like:
+
+> *"Much like an actual dodgy doner, Truss and her dodgy donors will poison this country - leaving it sick, weak, and forever in the toilet."*
+
+But its just sad. These people are maintaining a pitifully low rate of corporation tax, removing the cap for bankers bonuses, subsidising energy companies, and more, whilst at the same [reducing in work benefits for those on Universal Credit](https://www.gov.uk/government/publications/the-growth-plan-2022-documents/the-growth-plan-2022-html#policy-decisions).
+
+As [Daniela Gabor has made clear](https://www.theguardian.com/commentisfree/2022/oct/06/economic-chaos-class-war-british-liz-truss), this is class war.

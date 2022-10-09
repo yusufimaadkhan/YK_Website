@@ -4,17 +4,21 @@ image: profile_large.jpg
 about:
   template: solana
   links:
+    - icon: envelope 
+      text: Email
+      href: yusuf.imaad.khan@gmail.com
     - icon: twitter
       text: Twitter
       href: https://twitter.com/yusuf_i_k 
     - icon: github
       text: GitHub
       href: https://github.com/yusufimaadkhan
-    - text: PhilPeople
+    - icon: person
+      text: PhilPeople
       href: https://philpeople.org/profiles/yusuf-imaad-khan
 ---
 
-I am about to start an [MRes/PhD](https://www.lse.ac.uk/study-at-lse/Graduate/degree-programmes-2022/MResPhD-Political-Science) in the [Department of Government at the London School of Economics](https://www.lse.ac.uk/government). My plan is to work somewhere between political philosophy and social epistemology.
+I am an [MRes/PhD](https://www.lse.ac.uk/study-at-lse/Graduate/degree-programmes-2022/MResPhD-Political-Science) student in the [Department of Government at the London School of Economics](https://www.lse.ac.uk/government). My research sits between political philosophy and social epistemology.
 
 I completed my [MSc in the Philosophy of the Social Sciences](https://www.lse.ac.uk/study-at-lse/Graduate/degree-programmes-2022/MSc-Philosophy-of-the-Social-Sciences) at the LSE in the [Department of Philosophy, Logic, and Scientific Method](https://www.lse.ac.uk/philosophy/). Before that, I completed my [BA in Philosophy and Economics](https://www.cardiff.ac.uk/study/undergraduate/courses/course/philosophy-and-economics-ba) at [Cardiff University](https://www.cardiff.ac.uk/).
 
