@@ -5,7 +5,6 @@ date: "2022-10-9"
 categories: [Networks, Corruption, Politics, Money, Budget]
 code-fold: true
 code-tools: true
-#code-copy: true
 ---
 
 The recent £45bn "mini-budget"[^1] was a disaster in both [content](https://mainlymacro.blogspot.com/2022/09/a-budget-that-harms-everyone-except.html) and [consequence](https://www.ft.com/content/1ace8d42-f3ee-4fdd-a103-5cd4234e8c42). This is [widely understood](https://yougov.co.uk/topics/politics/articles-reports/2022/09/27/mini-budget-gets-worst-reception-any-financial-sta). To believe it was about growth is beyond a joke. The government claimed that **tax cuts for the rich** will somehow lead to growth that will boost wages and support public services. This is either [unsupported by the evidence](https://academic.oup.com/ser/article/20/2/539/6500315), or the [opposite is true.](https://www.opendemocracy.net/en/truss-kwarteng-tax-cuts-rich-growth/) *Shockingly*, it turns out that tax cuts for the rich (who spend less and save more as a proportion of their income) will just benefit the rich.
@@ -325,15 +324,17 @@ A few things to note:
 
 -   I've summed the value of cash and non-cash donations. Yes this is crude and it relies on them reliably stating the value of any in-kind transfers. Not sure what to do otherwise. Also I'm sure there are so many other unmonetised benefits that accrue from the social aspects of networks (I'm not using this as an excuse, just pointing it out)
 
-### **Most of the Conservative Party and MP donations comes from individuals and companies**
+### **Most of the Conservative Party and MP donations come from individuals and companies**
 
 *Political donations to the major parties broken down by donor status. Figures given for donations reported in 2022 so far.*
 
 ```{r}
 #| message: false
 #| echo: false
+#| out-width: 100%
 #| fig-height: 6
-#| fig-width: 7.5
+
+#fig-width: 7.5
 
 # Ok I didn't use D3/Observable to make this - I am sorry for being lazy. This R wrapper works fine for present purposes. 
 
@@ -373,7 +374,7 @@ region_sankey <- sankeyNetwork(Links = don_by_party, Nodes = nodes,
                                Source = "IDsource", Target = "IDtarget", 
                                Value = "Value", NodeID = "name", units = "£", 
                                colourScale=my_color, LinkGroup="group", NodeGroup="group",
-                               margin = list(right = 100, top=-120), sinksRight=FALSE, nodeWidth=40, nodePadding=20,
+                               margin = list(right = 100, top=-80), sinksRight=FALSE, nodeWidth=40, nodePadding=20,
                                fontSize=20, fontFamily = "sans-serif", iterations = 0) 
 
 # If you set "iterations" > 0 it will reorganise the visual to reduce overlaps where possible. This could overwrite your factor reordering.  
@@ -558,7 +559,7 @@ So that's a broad look at the types of donors and quantums involved for the majo
 #| message: false
 #| echo: true
 #| warning: false
-#| fig.height: 6
+#| out-width: 100%
 #| fig-subcap: Individual here means individuals registered on a UK electoral register. Figures given for 2022 so far.
 
 library(plotly)
@@ -594,7 +595,7 @@ p <- don_by_party_indiv %>%
   filter(grepl("Individual",DonorStatus)) %>% 
   ggplot(aes(Party_Name,Value,label=DonorName,fill=Party_Name)) +
   geom_jitter(alpha=0.6,size=2,grouponX=TRUE,colour="black") +
-  scale_y_continuous(label=comma) +
+  scale_y_continuous(labels = label_number(suffix = " k", scale = 1e-3)) +
   theme_minimal()+
   theme(legend.position = "none",
         axis.text = element_text(face="bold",size = 10),
@@ -619,7 +620,7 @@ I have used a log scale here to better view the distribution and ordering. Also 
 #| message: false
 #| echo: true
 #| warning: false
-#| fig.height: 6
+#| out-width: 100%
 #| fig-subcap: Individual here means individuals registered on a UK electoral register. Figures given for 2022 so far.
 
 
@@ -628,7 +629,7 @@ p<-don_by_party_indiv[order(don_by_party_indiv$Value),] %>%
  ggplot(aes(x=seq(Value), y=Value, lab=DonorName,fill=Party_Name)) +
   geom_point(alpha=0.5,size=3.5) +
   theme_bw() +
-  scale_y_continuous(labels = comma, trans="log10") + 
+  scale_y_continuous(labels = label_number(suffix = " k", scale = 1e-3), trans="log10") + 
   theme(axis.text.x=element_blank(),
   panel.spacing.x = unit(1.5, "lines"),
   panel.spacing.y = unit(1.5, "lines"),
@@ -677,7 +678,7 @@ We can do the same comparisons for donations from companies.
 #| message: false
 #| echo: true
 #| warning: false
-#| fig.height: 6
+#| out-width: 100%
 #| fig-subcap: Company refers to a UK-registered company which is incorporated in the UK and carries on business in the UK. Figures given for 2022 so far.
 
 
@@ -693,7 +694,7 @@ p <- don_by_party_indiv %>%
   filter(grepl("Company",DonorStatus)) %>% 
   ggplot(aes(Party_Name,Value,label=DonorName,fill=Party_Name)) +
   geom_jitter(alpha=0.6,size=2,grouponX=TRUE,colour="black") +
-  scale_y_continuous(label=comma) +
+  scale_y_continuous(labels = label_number(suffix = " k", scale = 1e-3)) +
   theme_minimal()+
   theme(legend.position = "none",
         axis.text = element_text(face="bold",size = 10),
@@ -718,7 +719,7 @@ I have used a log scale here to better view the distribution and ordering. Also 
 #| message: false
 #| echo: true
 #| warning: false
-#| fig.height: 6
+#| out-width: 100%
 #| fig-subcap: Company refers to a UK-registered company which is incorporated in the UK and carries on business in the UK. Figures given for 2022 so far.
 
 
@@ -727,7 +728,7 @@ p<-don_by_party_indiv[order(don_by_party_indiv$Value),] %>%
  ggplot(aes(x=seq(Value), y=Value, lab=DonorName,fill=Party_Name)) +
   geom_point(alpha=0.5,size=3.5) +
   theme_bw() +
-  scale_y_continuous(labels = comma, trans="log10") + 
+  scale_y_continuous(labels = label_number(suffix = " k", scale = 1e-3), trans="log10") + 
   theme(axis.text.x=element_blank(),
   panel.spacing.x = unit(1.5, "lines"),
   panel.spacing.y = unit(1.5, "lines"),
@@ -751,7 +752,7 @@ Feel free to hover over the names and have a google.
 
 Okay so that is a brief look at political donations to the main parties in 2022 so far. Do tweet with any feedback or suggestions.
 
-## Donation Time Series? Maybe next time
+## Donation Time Series? Maybe Next Time
 
 I wanted to close by looking at the trend of political donations over time broken down by donor status. **Unfortunately this is not exactly straightforward and I might revisit this another time.**
 
