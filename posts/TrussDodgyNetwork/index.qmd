@@ -331,10 +331,9 @@ A few things to note:
 ```{r}
 #| message: false
 #| echo: false
-#| out-width: 100%
+#| fig-width: 7.5
 #| fig-height: 6
 
-#fig-width: 7.5
 
 # Ok I didn't use D3/Observable to make this - I am sorry for being lazy. This R wrapper works fine for present purposes. 
 
@@ -374,7 +373,7 @@ region_sankey <- sankeyNetwork(Links = don_by_party, Nodes = nodes,
                                Source = "IDsource", Target = "IDtarget", 
                                Value = "Value", NodeID = "name", units = "£", 
                                colourScale=my_color, LinkGroup="group", NodeGroup="group",
-                               margin = list(right = 100, top=-80), sinksRight=FALSE, nodeWidth=40, nodePadding=20,
+                               margin = list(right = 100, top=-120), sinksRight=FALSE, nodeWidth=40, nodePadding=20,
                                fontSize=20, fontFamily = "sans-serif", iterations = 0) 
 
 # If you set "iterations" > 0 it will reorganise the visual to reduce overlaps where possible. This could overwrite your factor reordering.  
