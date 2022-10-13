@@ -324,6 +324,10 @@ A few things to note:
 
 -   I've summed the value of cash and non-cash donations. Yes this is crude and it relies on them reliably stating the value of any in-kind transfers. Not sure what to do otherwise. Also I'm sure there are so many other unmonetised benefits that accrue from the social aspects of networks (I'm not using this as an excuse, just pointing it out)
 
+-   Donations listed on the Electoral Commission website are only reported if they meet [certain conditions](https://www.electoralcommission.org.uk/who-we-are-and-what-we-do/financial-reporting/donations-and-loans) (e.g. if its a donation to the central party, then its reported if the donation is greater than or equal to £7,500 - or over £1500 if the donor or lender gives further during the calendar year). **I think this means when I say x% of *total* donations come from y, that *total* is only *total disclosed donations* rather than *all donations received by the party*** (I don't think 100 people only donating £50 each would be reported)*.* So every time I use the donations data to make claims about sources and totals, only *reported donations are in scope.*[^7]
+
+[^7]: I added this correction on 13/10/2022
+
 ### **Most of the Conservative Party and MP donations come from individuals and companies**
 
 *Political donations to the major parties broken down by donor status. Figures given for donations reported in 2022 so far.*
@@ -539,9 +543,9 @@ region_sankey <- onRender(
 region_sankey
 ```
 
-Roughly £14m of the £17m in donations received by the Conservative Parties so far this year has been from *individuals and companies*. Not hugely surprising, but interesting to compare to the donation sources of the other parties. Its worth mentioning that opposition parties receive the bulk of public funding through the ["Short Money" payment](https://en.wikipedia.org/wiki/Short_Money)[^7] to fund their activities.
+Roughly £14m of the £17m in donations received by the Conservative Parties so far this year has been from *individuals and companies*. Not hugely surprising, but interesting to compare to the donation sources of the other parties. Its worth mentioning that opposition parties receive the bulk of public funding through the ["Short Money" payment](https://en.wikipedia.org/wiki/Short_Money)[^8] to fund their activities.
 
-[^7]: See here too - <https://www.parliament.uk/site-information/foi/transparency-publications/hoc-transparency-publications/financial-information/financial-assistance-to-opposition-parties/>
+[^8]: See here too - <https://www.parliament.uk/site-information/foi/transparency-publications/hoc-transparency-publications/financial-information/financial-assistance-to-opposition-parties/>
 
 So that's a broad look at the types of donors and quantums involved for the major parties. As individual and company donations are proving so lucrative for the Conservative Party, lets zoom in a bit on them.
 
