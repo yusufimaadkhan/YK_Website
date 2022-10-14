@@ -36,7 +36,7 @@ So why the *edgy* blog name? Well beyond it being a fun name, and feeling like I
 
 I'd like to use this space to experiment with combining visuals/text/literate programming in a way that supports openness and clarity[^1]. To achieve this, my website is built with an open source publishing system called [Quarto](https://quarto.org/). With Quarto you can do stuff like easily chuck this interactive visual of [Schelling's model of segregation](https://en.wikipedia.org/wiki/Schelling%27s_model_of_segregation) built by [Graham McNeil](https://observablehq.com/@gjmcn/atomic-agents-schellings-model-of-segregation?collection=@gjmcn/atomic-agents)[^2] right into your blog[^3]:
 
-[^1]: I've spent some time studying data visualisation because I like how it embodies these ideals. It would be cool if I can combine that with my philosophical interests.
+[^1]: I've spent some time studying data visualisation because I like how it can embody these ideals. It would be cool if I can combine that with my philosophical interests.
 
 [^2]: I've literally just copy and pasted Graham's excellent code from [here](https://observablehq.com/@gjmcn/atomic-agents-schellings-model-of-segregation?collection=@gjmcn/atomic-agents) with a few minor edits
 
