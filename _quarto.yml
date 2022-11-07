@@ -11,7 +11,7 @@ website:
       - href: index.qmd
         text: Home
       - href: blog.qmd
-        text: Blog - Rogue Analysis
+        text: Blog - Rogue Analysis 📈 
       - href: resources.qmd
         text: Resources 
     right:
@@ -21,6 +21,9 @@ website:
             text: Twitter
             href: https://twitter.com/yusuf_i_k 
             aria-label: Twitter
+          - icon: mastodon
+            text: Mastodon
+            href: https://mastodon.online/@yusuf_i_k
           - icon: github
             text: Github
             href: https://github.com/yusufimaadkhan

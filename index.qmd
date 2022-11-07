@@ -7,6 +7,9 @@ about:
     - icon: twitter
       text: Twitter
       href: https://twitter.com/yusuf_i_k 
+    - icon: mastodon
+      text: Mastodon
+      href: https://mastodon.online/@yusuf_i_k
     - icon: github
       text: GitHub
       href: https://github.com/yusufimaadkhan
