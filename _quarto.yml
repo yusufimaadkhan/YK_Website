@@ -32,7 +32,7 @@ website:
             text: PhilPeople
             href: https://philpeople.org/profiles/yusuf-imaad-khan
   page-footer:
-    right: "This website was built with [Quarto](https://quarto.org/), [GitHub](https://github.com/), and [Netlify](https://netlify.com/)."
+    right: "This website was built with [Quarto](https://quarto.org/), [GitHub](https://github.com/), and [Netlify](https://netlify.com/). [License: CC BY-SA 4.0.](https://creativecommons.org/licenses/by-sa/4.0/)"
 
 
 format:
