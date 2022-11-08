@@ -17,6 +17,9 @@ website:
     right:
       - text: "Connect"
         menu:
+          - icon: envelope
+            text: Email
+            href: mailto:yusuf.imaad.khan@gmail.com
           - icon: twitter
             text: Twitter
             href: https://twitter.com/yusuf_i_k 
@@ -31,6 +34,7 @@ website:
           - icon: person  
             text: PhilPeople
             href: https://philpeople.org/profiles/yusuf-imaad-khan
+  reader-mode: true
   page-footer:
     right: "This website was built with [Quarto](https://quarto.org/), [GitHub](https://github.com/), and [Netlify](https://netlify.com/). [License: CC BY-SA 4.0.](https://creativecommons.org/licenses/by-sa/4.0/)"
 
