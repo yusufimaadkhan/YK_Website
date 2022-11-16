@@ -2,8 +2,7 @@
 title: "Yusuf Imaad Khan"
 image: profile_large.jpg
 about:
-  template: solana
-  image-width: 100%
+  template: trestles
   image-shape: rounded
   links:
     - icon: envelope
