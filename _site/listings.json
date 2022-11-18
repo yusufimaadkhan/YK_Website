@@ -2,6 +2,7 @@
   {
     "listing": "/blog.html",
     "items": [
+      "/posts/blackhole/index.html",
       "/posts/TrussDodgyNetwork/index.html",
       "/posts/welcome/index.html"
     ]

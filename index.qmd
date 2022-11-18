@@ -2,8 +2,8 @@
 title: "Yusuf Imaad Khan"
 image: profile_large.jpg
 about:
-  template: trestles
-  image-shape: rounded
+  template: trestles # fixing the issue with browser stuff
+  image-shape: rounded # unnecessary
   links:
     - icon: envelope
       text: Email
