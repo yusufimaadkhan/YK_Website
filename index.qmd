@@ -2,24 +2,24 @@
 title: "Yusuf Imaad Khan"
 image: profile_large.jpg
 about:
-  template: trestles # fixing the issue with browser stuff
-  image-shape: rounded # unnecessary
-  links:
-    - icon: envelope
-      text: Email
-      href: mailto:yusuf.imaad.khan@gmail.com
-    - icon: twitter
-      text: Twitter
-      href: https://twitter.com/yusuf_i_k 
-    - icon: mastodon
-      text: Mastodon
-      href: https://mastodon.online/@yusuf_i_k
-    - icon: github
-      text: GitHub
-      href: https://github.com/yusufimaadkhan
-    - icon: person
-      text: PhilPeople
-      href: https://philpeople.org/profiles/yusuf-imaad-khan
+  template: trestles 
+  image-shape: round 
+  # links:
+  #   - icon: envelope
+  #     text: Email
+  #     href: mailto:yusuf.imaad.khan@gmail.com
+  #   - icon: twitter
+  #     text: Twitter
+  #     href: https://twitter.com/yusuf_i_k 
+  #   - icon: mastodon
+  #     text: Mastodon
+  #     href: https://mastodon.online/@yusuf_i_k
+  #   - icon: github
+  #     text: GitHub
+  #     href: https://github.com/yusufimaadkhan
+  #   - icon: person
+  #     text: PhilPeople
+  #     href: https://philpeople.org/profiles/yusuf-imaad-khan
 ---
 
 I am an [MRes/PhD](https://www.lse.ac.uk/study-at-lse/Graduate/degree-programmes-2022/MResPhD-Political-Science) student in the [Department of Government at the London School of Economics](https://www.lse.ac.uk/government). My research sits between political philosophy and social epistemology.
@@ -27,3 +27,25 @@ I am an [MRes/PhD](https://www.lse.ac.uk/study-at-lse/Graduate/degree-programmes
 I completed my [MSc in the Philosophy of the Social Sciences](https://www.lse.ac.uk/study-at-lse/Graduate/degree-programmes-2022/MSc-Philosophy-of-the-Social-Sciences) at the LSE in the [Department of Philosophy, Logic, and Scientific Method](https://www.lse.ac.uk/philosophy/). Before that, I completed my [BA in Philosophy and Economics](https://www.cardiff.ac.uk/study/undergraduate/courses/course/philosophy-and-economics-ba) at [Cardiff University](https://www.cardiff.ac.uk/).
 
 In between my studies, I worked in the [Government Economic Service](https://www.gov.uk/government/organisations/civil-service-government-economic-service) in a few areas including international climate finance and local policy analysis.
+
+Welcome to my website! Here you can find my blog - [***Rogue Analysis***](blog.qmd)📈, and a [page of resources](resources.qmd) I've found handy.
+
+::: {.callout-note collapse="true"}
+## Disambiguation
+
+Yusuf Khan is a pretty common name so I tend to use my middle name too. To clear things up further:
+
+-   I am not [Kamala's father](https://marvelcinematicuniverse.fandom.com/wiki/Yusuf_Khan)
+
+-   I am not this character from the [famous Pashtun amorous folktale](https://en.wikipedia.org/wiki/Yusuf_Khan_and_Sherbano)
+
+-   I am not the [murderous doctor from Eastenders](https://eastenders.fandom.com/wiki/Yusef_Khan)
+
+-   I am not [this actor](https://en.wikipedia.org/wiki/Yusuf_Khan_(actor))
+
+-   I am not [Dilip Kumar from before he changed his name](https://en.wikipedia.org/wiki/Dilip_Kumar)
+
+-   I am not this [WSJ journalist](https://www.wsj.com/news/author/yusuf-khan)
+
+-   etc.
+:::
