@@ -20,7 +20,7 @@ In truth, it makes you ashamed to be associated with such a racket. LSE have cre
 
 In response to LSE UCU's casualisation report I saw a few people saying **they'd like to see similar analysis for their institution**. LSE UCU also encouraged others to make use of their code to conduct similar analysis. So I thought why not try and do similar analysis for *every* institution? It could be useful and I like a challenge.
 
-I'd like to stress that all of what follows builds on [analysis from Marion Lieutaud (2023) and LSE UCU members](https://github.com/MarionLieutaud/LSEUCU-casualisation). Lieutaud drew on HESA (Higher Education Statistics Authority) data for much the analysis. The heavy of lifting of getting the data in good format was basically already done by Lieutaud. All I've done is taken that data and shoved it in some charts so you can (hopefully) see *every institution*.
+I'd like to stress that all of what follows builds on [analysis from Marion Lieutaud (2023) and LSE UCU members](https://github.com/MarionLieutaud/LSEUCU-casualisation). Lieutaud drew on HESA (Higher Education Statistics Authority) data for much the analysis. The heavy of lifting of getting the data in a good format was basically already done by Lieutaud. All I've done is taken that data and shoved it in some charts so you can (hopefully) see *every institution*.
 
 ::: {.callout-caution collapse="true"}
 ## Caveats
@@ -41,7 +41,7 @@ It is tricky enough to do this sort of thing for one institution. I have no doub
 
 -   The structure and conditions of university contracts/funding may obscure the extent of casualisation e.g. [UCL classifying research posts as permanent but really they're open ended and dependent on future grant flows](https://twitter.com/PaulCinnam0n/status/1526505700901457923?s=20)
 
--   Where possible I have replicated Lieutad's excellent charts but just added a dropdown so you can compare other HEIs. This also allowed me to eyeball whether I'd messed any of the analysis up compared to the original report.
+-   Where possible I have replicated Lieutaud's excellent charts but just added a dropdown so you can compare other HEIs. This also allowed me to eyeball whether I'd messed any of the analysis up compared to the original report.
 
 -   I've added a dashed line for the mean of the Russell Group. A group of 24 universities that take a large share of funding, grant a majority of PhDs, and are all about research eXceLleNcE
 
@@ -62,6 +62,7 @@ It is tricky enough to do this sort of thing for one institution. I have no doub
 # Remember to make a joke about the russell/hustle group
 
 library(tidyverse)
+library(janitor)
 
 # First get the tidied dataset
 
@@ -277,7 +278,58 @@ boxdata_chart <- prop_casual_chart %>%
   mutate(rg_boxplot_flag = if_else(rg_flag==1, "Yes", "No")) %>% 
   select(1:4, rg_boxplot_flag) %>% 
   filter(!HE_provider_short=="Court Theatre Training Company Ltd", # big outlier of 100% temo contracts - omitted for visibility. But if its real??? whats going on
-         !prop_casual==0) 
+         !prop_casual==0)
+
+# Ok one more chart attempt - hr = Hans Rosling 
+  
+  hr_chart_data <- staff_and_student_df %>% 
+    clean_names() %>% # clean names this time smh
+    filter(!he_provider=="Total") %>%
+    select(ukprn, 
+         he_provider, 
+         date,
+         staffstudent_ratio,
+         prop_casual,
+         total)  # this is total students
+    
+  hr_chart_data$year <- gsub("^[^-]*-", "", hr_chart_data$date)
+    
+  # split out the latter part of the date var and convert it to numeric so we can use the fun slider thing
+  # Russell Group Flag
+  hr_chart_data <- hr_chart_data %>% 
+    mutate(
+    year = as.numeric(year),
+    rg_flag = if_else(he_provider %in% c(
+    "The University of Birmingham",
+    "The University of Bristol", 
+    "The University of Cambridge",
+    "Cardiff University",
+    "University of Durham", 
+    "The University of Edinburgh",
+    "The University of Exeter",
+    "The University of Glasgow",
+    "Imperial College of Science, Technology and Medicine",
+    "King's College London",
+    "The University of Leeds",
+    "The University of Liverpool",
+    "London School of Economics and Political Science",
+    "The University of Manchester",
+    "Newcastle University",
+    "University of Nottingham", 
+    "The University of Oxford", 	
+    "Queen Mary University of London", 
+    "Queen's University Belfast",
+    "The University of Sheffield", 
+    "The University of Southampton", 
+    "University College London", 	
+    "The University of Warwick", 	
+    "The University of York"), "Russell Group", "Wider Sector")) %>% 
+    
+    filter(!he_provider == "Court Theatre Training Company Ltd",
+           !staffstudent_ratio>50,
+           !staffstudent_ratio==0,
+           !prop_casual>90,
+           !prop_casual==0)
   
 
 
@@ -301,6 +353,8 @@ ojs_define(student_nb_chart_convert = student_nb_chart)
 ojs_define(prop_non_uk_student_convert = prop_non_uk_student_chart)
 
 ojs_define(boxdata_chart_convert = boxdata_chart)
+
+ojs_define(hr_chart_convert = hr_chart_data)
 
 ```
 
@@ -525,6 +579,8 @@ Remember to use the dropdown to check out other places.
 viewof HE1 = Inputs.select(he_names_convert.HE_provider_short, {value: "LSE"})
 ```
 
+<hr style="height:0.1px; visibility:hidden;" />
+
 ```{ojs}
 //| warning: false
 //| echo: false
@@ -665,7 +721,7 @@ Once again, do use the dropdown to check out other places!
 ![](line.svg){width="70" height="5"}
 
 ::: {style="margin-top: -1.6rem; margin-bottom: 1rem"}
-### Proportionate *changes* (%) in share of permanent academic staff
+### Proportionate *changes* (%) in share of permanent academic staff at:
 :::
 
 ```{ojs}
@@ -674,6 +730,8 @@ Once again, do use the dropdown to check out other places!
 //| message: false
 viewof HE2 = Inputs.select(he_names_convert.HE_provider_short, {value: "LSE"})
 ```
+
+<hr style="height:0.1px; visibility:hidden;" />
 
 ```{ojs}
 //| warning: false
@@ -815,7 +873,7 @@ This is the student to *permanent* staff ratio (I'm going to be a bit light on t
 ![](line.svg){width="70" height="5"}
 
 ::: {style="margin-top: -1.6rem; margin-bottom: 1rem"}
-### Student to permanent staff ratio
+### Student to permanent staff ratio at:
 :::
 
 ```{ojs}
@@ -824,6 +882,8 @@ This is the student to *permanent* staff ratio (I'm going to be a bit light on t
 //| message: false
 viewof HE3 = Inputs.select(he_names_convert.HE_provider_short, {value: "LSE"})
 ```
+
+<hr style="height:0.1px; visibility:hidden;" />
 
 ```{ojs}
 //| warning: false
@@ -962,7 +1022,7 @@ Next we have relative changes in student numbers. My main gripe with all this da
 ![](line.svg){width="70" height="5"}
 
 ::: {style="margin-top: -1.6rem; margin-bottom: 1rem"}
-### Proportionate *changes* (%) in number of students
+### Proportionate *changes* (%) in number of students at:
 :::
 
 ```{ojs}
@@ -971,6 +1031,8 @@ Next we have relative changes in student numbers. My main gripe with all this da
 //| message: false
 viewof HE4 = Inputs.select(he_names_convert.HE_provider_short, {value: "LSE"})
 ```
+
+<hr style="height:0.1px; visibility:hidden;" />
 
 ```{ojs}
 //| warning: false
@@ -1112,7 +1174,7 @@ Finally here is the proportion of international students across universities. Pl
 ![](line.svg){width="70" height="5"}
 
 ::: {style="margin-top: -1.6rem; margin-bottom: 1rem"}
-### Proportion of international students
+### Proportion of international students at:
 :::
 
 ```{ojs}
@@ -1121,6 +1183,8 @@ Finally here is the proportion of international students across universities. Pl
 //| message: false
 viewof HE5 = Inputs.select(he_names_convert.HE_provider_short, {value: "LSE"})
 ```
+
+<hr style="height:0.01px; visibility:hidden;" />
 
 ```{ojs}
 //| warning: false
@@ -1261,3 +1325,146 @@ Please let me know if you spot any issues or have any suggestions. Given the wor
 I should probably close with some words of support for the union and strikes, but I hope the work above conveys my support.
 
 Solidarity forever.
+
+## Annex: An attempt to view pressures across the sector
+
+I added this extra chart on 10/04/2023. It is a bit dense, but I was attempting to view pressures across the sector by looking at:
+
+-   The student to permanent staff ratio (x axis)
+-   \% of fixed-term staff (y axis)
+-   Total number of students (size of ◯ )
+-   Broken down by Russell Group/wider sector
+-   Disaggregated for institution (individual ◯ )
+
+All between 2014/15 - 2021/22. It would be great if we could go back a few more years to see the proper effect of lifting the student number cap.
+
+I thought this chart might help explore and explain where the pressures lie in the sector. A movement to the **northeast** would *suggest* increased pressure in the sector as the student to permanent staff ratio increases (X) and more fixed-term staff are brought in (Y).
+
+Whilst its dense, lets focus on the Russell Group for a second. The boom in student numbers (size of ◯ ) is accompanied by increases in the student to permanent staff ratio. But there is a much more dramatic pivot to fixed-term staff - especially for LSE, KCL, and QMUL.
+
+Next, lets focus on the wider sector. Student numbers have also boomed. The % of staff that are fixed-term has also increased, but what is more dramatic is the increase in the student to permanent staff ratio.
+
+So the Russell Group can respond to the crisis of higher education by pumping up fixed term contracts (especially if domestic and international student numbers have increased), but the wider sector faces greater pressure from student numbers on permanent staff.
+
+So my rough interpretation is something like, Russell Group use improved financial position, "prestige" attraction, and cash flow from booming student numbers (domestic but especially international) to keep pressures at bay. But the rest of the sector can do this to a lesser extent and feels the direct pressure of increased student numbers hitting the student to permanent staff ratio.
+
+Let me know if you disagree and what you reckon! Maybe this chart was just too dense.
+
+![](line.svg){width="70" height="5"}
+
+::: {style="margin-top: -1.6rem; margin-bottom: 0.7rem"}
+### Student numbers have boomed compared to staffing capacity
+:::
+
+<hr>
+
+::: {style="color: #5a6570; margin-bottom: -0.3rem;font-size: 0.9em;"}
+**Hover to check institution.** ◯ size = Total number of students
+:::
+
+```{ojs}
+//| warning: false
+//| echo: false
+//| message: false
+
+viewof year_slider = Inputs.range([2015, 2022], {value: 2015, step: 1, label: "Year"})
+```
+
+<hr style="height:0.1px; visibility:hidden;" />
+
+```{ojs}
+//| warning: false
+//| echo: false
+//| message: false
+
+//transpose
+
+mydata_hr = transpose(hr_chart_convert)
+.filter(d => d.year == year_slider);
+
+// plot
+
+chart = Plot.plot({
+  
+  marginTop:30,
+  marginRight: 160,
+  marginBottom: 65,
+  height: 500,
+  
+  x: {
+    label: "Student to Permanent Staff Ratio →",
+    nice: true,
+    domain: [0, 50],
+    grid: true,
+    tickPadding: 10
+  },
+  
+  y: {
+    className: "axis-lab",
+    label: "↑ % of Staff that are Fixed-Term",
+    domain: [0, 90],
+    grid: true,
+    nice: true,
+    ticks: 5,
+    tickPadding: 10
+  },
+  
+  facet: {data: mydata_hr, y: "rg_flag", marginBottom: 10},
+  
+  fy: {label: null},
+  
+  marks: [
+    
+    Plot.dot(mydata_hr,{
+      x: "staffstudent_ratio", 
+      y: "prop_casual",
+      r: "total",
+      stroke: "rg_flag",
+      strokeWidth: 1,
+      title: (d) =>`${d.he_provider} \n X - Student to permanent staff ratio: ${d.staffstudent_ratio} \n Y - % of casual: ${d.prop_casual} \n Z/Size - Total students: ${d.total}`,
+      fill: "rg_flag",
+      fillOpacity: 0.3
+    }),
+    
+    Plot.arrow(mydata_hr, {
+      x1: 30,
+      y1: 40,
+      x2: 40,
+      y2: 60,
+      bend: false,
+      stroke: 3,
+      fy: ["Russell Group"]
+    }),
+    
+    Plot.text(mydata_hr,
+      Plot.selectFirst({
+        textAnchor: "start",
+        x: (d) => 35,
+        y: (d) => 68,
+        text: [`More pressure`],
+        fy: ["Russell Group"],
+        fontSize: 24,
+      })
+    )
+    
+  ],
+  
+  color: {
+  legend: false,
+  range: ["#de425b","#446e9b"]
+  }
+  
+})
+
+```
+
+<axis-lab>
+
+```{=html}
+<style> text { font-size: 18px; color: #5a6570; } </style>
+```
+</axis-lab>
+
+::: {style="color: #5a6570; margin-top: -0.3rem;font-size: 0.8em;"}
+Excludes student staff ratios \> 50 for visibility. <br> This exclusion catches the Open University and also smaller specialised institutions. <br> Source: [M. Lieutaud (2023) LSE UCU Analysis of HESA data](https://github.com/MarionLieutaud/LSEUCU-casualisation) <br> Year formatting: 2021-2022 = 2022<br> Prompted by a suggestion from Bernard Keenan @psychicyogamat <br> Graphic: Yusuf Imaad Khan / @yusuf_i_k <br> Rogue Analysis📈
+:::
