@@ -35,7 +35,7 @@ It is tricky enough to do this sort of thing for one institution. I have no doub
 
 -   Some universities have missing data and in *some* instances there are good explanations for this (e.g. the recent founding of the New College of Humanities). I have not interpolated missing observations
 
--   I have noticed some issues with the HESA data (e.g. SOAS being called something different one year) and have fixed where I've spotted. There are some I haven't fixed yet e.g. City University and St. Andrews have slightly different names. I'll see if I can fix these at some point. There could likely be more errors but hey verification and validation should be one of the tasks of...the Higher Education Statistics Authority no? Not a random grad student...
+-   I have noticed some issues with the HESA data (e.g. SOAS being called something different one year) and have fixed where I've spotted. There are some I haven't fixed yet e.g. City University and St. Andrews have slightly different names. I'll see if I can fix these at some point[^2]. There could likely be more errors but hey verification and validation should be one of the tasks of...the Higher Education Statistics Authority no? Not a random grad student...
 
 -   I am a wally and didn't use UKPRN codes to match institutions. Apologies. Rookie mistake on my part.
 
@@ -47,6 +47,8 @@ It is tricky enough to do this sort of thing for one institution. I have no doub
 
 -   When I've omitted a comparator university on the chart that appeared in the report, its because of visibility and I couldn't get the blasted label out of the way in Observable. This was a pragmatic choice. Sorry.
 :::
+
+[^2]: I fixed these issues on 11/04/2023 for City , St. Andrews, Queen's Belfast, and Newcastle. There may still be others?
 
 ```{r}
 #| message: false
@@ -72,7 +74,15 @@ staff_and_student_df <- read_csv("staff_and_student_df.csv") %>%
   
 # Fix issue where SOAS was called something else one year 
   
-  mutate(HE_provider = recode(HE_provider, "The School of Oriental and African Studies" = "SOAS University of London")) %>% 
+  # names were different for all these in 2014/15. Fix them for the dropdown - with thanks to @EricBla68448839 for raising issue
+  
+  mutate(HE_provider = recode(HE_provider, 
+                              "The School of Oriental and African Studies" = "SOAS University of London", 
+                              "The University of St Andrews" = "The University of St. Andrews",
+                              "The City University" = "City, University of London",
+                              "The Queen's University of Belfast" = "Queen's University Belfast",
+                              "University of Newcastle-upon-Tyne" = "Newcastle University"
+                              )) %>% 
   
   # Flag Russell Group
   
@@ -102,7 +112,7 @@ staff_and_student_df <- read_csv("staff_and_student_df.csv") %>%
   "The University of Warwick", 	
   "The University of York"), 1, 0)) %>%  
   
-  #filter(rg_flag==1) %>% select(HE_provider) %>% distinct() # should have 24 Russell Group unis. Check here.
+  #filter(rg_flag==1) %>% select(date,HE_provider) %>% distinct() # should have 24 Russell Group unis. 192 across all years. Check here.
   
   # Rename a few
   
@@ -118,6 +128,7 @@ staff_and_student_df <- read_csv("staff_and_student_df.csv") %>%
                                        "The University of Bristol" ~ "Bristol",
                                        "The University of Glasgow" ~ "Glasgow",
                                        .default = HE_provider)) %>% 
+    
   # ok just get rid of "The university of blah" and "University of" for everywhere. Its really annoying to search through in the dropdowns and just sounds kind of pretentious?
   mutate(HE_provider_short = str_remove_all(HE_provider_short, "The University of |University of |The |the ")) 
 
@@ -360,9 +371,9 @@ ojs_define(hr_chart_convert = hr_chart_data)
 
 ## The Russell Group or the hustle group?
 
-So lets take a look at all the data Lieutaud put together. Specifically, what is the distribution of fixed term contracts like across all institutions since 2014-15? And how does the Russell Group[^2] look? Well it looks like this:
+So lets take a look at all the data Lieutaud put together. Specifically, what is the distribution of fixed term contracts like across all institutions since 2014-15? And how does the Russell Group[^3] look? Well it looks like this:
 
-[^2]: Why the Russell Group? Its a group of universities in the UK that command a majority of research funding, grant the majority of PhDs, and are lauded for research excellence. Seems to make sense to pick them out and analyse trends.
+[^3]: Why the Russell Group? Its a group of universities in the UK that command a majority of research funding, grant the majority of PhDs, and are lauded for research excellence. Seems to make sense to pick them out and analyse trends.
 
 ![](line.svg){width="70" height="5"}
 
