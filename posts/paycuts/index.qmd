@@ -11,7 +11,9 @@ code-tools: true
 code-fold: true
 ---
 
-In response to UCU's [marking and assessment boycott (MAB)](https://www.ucu.org.uk/MAB2023), universities are threatening disproportionate and unjust pay deductions. This is unnecessary. Ulster University and London Metropolitan University have publicly said they will make no deductions (for the moment). [Queen Mary University of London has managed to get a commitment](https://twitter.com/qm_ucu/status/1651493114446528512?s=20) from senior management to not deduct in response to MAB (for now and on the basis of a prior local agreement). [Hertfordshire University has managed to reduce deductions](https://twitter.com/UCU_UHerts/status/1651242998057803777?s=20) from 100% to a school by school formula.  Meanwhile, 67 other universities have decided on arbitrarily large pay deductions in the midst of a cost of living crisis.
+![](scarred_meme.jpg){fig-align="center" width="526"}
+
+In response to UCU's [marking and assessment boycott (MAB)](https://www.ucu.org.uk/MAB2023), universities are threatening disproportionate and unjust pay deductions. This is unnecessary. Ulster University and London Metropolitan University have publicly said they will make no deductions (for the moment). [Queen Mary University of London has managed to get a commitment](https://twitter.com/qm_ucu/status/1651493114446528512?s=20) from senior management to not deduct in response to MAB (for now and on the basis of a prior local agreement). [Hertfordshire University has managed to reduce deductions](https://twitter.com/UCU_UHerts/status/1651242998057803777?s=20) from 100% to a school by school formula. Meanwhile, 67 other universities have decided on arbitrarily large pay deductions in the midst of a cost of living crisis.
 
 Wealthy vice chancellors stand behind this disgraceful choice. So I think it only makes sense to take a look at their salaries in light of this choice. On average, this group earn £300k and most of them are deciding to deduct between 50% and 100% of salaries. If we were to cut the salaries of the median vice chancellor by 50%, this would be £150k. That still leaves them comfortably [in the top 2% of earners by income in the UK](https://ifs.org.uk/publications/characteristics-and-incomes-top-1).
 
@@ -125,7 +127,7 @@ Next, I put this into a visual comparing head of university salary to the paycut
 
 Here are some caveats to my analysis:
 
--    Where vice chancellor/head of uni remuneration data is missing in HESA for this year, I have used previous years data
+-   Where vice chancellor/head of uni remuneration data is missing in HESA for this year, I have used previous years data
 
 -   If it is still missing, I've looked up the VC salary e.g. for Bristol
 
