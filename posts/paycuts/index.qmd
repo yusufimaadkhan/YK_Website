@@ -1,0 +1,233 @@
+---
+title: "The Vices of the Vice-Chancellors"
+author: "Yusuf Imaad Khan"
+date: "2023-04-27"
+categories: [LSE, Unions, Strikes, Employment]
+editor: visual
+self-contained: true
+toc: true
+toc-depth: 2
+code-tools: true
+code-fold: true
+---
+
+In response to UCU's [marking and assessment boycott (MAB)](https://www.ucu.org.uk/MAB2023), universities are threatening disproportionate and unjust pay deductions. This is unnecessary. Ulster University and London Metropolitan University have publicly said they will make no deductions (for the moment). [Queen Mary University of London has managed to get a commitment](https://twitter.com/qm_ucu/status/1651493114446528512?s=20) from senior management to not deduct in response to MAB (for now and on the basis of a prior local agreement). [Hertfordshire University has managed to reduce deductions](https://twitter.com/UCU_UHerts/status/1651242998057803777?s=20) from 100% to a school by school formula.  Meanwhile, 67 other universities have decided on arbitrarily large pay deductions in the midst of a cost of living crisis.
+
+Wealthy vice chancellors stand behind this disgraceful choice. So I think it only makes sense to take a look at their salaries in light of this choice. On average, this group earn £300k and most of them are deciding to deduct between 50% and 100% of salaries. If we were to cut the salaries of the median vice chancellor by 50%, this would be £150k. That still leaves them comfortably [in the top 2% of earners by income in the UK](https://ifs.org.uk/publications/characteristics-and-incomes-top-1).
+
+Perhaps one might respond by saying the mechanisms that led to the decision to cut pay are more complex than blaming a single figurehead vice-chancellor. Agreed. But what is the point of these people if they are not accountable or liable for the decisions taken in the institutions they purport to run? Worse, there is an utter hypocrisy in leading an organisation where you condone pay cuts whilst sitting in the top 2% of earners.
+
+I've taken the list of pay cut threats that [Dr Kait Clark](https://twitter.com/DrKaitClark/status/1649038370029314052) compiled. I then combined this with [HESA data](https://www.hesa.ac.uk/data-and-analysis/finances/statements/senior-pay) on head of provider (or vice chancellor) remuneration. Here is a glimpse of the dataset:
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: true
+
+library(tidyverse)
+library(janitor)
+library(readr)
+
+# Get paycut info - https://twitter.com/DrKaitClark/status/1649038370029314052
+# I chucked this data into a csv - you can find it on my github. I'll link this. Will probably need updating as things change.
+
+paycut_threats <- read_csv("paycut_threats.csv") %>% 
+  clean_names() %>% 
+  mutate(paycut_amount=as.character(paycut_amount))
+
+# Get VC salary data
+
+remun_2122_head <- read_csv("dt031-table-11_head_of_provider_remuneration.csv", 
+    skip = 17) %>% 
+  clean_names() %>% 
+  select(ukprn,total_remuneration_before_salary_sacrifice) %>% 
+  rename(tot_remun_b4_sal_sac_21_22 = total_remuneration_before_salary_sacrifice)
+
+# And get VC salary data for previous year if data missing
+
+remun_2021_head  <- read_csv("dt031-table-11_head_of_provider_remuneration_PREVIOUS_YEAR.csv", 
+    skip = 17) %>% 
+  clean_names() %>% 
+  select(ukprn,he_provider,total_remuneration_before_salary_sacrifice) %>% 
+  rename(tot_remun_b4_sal_sac_20_21 = total_remuneration_before_salary_sacrifice)
+
+# merge this year VC salary and last year VC salary
+
+remun_head_df <- remun_2021_head %>% 
+  left_join(remun_2122_head,by="ukprn") %>%
+  mutate(imput_tot_remun_b4_sal_sac = ifelse(is.na(tot_remun_b4_sal_sac_21_22),tot_remun_b4_sal_sac_20_21,tot_remun_b4_sal_sac_21_22)) %>% # impute with last year if missing
+  mutate(he_provider_short = str_remove_all(he_provider, "The University of |University of |The |the | University")) %>% 
+  select(ukprn,he_provider,he_provider_short,imput_tot_remun_b4_sal_sac)
+
+remove(remun_2021_head,remun_2122_head) # drop objects we're done with
+
+# merge the VC salaries with the paycut %s
+
+remun_head_paycut_df <- paycut_threats %>% 
+  
+  # sigh - do some name editing so all the merging works out
+  
+  mutate(university =case_match(university,
+                                    "QMUL"~"Queen Mary of London",
+                                    "OU"~"Open",
+                                    "Queen Margaret"~"Queen Margaret, Edinburgh",
+                                    "SOAS"~"SOAS of London",
+                                    "UEA"~"East Anglia",
+                                    "Cardiff Met"~"Cardiff Metropolitan",
+                                    "CCCU"~"Canterbury Christ Church",
+                                    "London Met"~"London Metropolitan",
+                                    "MMU"~"Manchester Metropolitan",
+                                    "Northumbria"~"Northumbria at Newcastle",
+                                    "UCL"~"University College London",
+                                    "UOC"~"Chester",
+                                    "USW"~"South Wales",
+                                    "UWE"~"West of England, Bristol",
+                                    "UWS"~"West of Scotland",
+                                    "Birkbeck"~"Birkbeck College",
+                                    "City"~"City, of London",
+                                    "DMU"~"De Montfort",
+                                    "KCL"~"King's College London",
+                                    "LJMU"~"Liverpool John Moores",
+                                    "UCLan"~"Central Lancashire",
+                                    "UEL"~"East London",
+                                     .default = university
+                                       )) %>% 
+  
+  # finally merge it
+  
+  left_join(remun_head_df,by=c("university"="he_provider_short")) %>% 
+  
+  # exclude London met and ulster who are actually not doing any paycuts!
+  
+  filter(!paycut_amount=="0%",
+         
+  # exclude Northumbria because their salary data is dodgy. Its like 60k one year. Then 0 year before. Then when I googled its like 250k. I'm just gonna exclude to be safe
+  
+         !university=="Northumbria at Newcastle") %>% 
+  
+  mutate(imput_tot_remun_b4_sal_sac=ifelse(university=="Bristol",285,imput_tot_remun_b4_sal_sac)) %>%  # 285 for Bristol - https://www.bristol.ac.uk/university/governance/executive/vice-chancellor-and-president/
+  
+  # Filter the unis that have recently come to agreements
+  
+  filter(!university%in%c("Queen Mary of London","Hertfordshire"))
+
+#summary(remun_head_paycut_df) # summary stats
+
+# Ok so dodgy salary data at Northumbria aside. Drop it and caveat in the visual. Go make it.
+
+glimpse(remun_head_paycut_df)
+```
+
+Next, I put this into a visual comparing head of university salary to the paycut threat, You can hover over and check who is who. Do let me know if the list of pay cuts needs updating.
+
+::: {.callout-caution collapse="true"}
+## Caveats
+
+Here are some caveats to my analysis:
+
+-    Where vice chancellor/head of uni remuneration data is missing in HESA for this year, I have used previous years data
+
+-   If it is still missing, I've looked up the VC salary e.g. for Bristol
+
+-   I dropped Northumbria because the HESA figure seemed incorrect in comparison to light research (60k vs a few 100k). Also, the previous year of data was empty for them, and googling the salary came up with slightly out of date results
+
+-   I took the list [Dr Kait Clark](https://twitter.com/DrKaitClark/status/1649038370029314052) compiled and updated it for developments at Hertfordshire and QMUL
+:::
+
+```{r}
+#| message: false
+#| warning: false
+#| echo: false
+ojs_define(remun_head_paycut_df_convert = remun_head_paycut_df)
+```
+
+![](line.svg){width="70" height="5"}
+
+::: {style="margin-top:-1.2rem;font-size: 22px;"}
+[Wealthy vice chancellors are threatening]{style="color: black;"} [huge pay cuts]{style="color: #a50f15;"} [in response to the boycotts (MAB). On average, this group earns £300k and we are in a cost of living crisis]{style="color: black"}
+:::
+
+::: {style="color: #5a6570; margin-bottom: -0.7rem;font-size: 0.9em;"}
+**Hover** to see institution names.
+:::
+
+```{ojs}
+//| warning: false
+//| echo: false
+//| message: false
+
+// toggle
+viewof facet_cat = Inputs.toggle({label: "Combine together?", values: [null, "paycut_amount"]});
+
+import {Plot} from "@mkfreeman/plot-tooltip";
+
+boxdata = transpose(remun_head_paycut_df_convert);
+
+Plot.plot({
+  height: 610,
+  marginBottom: 60,
+  
+  x: {
+    className: "axis-lab",
+    label: "Head of University Salary (£000s)→",
+    grid: true,
+    nice: true,
+    ticks: 5,
+    labelOffset: 55
+  },
+  
+  y: {
+    label: "Pay cuts",
+    grid: true,
+    ticks: null
+  },
+  
+  facet: {data: boxdata, y: facet_cat, marginLeft: 70},
+  
+  sort: {fy: "y"},
+  
+  fy: {label:"Pay cuts",domain: ["100%", "80%", "60%", "50%", "25%", "20%"]},
+  
+  marks: [
+  
+    Plot.frame(),
+  
+    Plot.dot(boxdata, 
+    
+    Plot.dodgeY({
+      x: "imput_tot_remun_b4_sal_sac", 
+      fill: "paycut_amount",
+      stroke: "black",
+      anchor: "middle", 
+      r: 5.5,
+      fillOpacity: 0.8,
+      padding: 0.5,
+      title: (d) =>`${d.he_provider} \n VC Salary: £${d.imput_tot_remun_b4_sal_sac},000 \n Pay cuts: ${d.paycut_amount}`
+      }))
+      
+  ],
+  
+  color: {
+  legend: false,
+  domain: ["100%", "80%", "60%", "50%", "25%", "20%"],
+  scheme: "Reds",
+  reverse: true,
+  style: {
+  fontSize: "1em"}
+  },
+  
+})
+
+
+```
+
+<axis-lab>
+
+```{=html}
+<style> text { font-size: 2em; color: #5a6570; } </style>
+```
+</axis-lab>
+
+::: {style="color: #5a6570; margin-top: -0.2rem;font-size: 0.7em;"}
+University head salary vs. proposed pay cuts in response to marking and assessment boycott <br> Broken down by pay cut amount and institution.<br> Source: [List of salary deductions - \@DrKaitClark](https://twitter.com/DrKaitClark/status/1649038370029314052). [Head of university salary data from HESA](https://www.hesa.ac.uk/data-and-analysis/finances/statements/senior-pay). <br> Graphic: Yusuf Imaad Khan / @yusuf_i_k <br> Rogue Analysis📈
+:::
