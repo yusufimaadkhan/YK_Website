@@ -1,6 +1,6 @@
 # options specified here will apply to all posts in this folder
 # default name
-author: "Yusuf Imaad Khan"
+#author: "Yusuf Imaad Khan"
 
 # freeze computational output
 # (see https://quarto.org/docs/projects/code-execution.html#freeze)
