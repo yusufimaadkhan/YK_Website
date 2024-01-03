@@ -4,8 +4,7 @@ date: "2024-01-02"
 categories: [Palestine, Generative Art]
 editor: visual
 #self-contained: true
-toc: true
-toc-depth: 2
+toc: false
 code-tools: true
 execute:
   echo: false
