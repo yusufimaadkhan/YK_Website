@@ -47,7 +47,7 @@ function setup() {
 
     let canvas = createCanvas(divWidth, textHeight); // Set canvas height to textHeight
     canvas.parent('sketch-container');
-    pixelDensity(3);
+    //pixelDensity(1);
 }
 
 // Function to handle window resize event
@@ -80,7 +80,7 @@ function setupText() {
         }
 
         let points = font.textToPoints(words[i], x, y, fontSize, {
-            sampleFactor: 0.35
+            sampleFactor: 0.3
         });
 
         for (let j = 0; j < points.length; j++) {
@@ -109,7 +109,7 @@ class Particle {
         this.target = createVector(x, y); // Target vector
         this.vel = p5.Vector.random2D(); // Velocity vector
         this.acc = createVector(); // Acceleration vector
-        this.maxspeed = 12; //10; // Maximum speed
+        this.maxspeed = 6; //10; // Maximum speed
         this.maxforce = 1; // Maximum steering force
         let c = color(random(colors)); // Choose a random color
         this.color = [red(c), green(c), blue(c)]; // Set particle color
