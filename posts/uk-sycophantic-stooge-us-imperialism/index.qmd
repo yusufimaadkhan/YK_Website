@@ -42,7 +42,7 @@ Let us first be clear about what the UK has helped create ([historically](https:
 
 -   [Decolonize Palestine](https://decolonizepalestine.com/) and the [reading list](https://decolonizepalestine.com/reading-list/) they have put together
 
--   [Al Jazeera - Israel-Gaza war in maps and charts: Live tracker](https://www.ft.com/israel-hamas-war)
+-   [Al Jazeera - Israel-Gaza war in maps and charts: Live tracker](https://www.aljazeera.com/news/longform/2023/10/9/israel-hamas-war-in-maps-and-charts-live-tracker)
 
 -   [Financial Times - The Israel-Hamas war in maps: latest updates](https://www.ft.com/content/42bbe534-8a0d-4ba8-9cc6-f84936d87196)
 
@@ -240,7 +240,9 @@ Between 1983-2023\*, the **UK** barely opposed the **US** on **UN** resolutions 
 
 ```{ojs}
 
-newPlot = import("https://esm.sh/@observablehq/plot");
+//newPlot = import("https://esm.sh/@observablehq/plot"); dependency broke
+
+newPlot = import("https://esm.sh/@observablehq/plot@0.6.9");
 
 parseTimeYear = d3.utcParse("%Y");
 
@@ -611,7 +613,7 @@ newPlot.plot({
 ```
 
 ::: {style="font-size: 13px; color: #5a6570;"}
-\*5/11/1983 - 30/6 /2023. See codebook for further caveats. <br> **Source:** UNGA; Erik Voeten - Data and Analyses of Voting in the UN General Assembly<br> **Graphic:** Yusuf Imaad Khan / @yusuf_i_k
+\*5/11/1983 - 30/6/2023. See codebook for further caveats. <br> **Source:** UNGA; Erik Voeten - Data and Analyses of Voting in the UN General Assembly<br> **Graphic:** Yusuf Imaad Khan / @yusuf_i_k
 :::
 :::
 
