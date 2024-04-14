@@ -1,7 +1,5 @@
 ---
 title: "Rogue Analysis 📈 (Blog)"
-#title: |
-  #![](logo_ra.png){width="40%"}
 listing:
   contents: posts
   sort: "date desc"
@@ -10,8 +8,5 @@ listing:
   sort-ui: true #false
   filter-ui: true #false
 page-layout: full
-#margin-header: |
-  #![](logo_ra.png)
 margin-header: subscribe_yk.html
-#title-block-banner: true
 ---
