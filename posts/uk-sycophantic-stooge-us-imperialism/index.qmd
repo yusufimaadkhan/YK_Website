@@ -242,7 +242,9 @@ Between 1983-2023\*, the **UK** barely opposed the **US** on **UN** resolutions 
 
 //newPlot = import("https://esm.sh/@observablehq/plot"); dependency broke
 
-newPlot = import("https://esm.sh/@observablehq/plot@0.6.9");
+//newPlot = import("https://esm.sh/@observablehq/plot@0.6.9");
+//newPlot = import("https://esm.sh/@observablehq/plot@0.6"); // 0.6.1 before
+newPlot = import("https://esm.sh/@observablehq/plot@0.6.1");
 
 parseTimeYear = d3.utcParse("%Y");
 
@@ -324,7 +326,7 @@ annotation = {
       x2: new Date("1994-01-01"),
       y2: -19
     }),
-    newPlot.frame({fx: "Palestine"})
+    //newPlot.frame({fx: "Palestine"}) // check
   ];
 }
 
@@ -333,7 +335,10 @@ xAxis = ({
   ticks: [new Date("1983-01-01"), new Date("2023-01-01")],
   label: null,
   nice: true,
-  interval: "year"
+  type: "band",
+  tickFormat: "%Y"
+  //tickFormat: Plot.formatYear()
+  //interval: "year"
 })
 
 yAxis = ({
@@ -555,7 +560,7 @@ annotation2 = {
       x2: new Date("1994-01-01"),
       y2: -4800
     }),
-    newPlot.frame({fx: "Palestine"})
+    //newPlot.frame({fx: "Palestine"})
   ];
 }
 
@@ -564,7 +569,9 @@ xAxis2 = ({
   ticks: [new Date("1983-01-01"), new Date("2023-01-01")],
   label: null,
   nice: true,
-  interval: "year"
+  type: "band",
+  tickFormat: "%Y"
+  //interval: "year"
 })
 
 yAxis2 = ({
@@ -622,6 +629,14 @@ As you might have expected, when compared to the UK, the pattern flips for the w
 ## Conclusion
 
 These charts may strike you as obvious or trivial. But I think being armed with the facts and having a clear picture of what is going on are too important to dismiss. For those who believe the situation is hopeless, and that the UK vote at the UN doesn't matter, consider asking why the UK didn't just support the General Assembly resolution for the ceasefire *symbolically*.
+
+## PNGs
+
+I had some trouble with dependencies and the charts weren't loading properly. So here are the PNGs too:
+
+![](charts/chart1-uk-v-us.png)
+
+![](charts/chart2-world-v-us.png)
 
 ## Postscript
 
