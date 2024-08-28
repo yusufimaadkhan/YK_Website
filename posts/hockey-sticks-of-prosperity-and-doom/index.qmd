@@ -63,7 +63,7 @@ Slightly grandiose but it captures the point nicely. Enough preambling. The main
 
 The chart in question depicts what has come to be known as the "Great Acceleration" - a surge of human activity in the mid-twentieth century. In an incredible effort to "build a more systematic picture of the human-driven changes to the Earth System", the International Geosphere-Biosphere Programme (IGBP) collected data on 24 indicators. 12 to record the trajectory of the human enterprise, and 12 for features of the Earth System.
 
-It is worth reflecting on this striking paragraph on their findings. It appears in the the [2004 IGBP report](http://www.igbp.net/publications/igbpbookseries/igbpbookseries/globalchangeandtheearthsystem2004.5.1b8ae20512db692f2a680007462.html) synthesising research from their first phase:
+It is worth reflecting on this striking paragraph on their findings. It appears in the [2004 IGBP report](http://www.igbp.net/publications/igbpbookseries/igbpbookseries/globalchangeandtheearthsystem2004.5.1b8ae20512db692f2a680007462.html) synthesising research from their first phase:
 
 > One feature stands out as remarkable. The second half of the twentieth century is unique in the entire history of human existence on Earth. Many human activities reached take-off points sometime in the twentieth century and have accelerated sharply towards the end of the century. The last 50 years have without doubt seen the most rapid transformation of the human relationship with the natural world in the history of humankind.
 >
@@ -642,7 +642,7 @@ Next, let's import the latest version of Plot, change the data structure to work
 ```{ojs}
 //| code-fold: false
 
-newPlot = import("https://esm.sh/@observablehq/plot@0.6.9");
+newPlot = import("https://esm.sh/@observablehq/plot@0.6.1");
 
 
 // Transpose
