@@ -16,13 +16,13 @@ about:
 }
 </style>
 
-I am an [MRes/PhD](https://www.lse.ac.uk/study-at-lse/Graduate/degree-programmes-2022/MResPhD-Political-Science) student in the [Department of Government at the London School of Economics](https://www.lse.ac.uk/government). My research sits between political philosophy and social epistemology.
+I am a PhD candidate in the Department of Government at the London School of Economics and Political Science. My research sits between political philosophy and social epistemology.
 
-I completed my [MSc in the Philosophy of the Social Sciences](https://www.lse.ac.uk/study-at-lse/Graduate/degree-programmes-2022/MSc-Philosophy-of-the-Social-Sciences) at the LSE in the [Department of Philosophy, Logic, and Scientific Method](https://www.lse.ac.uk/philosophy/). Before that, I completed my [BA in Philosophy and Economics](https://www.cardiff.ac.uk/study/undergraduate/courses/course/philosophy-and-economics-ba) at [Cardiff University](https://www.cardiff.ac.uk/).
+I completed my MSc in the Philosophy of the Social Sciences at the LSE in the Department of Philosophy, Logic, and Scientific Method. Before that, I completed my BA in Philosophy and Economics at Cardiff University.
 
-In between my studies, I worked in the [Government Economic Service](https://www.gov.uk/government/organisations/civil-service-government-economic-service) in a few areas including international climate finance and local policy analysis.
+In between my studies, I worked in the UK Government Economic Service in a few areas including international climate finance and local policy analysis.
 
-Welcome to my website! Here you can find my blog - [***Rogue Analysis***](blog.qmd)📈, and a [page of resources](resources.qmd) I've found handy.
+Welcome to my website! Here you can find my blog - [Rogue Analysis](blog.qmd)📈, and a [page of resources](resources.qmd) I've found handy.
 
 ::: {.callout-note collapse="true"}
 ## Disambiguation
