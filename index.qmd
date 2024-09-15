@@ -3,24 +3,18 @@ title: "Yusuf Imaad Khan"
 image: profile_large.jpg
 about:
   template: trestles 
+  #image-width: 10em
   image-shape: round 
-  # links:
-  #   - icon: envelope
-  #     text: Email
-  #     href: mailto:yusuf.imaad.khan@gmail.com
-  #   - icon: twitter
-  #     text: Twitter
-  #     href: https://twitter.com/yusuf_i_k 
-  #   - icon: mastodon
-  #     text: Mastodon
-  #     href: https://mastodon.online/@yusuf_i_k
-  #   - icon: github
-  #     text: GitHub
-  #     href: https://github.com/yusufimaadkhan
-  #   - icon: person
-  #     text: PhilPeople
-  #     href: https://philpeople.org/profiles/yusuf-imaad-khan
 ---
+
+<style>
+/* Add padding to the top of the image on smaller screens */
+@media only screen and (max-width: 990px) {
+  .about-image {
+    padding-top: 1em; /* Adjust the value as needed */
+  }
+}
+</style>
 
 I am an [MRes/PhD](https://www.lse.ac.uk/study-at-lse/Graduate/degree-programmes-2022/MResPhD-Political-Science) student in the [Department of Government at the London School of Economics](https://www.lse.ac.uk/government). My research sits between political philosophy and social epistemology.
 

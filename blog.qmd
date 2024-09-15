@@ -1,9 +1,10 @@
 ---
-title: "Rogue Analysis 📈 (Blog)"
+title: "Rogue Analysis 📈"
 listing:
   contents: posts
   sort: "date desc"
-  type: default
+  type: table
+  fields: [date, title]
   categories: true
   sort-ui: true #false
   filter-ui: true #false
