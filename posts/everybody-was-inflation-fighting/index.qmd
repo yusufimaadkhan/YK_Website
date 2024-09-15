@@ -5,6 +5,7 @@ date: "2024-09-15"
 format: html 
 code-tools: true
 code-fold: false
+toc: false
 self-contained: true
 execute:
   echo: true
@@ -12,7 +13,7 @@ execute:
   message: false
 ---
 
-The US [Federal Reserve is set to reduce interest rates for the first time in four years](https://www.ft.com/content/a6e5cafe-01fa-4291-a7ba-f2b132ef6879). Rates were hiked up globally to kill off the [Great Inflation](https://www.ft.com/content/2ee6364e-3d48-447c-9b37-659d0f36d656) born of the [pandemic and Russia-Ukraine war](https://conference.nber.org/conf_papers/f197647.pdf). Hiking rates was a blunt and painful way to deal with inflation - it increased the cost of borrowing, tightened financial conditions, and squeezed economies. Countries the world over increased rates to tackle inflation and also to maintain dollar exchange rates. Worse, the rate hikes increased debt servicing costs for developing countries, precipitating [debt crises](https://jacobin.com/2022/06/developing-world-dollar-debt-crisis-inflation). And to really pile things on, the higher rates have likely impeded the speed and scale of [investment for the green transition](https://jacobin.com/2024/08/federal-reserve-rates-climate-inflation). Given the Federal Reserve's [primacy in the global financial system](https://www.phenomenalworld.org/analysis/the-imperial-fed/), this forthcoming rate cut is huge - [even if overdue](https://jacobin.com/2024/08/federal-reserve-rates-climate-inflation).
+The US [Federal Reserve is set to reduce interest rates for the first time in four years](https://www.ft.com/content/a6e5cafe-01fa-4291-a7ba-f2b132ef6879). Rates were hiked up globally to kill off the [Great Inflation](https://www.ft.com/content/2ee6364e-3d48-447c-9b37-659d0f36d656) born of the [pandemic and Russia-Ukraine war](https://conference.nber.org/conf_papers/f197647.pdf). Hiking rates was a blunt and painful way to deal with inflation - it increased the cost of borrowing, tightened financial conditions, and squeezed economies. Countries the world over increased rates to tackle inflation and to also maintain dollar exchange rates. Worse, the rate hikes increased debt servicing costs for developing countries, precipitating [debt crises](https://jacobin.com/2022/06/developing-world-dollar-debt-crisis-inflation). And to really pile things on, the higher rates have likely impeded the speed and scale of [investment for the green transition](https://jacobin.com/2024/08/federal-reserve-rates-climate-inflation). Given the Federal Reserve's [primacy in the global financial system](https://www.phenomenalworld.org/analysis/the-imperial-fed/), this forthcoming rate cut is huge - [even if overdue](https://jacobin.com/2024/08/federal-reserve-rates-climate-inflation).
 
 Anyway, I was browsing the [FT inflation tracker](https://www.ft.com/content/088d3368-bb8b-4ff3-9df7-a7680d4d81b2) to have a look at how things are going across the world. The tracker doesn't have the very latest data for every country, but it's pretty good. On the tracker, you can see a bunch of useful charts breaking down figures for inflation and interest rates in various countries. But there is no big synoptic visual that jointly:
 
