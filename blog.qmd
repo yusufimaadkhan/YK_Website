@@ -4,10 +4,12 @@ listing:
   contents: posts
   sort: "date desc"
   type: table
+  table-hover: true
   fields: [date, title]
+  date-format: "D/M/YY" 
   categories: true
-  sort-ui: true #false
-  filter-ui: true #false
+  sort-ui: true 
+  filter-ui: true 
 page-layout: full
 margin-header: subscribe_yk.html
 ---
