@@ -4,6 +4,7 @@ project:
     - audio.mp3
     - Flag_of_Palestine_(vertical).svg
     - OPTIBuffer-Bold.otf
+    - .well-known
     #- "_redirects"
 
 website:
