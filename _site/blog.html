@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.475">
+<meta name="generator" content="quarto-1.6.40">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Yusuf Imaad Khan - Rogue Analysis 📈</title>
+<title>Rogue Analysis 📈 – Yusuf Imaad Khan</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -17,7 +17,7 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
 </style>
@@ -37,17 +37,23 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-8fdb60cc607797eed9f9084820682789.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
   "collapse-after": 3,
   "panel-placement": "end",
   "type": "overlay",
-  "limit": 20,
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -56,8 +62,10 @@ ul.task-list li input[type="checkbox"] {
     "search-more-match-text": "more match in this document",
     "search-more-matches-text": "more matches in this document",
     "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
     "search-detached-cancel-button-title": "Cancel",
-    "search-submit-button-title": "Submit"
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
   }
 }</script>
 <script>
@@ -89,48 +97,82 @@ ul.task-list li input[type="checkbox"] {
     }
   })
   </script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&amp;display=swap" rel="stylesheet">
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
 <link rel="stylesheet" href="styles.css">
-</head>
+<link rel="alternate" type="application/rss+xml" title="Yusuf Imaad Khan" href="blog.xml" data-external="1"></head>
 
 <body class="nav-fixed">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
-    <nav class="navbar navbar-expand-lg navbar-dark ">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
       <div class="navbar-container container-fluid">
-      <div class="navbar-brand-container">
+      <div class="navbar-brand-container mx-auto">
     <a class="navbar-brand" href="./index.html">
     <span class="navbar-title">Yusuf Imaad Khan</span>
     </a>
   </div>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./index.html">
- <span class="menu-text">Home</span></a>
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Home</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./blog.html" aria-current="page">
- <span class="menu-text">Blog - Rogue Analysis 📈</span></a>
+    <a class="nav-link active" href="./blog.html" aria-current="page"> 
+<span class="menu-text">Blog - Rogue Analysis 📈</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./resources.html">
- <span class="menu-text">Resources</span></a>
+    <a class="nav-link" href="./teaching.html"> 
+<span class="menu-text">Teaching</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./watermelon.html">
- <span class="menu-text">🍉</span></a>
+    <a class="nav-link" href="./resources.html"> 
+<span class="menu-text">Resources</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./watermelon.html"> 
+<span class="menu-text">🍉</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-connect" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-connect" role="link" data-bs-toggle="dropdown" aria-expanded="false">
  <span class="menu-text">Connect</span>
     </a>
     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="nav-menu-connect">    
@@ -140,14 +182,9 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">Email</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="https://twitter.com/yusuf_i_k"><i class="bi bi-twitter" role="img" aria-label="Twitter">
+    <a class="dropdown-item" href="https://bsky.app/profile/yusufimaadkhan.com"><i class="bi bi-cloud" role="img">
 </i> 
- <span class="dropdown-text">Twitter</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="https://mastodon.online/@yusuf_i_k"><i class="bi bi-mastodon" role="img">
-</i> 
- <span class="dropdown-text">Mastodon</span></a>
+ <span class="dropdown-text">Bluesky</span></a>
   </li>  
         <li>
     <a class="dropdown-item" href="https://github.com/yusufimaadkhan"><i class="bi bi-github" role="img" aria-label="GitHub">
@@ -160,15 +197,26 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">PhilPeople</span></a>
   </li>  
         <li>
+    <a class="dropdown-item" href="https://observablehq.com/@yusuf-imaad-khan"><i class="bi bi-graph-up-arrow" role="img">
+</i> 
+ <span class="dropdown-text">Observable</span></a>
+  </li>  
+        <li>
     <a class="dropdown-item" href="https://www.lse.ac.uk/government/people/research-students/yusuf-imaad-khan"><i class="bi bi-book" role="img">
 </i> 
  <span class="dropdown-text">LSE Profile</span></a>
   </li>  
+        <li>
+    <a class="dropdown-item" href="./index.xml"><i class="bi bi-rss" role="img">
+</i> 
+ <span class="dropdown-text"></span></a>
+  </li>  
     </ul>
   </li>
 </ul>
-              <div id="quarto-search" class="" title="Search"></div>
           </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
       </div> <!-- /container-fluid -->
     </nav>
 </header>
@@ -176,38 +224,9 @@ ul.task-list li input[type="checkbox"] {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar"><div class="quarto-margin-header"><div class="margin-header-item">
-<span style="font-weight: 600;">Subscribe</span>
-
-<!-- Begin Mailchimp Signup Form -->
-<link href="https://cdn-images.mailchimp.com/embedcode/slim-10_7_dtp.css" rel="stylesheet" type="text/css">
-<style type="text/css">
-    #mc_embed_signup{background:#fff; clear:left; font:14px Helvetica,Arial,sans-serif;  width:100%;}
-    /* Add your own Mailchimp form style overrides in your site stylesheet or in this style block.
-       We recommend moving this block and the preceding CSS link to the HEAD of your HTML file. */
-    #mc-embedded-subscribe-form{margin-left:-0px;}
-</style>
-<div id="mc_embed_signup">
-<form action="https://yusufimaadkhan.us8.list-manage.com/subscribe/post?u=603d225c3959d2b2cf01bd997&amp;id=bebd895f7b&amp;f_id=00c265e0f0" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate="">
-    <div id="mc_embed_signup_scroll">
-
-    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="email address" required="">
-    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
-    <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_f718424fc5df77c22533bdaa6_a3c37fb57b" tabindex="-1" value=""></div>
-        <div class="optionalParent">
-            <div class="clear foot" style="margin-top: 10px;">
-                <input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button">
-                <p class="brandingLogo"></p>
-            </div>
-        </div>
-    </div>
-</form>
-</div>
-
-<!--End mc_embed_signup-->
-</div></div>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(12)</span></div><div class="category" data-category="Budget">Budget <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Climate">Climate <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Cooking">Cooking <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Corruption">Corruption <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Economics">Economics <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Employment">Employment <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Generative Art">Generative Art <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Globalisation">Globalisation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Introductions">Introductions <span class="quarto-category-count">(1)</span></div><div class="category" data-category="LSE">LSE <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Money">Money <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Networks">Networks <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Palestine">Palestine <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Political Philosophy">Political Philosophy <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Politics">Politics <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Satire">Satire <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Strikes">Strikes <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UK">UK <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UN">UN <span class="quarto-category-count">(1)</span></div><div class="category" data-category="US">US <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Unions">Unions <span class="quarto-category-count">(2)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(13)</span></div><div class="category" data-category="QnVkZ2V0">Budget <span class="quarto-category-count">(2)</span></div><div class="category" data-category="Q2xpbWF0ZQ==">Climate <span class="quarto-category-count">(3)</span></div><div class="category" data-category="Q29va2luZw==">Cooking <span class="quarto-category-count">(1)</span></div><div class="category" data-category="Q29ycnVwdGlvbg==">Corruption <span class="quarto-category-count">(1)</span></div><div class="category" data-category="RWNvbm9taWNz">Economics <span class="quarto-category-count">(3)</span></div><div class="category" data-category="RW1wbG95bWVudA==">Employment <span class="quarto-category-count">(2)</span></div><div class="category" data-category="R2VuZXJhdGl2ZSUyMEFydA==">Generative Art <span class="quarto-category-count">(1)</span></div><div class="category" data-category="R2xvYmFsaXNhdGlvbg==">Globalisation <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SGlzdG9yaWNhbCUyME1hdGVyaWFsaXNt">Historical Materialism <span class="quarto-category-count">(1)</span></div><div class="category" data-category="SW50cm9kdWN0aW9ucw==">Introductions <span class="quarto-category-count">(1)</span></div><div class="category" data-category="TFNF">LSE <span class="quarto-category-count">(2)</span></div><div class="category" data-category="TW9uZXk=">Money <span class="quarto-category-count">(2)</span></div><div class="category" data-category="TmV0d29ya3M=">Networks <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UGFsZXN0aW5l">Palestine <span class="quarto-category-count">(2)</span></div><div class="category" data-category="UG9saXRpY2FsJTIwUGhpbG9zb3BoeQ==">Political Philosophy <span class="quarto-category-count">(1)</span></div><div class="category" data-category="UG9saXRpY3M=">Politics <span class="quarto-category-count">(3)</span></div><div class="category" data-category="U2F0aXJl">Satire <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U29jaWFsJTIwRXBpc3RlbW9sb2d5">Social Epistemology <span class="quarto-category-count">(1)</span></div><div class="category" data-category="U3RyaWtlcw==">Strikes <span class="quarto-category-count">(2)</span></div><div class="category" data-category="VUs=">UK <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VU4=">UN <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VVM=">US <span class="quarto-category-count">(1)</span></div><div class="category" data-category="VW5pb25z">Unions <span class="quarto-category-count">(2)</span></div></div></div>
 <!-- main -->
 <main class="content column-page-left" id="quarto-document-content">
 
@@ -218,7 +237,7 @@ ul.task-list li input[type="checkbox"] {
 
 
 
-<div class="quarto-title-meta">
+<div class="quarto-title-meta column-page-left">
 
     
   
@@ -226,7 +245,9 @@ ul.task-list li input[type="checkbox"] {
   </div>
   
 
+
 </header>
+
 
 
 
@@ -255,7 +276,6 @@ ul.task-list li input[type="checkbox"] {
       <input type="text" class="search form-control" placeholder="Filter">
     </div>
 </div>
-
 <table class="quarto-listing-table table table-hover">
 <thead>
 <tr>
@@ -268,116 +288,124 @@ ul.task-list li input[type="checkbox"] {
 </tr>
 </thead>
 <tbody class="list">
-<tr data-index="0" data-categories="Climate" data-listing-date-sort="1731456000000" data-listing-file-modified-sort="1731501214406" data-listing-reading-time-sort="11.105" data-listing-title-sort="Consensus at COP29? (Bitch Better Have My Money)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="0" data-categories="SGlzdG9yaWNhbCUyME1hdGVyaWFsaXNtJTJDU29jaWFsJTIwRXBpc3RlbW9sb2d5" data-listing-date-sort="1740355200000" data-listing-file-modified-sort="1740585145244" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2066" data-listing-title-sort="The Gramsci of Life" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-date">
-13/11/24
+<td>
+<span class="listing-date">24/2/25</span>
 </td>
-<td class="listing-title">
-<a href="./posts/cop-consensus/index.html" class="title">Consensus at COP29? (Bitch Better Have My Money)</a>
+<td>
+<a href="./posts/gramsci-of-life/index.html" class="title listing-title">The Gramsci of Life</a>
 </td>
 </tr>
-<tr data-index="1" data-categories="Economics" data-listing-date-sort="1726354800000" data-listing-file-modified-sort="1726440433790" data-listing-reading-time-sort="6.92" data-listing-title-sort="Everybody was inflation fighting...those hikes were fast as lightning" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="1" data-categories="Q2xpbWF0ZQ==" data-listing-date-sort="1731456000000" data-listing-file-modified-sort="1731501216000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="12" data-listing-word-count-sort="2221" data-listing-title-sort="Consensus at COP29? (Bitch Better Have My Money)" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-date">
-15/9/24
+<td>
+<span class="listing-date">13/11/24</span>
 </td>
-<td class="listing-title">
-<a href="./posts/everybody-was-inflation-fighting/index.html" class="title">Everybody was inflation fighting…those hikes were fast as lightning</a>
+<td>
+<a href="./posts/cop-consensus/index.html" class="title listing-title">Consensus at COP29? (Bitch Better Have My Money)</a>
 </td>
 </tr>
-<tr data-index="2" data-categories="Climate" data-listing-date-sort="1713049200000" data-listing-file-modified-sort="1713131040267" data-listing-reading-time-sort="34.94" data-listing-title-sort="Warmer, wetter, hotter, drier, harder, better, faster, stronger" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="2" data-categories="RWNvbm9taWNz" data-listing-date-sort="1726354800000" data-listing-file-modified-sort="1726440434000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="7" data-listing-word-count-sort="1384" data-listing-title-sort="Everybody was inflation fighting...those hikes were fast as lightning" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-date">
-14/4/24
+<td>
+<span class="listing-date">15/9/24</span>
 </td>
-<td class="listing-title">
-<a href="./posts/DaFT-Punk/index.html" class="title">Warmer, wetter, hotter, drier, harder, better, faster, stronger</a>
+<td>
+<a href="./posts/everybody-was-inflation-fighting/index.html" class="title listing-title">Everybody was inflation fighting…those hikes were fast as lightning</a>
 </td>
 </tr>
-<tr data-index="3" data-categories="Palestine,Generative Art" data-listing-date-sort="1704153600000" data-listing-file-modified-sort="1704308811155" data-listing-reading-time-sort="7.955" data-listing-title-sort="In our thousands, in our millions...🇵🇸" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="3" data-categories="Q2xpbWF0ZQ==" data-listing-date-sort="1713049200000" data-listing-file-modified-sort="1713131042000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="35" data-listing-word-count-sort="6988" data-listing-title-sort="Warmer, wetter, hotter, drier, harder, better, faster, stronger" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-date">
-2/1/24
+<td>
+<span class="listing-date">14/4/24</span>
 </td>
-<td class="listing-title">
-<a href="./posts/in-our-thousands/index.html" class="title">In our thousands, in our millions…🇵🇸</a>
+<td>
+<a href="./posts/DaFT-Punk/index.html" class="title listing-title">Warmer, wetter, hotter, drier, harder, better, faster, stronger</a>
 </td>
 </tr>
-<tr data-index="4" data-categories="Palestine,UK,US,UN" data-listing-date-sort="1702512000000" data-listing-file-modified-sort="1724778947636" data-listing-reading-time-sort="26.12" data-listing-title-sort="The sycophantic stooge of US imperialism" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="4" data-categories="UGFsZXN0aW5lJTJDR2VuZXJhdGl2ZSUyMEFydA==" data-listing-date-sort="1704153600000" data-listing-file-modified-sort="1704308812000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1591" data-listing-title-sort="In our thousands, in our millions...🇵🇸" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-date">
-14/12/23
+<td>
+<span class="listing-date">2/1/24</span>
 </td>
-<td class="listing-title">
-<a href="./posts/uk-sycophantic-stooge-us-imperialism/index.html" class="title">The sycophantic stooge of US imperialism</a>
+<td>
+<a href="./posts/in-our-thousands/index.html" class="title listing-title">In our thousands, in our millions…🇵🇸</a>
 </td>
 </tr>
-<tr data-index="5" data-categories="Political Philosophy" data-listing-date-sort="1699920000000" data-listing-file-modified-sort="1724854210675" data-listing-reading-time-sort="5.42" data-listing-title-sort="Mills, Race, and Rawls" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="5" data-categories="UGFsZXN0aW5lJTJDVUslMkNVUyUyQ1VO" data-listing-date-sort="1702512000000" data-listing-file-modified-sort="1724778948000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="27" data-listing-word-count-sort="5224" data-listing-title-sort="The sycophantic stooge of US imperialism" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-date">
-14/11/23
+<td>
+<span class="listing-date">14/12/23</span>
 </td>
-<td class="listing-title">
-<a href="./posts/Mills-Race-Rawls/index.html" class="title">Mills, Race, and Rawls</a>
+<td>
+<a href="./posts/uk-sycophantic-stooge-us-imperialism/index.html" class="title listing-title">The sycophantic stooge of US imperialism</a>
 </td>
 </tr>
-<tr data-index="6" data-categories="Climate,Globalisation" data-listing-date-sort="1693695600000" data-listing-file-modified-sort="1724840891421" data-listing-reading-time-sort="59.35" data-listing-title-sort="Making the Hockey Sticks of Prosperity and Doom 🏒" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="6" data-categories="UG9saXRpY2FsJTIwUGhpbG9zb3BoeQ==" data-listing-date-sort="1699920000000" data-listing-file-modified-sort="1724854212000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="6" data-listing-word-count-sort="1072" data-listing-title-sort="Mills, Race, and Rawls" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-date">
-3/9/23
+<td>
+<span class="listing-date">14/11/23</span>
 </td>
-<td class="listing-title">
-<a href="./posts/hockey-sticks-of-prosperity-and-doom/index.html" class="title">Making the Hockey Sticks of Prosperity and Doom 🏒</a>
+<td>
+<a href="./posts/Mills-Race-Rawls/index.html" class="title listing-title">Mills, Race, and Rawls</a>
 </td>
 </tr>
-<tr data-index="7" data-categories="LSE,Unions,Strikes,Employment" data-listing-date-sort="1682550000000" data-listing-file-modified-sort="1682586925821" data-listing-reading-time-sort="10.235" data-listing-title-sort="The Vices of the Vice-Chancellors" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="7" data-categories="Q2xpbWF0ZSUyQ0dsb2JhbGlzYXRpb24=" data-listing-date-sort="1693695600000" data-listing-file-modified-sort="1724840892000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="60" data-listing-word-count-sort="11870" data-listing-title-sort="Making the Hockey Sticks of Prosperity and Doom 🏒" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-date">
-27/4/23
+<td>
+<span class="listing-date">3/9/23</span>
 </td>
-<td class="listing-title">
-<a href="./posts/paycuts/index.html" class="title">The Vices of the Vice-Chancellors</a>
+<td>
+<a href="./posts/hockey-sticks-of-prosperity-and-doom/index.html" class="title listing-title">Making the Hockey Sticks of Prosperity and Doom 🏒</a>
 </td>
 </tr>
-<tr data-index="8" data-categories="LSE,Unions,Strikes,Employment,Politics,Economics" data-listing-date-sort="1680735600000" data-listing-file-modified-sort="1681205251065" data-listing-reading-time-sort="48.84" data-listing-title-sort="Academic casualisation across the UK" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="8" data-categories="TFNFJTJDVW5pb25zJTJDU3RyaWtlcyUyQ0VtcGxveW1lbnQ=" data-listing-date-sort="1682550000000" data-listing-file-modified-sort="1682586926000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="11" data-listing-word-count-sort="2044" data-listing-title-sort="The Vices of the Vice-Chancellors" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-date">
-6/4/23
+<td>
+<span class="listing-date">27/4/23</span>
 </td>
-<td class="listing-title">
-<a href="./posts/LSEUCU_Casualisation_YIK/index.html" class="title">Academic casualisation across the UK</a>
+<td>
+<a href="./posts/paycuts/index.html" class="title listing-title">The Vices of the Vice-Chancellors</a>
 </td>
 </tr>
-<tr data-index="9" data-categories="Cooking,Politics,Economics,Money,Budget,Satire" data-listing-date-sort="1668729600000" data-listing-file-modified-sort="1669034937437" data-listing-reading-time-sort="7.96" data-listing-title-sort="Make your very own fiscal black hole! 🧑‍🍳" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="9" data-categories="TFNFJTJDVW5pb25zJTJDU3RyaWtlcyUyQ0VtcGxveW1lbnQlMkNQb2xpdGljcyUyQ0Vjb25vbWljcw==" data-listing-date-sort="1680735600000" data-listing-file-modified-sort="1681205252000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="49" data-listing-word-count-sort="9768" data-listing-title-sort="Academic casualisation across the UK" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-date">
-18/11/22
+<td>
+<span class="listing-date">6/4/23</span>
 </td>
-<td class="listing-title">
-<a href="./posts/blackhole/index.html" class="title">Make your very own fiscal black hole! 🧑‍🍳</a>
+<td>
+<a href="./posts/LSEUCU_Casualisation_YIK/index.html" class="title listing-title">Academic casualisation across the UK</a>
 </td>
 </tr>
-<tr data-index="10" data-categories="Networks,Corruption,Politics,Money,Budget" data-listing-date-sort="1665270000000" data-listing-file-modified-sort="1665655527638" data-listing-reading-time-sort="25.665" data-listing-title-sort="Visualising Truss's Dodgy Donor Network _(and a Brief Look at UK Political Donations)_" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="10" data-categories="Q29va2luZyUyQ1BvbGl0aWNzJTJDRWNvbm9taWNzJTJDTW9uZXklMkNCdWRnZXQlMkNTYXRpcmU=" data-listing-date-sort="1668729600000" data-listing-file-modified-sort="1669034938000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="8" data-listing-word-count-sort="1592" data-listing-title-sort="Make your very own fiscal black hole! 🧑‍🍳" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-date">
-9/10/22
+<td>
+<span class="listing-date">18/11/22</span>
 </td>
-<td class="listing-title">
-<a href="./posts/TrussDodgyNetwork/index.html" class="title">Visualising Truss’s Dodgy Donor Network <em>(and a Brief Look at UK Political Donations)</em></a>
+<td>
+<a href="./posts/blackhole/index.html" class="title listing-title">Make your very own fiscal black hole! 🧑‍🍳</a>
 </td>
 </tr>
-<tr data-index="11" data-categories="Introductions" data-listing-date-sort="1661641200000" data-listing-file-modified-sort="1666790905078" data-listing-reading-time-sort="3.46" data-listing-title-sort="Welcome to Rogue Analysis" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+<tr data-index="11" data-categories="TmV0d29ya3MlMkNDb3JydXB0aW9uJTJDUG9saXRpY3MlMkNNb25leSUyQ0J1ZGdldA==" data-listing-date-sort="1665270000000" data-listing-file-modified-sort="1665655528000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="26" data-listing-word-count-sort="5133" data-listing-title-sort="Visualising Truss's Dodgy Donor Network _(and a Brief Look at UK Political Donations)_" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
  if (href) { window.location=href ; return false; }">
-<td class="listing-date">
-28/8/22
+<td>
+<span class="listing-date">9/10/22</span>
 </td>
-<td class="listing-title">
-<a href="./posts/welcome/index.html" class="title">Welcome to Rogue Analysis</a>
+<td>
+<a href="./posts/TrussDodgyNetwork/index.html" class="title listing-title">Visualising Truss’s Dodgy Donor Network <em>(and a Brief Look at UK Political Donations)</em></a>
+</td>
+</tr>
+<tr data-index="12" data-categories="SW50cm9kdWN0aW9ucw==" data-listing-date-sort="1661641200000" data-listing-file-modified-sort="1666790906000" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="4" data-listing-word-count-sort="692" data-listing-title-sort="Welcome to Rogue Analysis" data-listing-filename-sort="index.qmd" onclick="href = this.querySelector('a').getAttribute('href');
+ if (href) { window.location=href ; return false; }">
+<td>
+<span class="listing-date">28/8/22</span>
+</td>
+<td>
+<a href="./posts/welcome/index.html" class="title listing-title">Welcome to Rogue Analysis</a>
 </td>
 </tr>
 </tbody>
-
 </table>
 <div class="listing-no-matching d-none">
 No matching items
@@ -410,12 +438,15 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
-  const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
     }
-  });
-  clipboard.on('success', function(e) {
+    return false;
+  }
+  const onCopySuccess = function(e) {
     // button target
     const button = e.trigger;
     // don't keep focus
@@ -447,11 +478,48 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     }, 1000);
     // clear code selection
     e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
   });
-  function tippyHover(el, contentFn) {
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/www\.yusufimaadkhan\.com\/blog");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
     const config = {
       allowHTML: true,
-      content: contentFn,
       maxWidth: 500,
       delay: 100,
       arrow: false,
@@ -461,8 +529,17 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       interactive: true,
       interactiveBorder: 10,
       theme: 'quarto',
-      placement: 'bottom-start'
+      placement: 'bottom-start',
     };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
     window.tippy(el, config); 
   }
   const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
@@ -474,9 +551,244 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       try { href = new URL(href).hash; } catch {}
       const id = href.replace(/^#\/?/, "");
       const note = window.document.getElementById(id);
-      return note.innerHTML;
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
     });
   }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {
@@ -519,9 +831,61 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
 </div> <!-- /content -->
 <footer class="footer">
   <div class="nav-footer">
-    <div class="nav-footer-right">This website was built with <a href="https://quarto.org/">Quarto</a>, <a href="https://github.com/">GitHub</a>, <a href="https://netlify.com/">Netlify</a>, and <a href="./tea.html">☕</a>. <a href="https://creativecommons.org/licenses/by-sa/4.0/">License: CC BY-SA 4.0.</a></div>
+    <div class="nav-footer-left">
+<p>Built with <a href="https://quarto.org/">Quarto</a>, <a href="https://github.com/">GitHub</a>, <a href="https://netlify.com/">Netlify</a>, and <a href="./tea.html">☕</a>. <a href="https://creativecommons.org/licenses/by-sa/4.0/">License: CC BY-SA 4.0.</a></p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+      <ul class="footer-items list-unstyled">
+    <li class="nav-item compact">
+    <a class="nav-link" href="mailto:yusuf.imaad.khan@gmail.com">
+      <i class="bi bi-envelope" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://bsky.app/profile/yusufimaadkhan.com">
+      <i class="bi bi-cloud" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/yusufimaadkhan">
+      <i class="bi bi-github" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://philpeople.org/profiles/yusuf-imaad-khan">
+      <i class="bi bi-person" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://observablehq.com/@yusuf-imaad-khan">
+      <i class="bi bi-graph-up-arrow" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="https://www.lse.ac.uk/government/people/research-students/yusuf-imaad-khan">
+      <i class="bi bi-book" role="img">
+</i> 
+    </a>
+  </li>  
+    <li class="nav-item compact">
+    <a class="nav-link" href="./index.xml">
+      <i class="bi bi-rss" role="img">
+</i> 
+    </a>
+  </li>  
+</ul>
+    </div>
   </div>
 </footer>
+
 
 
 

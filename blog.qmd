@@ -10,6 +10,7 @@ listing:
   categories: true
   sort-ui: true 
   filter-ui: true 
+  feed: true
 page-layout: full
-margin-header: subscribe_yk.html
+#margin-header: subscribe_yk.html
 ---
