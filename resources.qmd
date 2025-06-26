@@ -32,7 +32,7 @@ Now I'm not following this guide to the letter, but its convinced me to implemen
 
 Okay a confession - I did not have a good set up for *digital* note taking. I experimented a bit to see what works. Maybe it seems ridiculous that I hadn't sorted it out, but there are umpteen note taking apps that do cool things and could help me out.
 
-Generally my aim was to move to some kind of plain text set up because it enables a focus on content rather than format, would enable easy conversion to other formats, and allow for easy version control. [See here for some benefits of plain text notes](https://plaintext-productivity.net/2-01-why-plaintext-for-notes.html). I ended up settling with:
+Generally my aim was to move to some kind of plain text set up because it enables a focus on content rather than format, would enable easy conversion to other formats, and allow for easy version control. [See here for some benefits of plain text notes](https://plaintext-productivity.net/2-01-why-plaintext-for-notes.html). I ended up settling with a mix of:
 
 -   Obsidian
 
