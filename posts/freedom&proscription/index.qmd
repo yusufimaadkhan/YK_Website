@@ -52,6 +52,11 @@ function setup() {
     let canvas = createCanvas(divWidth, textHeight); // Set canvas height to textHeight
     canvas.parent('sketch-container');
     //pixelDensity(1);
+    
+      // Attach touch handlers to *just* this canvas
+canvas.touchStarted(() => { isInteracting = true; lastInteractionTime = millis(); return false; });
+  canvas.touchMoved(()  => { isInteracting = true; lastInteractionTime = millis(); return false; });
+  canvas.touchEnded(()  => { isInteracting = false; lastInteractionTime = millis(); return false; });
 }
 
 // Function to handle window resize event
@@ -129,28 +134,7 @@ class Particle {
         this.target.set(x, y);
     }
 
-    <!-- // Apply behaviors to particle --> OLD CODE - this wasn't so great with touchscreen
-    <!-- behaviors() { -->
-    <!--     let arrive = this.arrive(this.target); // Apply arrive behavior -->
 
-    <!--     <!-- let mouse = createVector(mouseX, mouseY); // Get mouse position --> -->
-    <!--     <!-- let flee = this.flee(mouse); // Apply flee behavior --> -->
-
-    <!--     // With this for touch support: -->
-
-    <!--     let pointer = createVector( -->
-    <!--         mouseX || touches[0]?.x || width/2,  -->
-    <!--         mouseY || touches[0]?.y || height/2 -->
-    <!--     ); -->
-
-    <!--     let flee = this.flee(pointer); // Change 'mouse' to 'pointer' -->
-
-    <!--     arrive.mult(1); // Adjust arrive behavior weight -->
-    <!--     flee.mult(5); // Adjust flee behavior weight -->
-
-    <!--     this.applyForce(arrive); // Apply arrive force -->
-    <!--     this.applyForce(flee); // Apply flee force -->
-    <!-- } -->
 
 // slightly improved for touchscreen and timeout so particles settle
 
@@ -252,23 +236,7 @@ behaviors() {
     }
 }
 
-function touchStarted() {
-    isInteracting = true;
-    return false; // Prevent default
-}
 
-function touchEnded() {
-    isInteracting = false;
-    lastInteractionTime = millis(); // Reset timer when touch ends
-    return false; // Prevent default
-}
-
-function touchMoved() {
-    // Update interaction state during touch movement
-    isInteracting = true;
-    lastInteractionTime = millis();
-    return false; // Prevent default scrolling behavior
-}
 
 // Draw function to update and display particles
 function draw() {
