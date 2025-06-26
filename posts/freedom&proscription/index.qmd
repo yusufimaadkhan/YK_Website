@@ -51,6 +51,7 @@ function setup() {
 
     let canvas = createCanvas(divWidth, textHeight); // Set canvas height to textHeight
     canvas.parent('sketch-container');
+    canvas.style('touch-action', 'none'); 
     //pixelDensity(1);
     
       // Attach touch handlers to *just* this canvas
