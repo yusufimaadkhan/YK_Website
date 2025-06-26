@@ -1,0 +1,108 @@
+---
+title: "Resources"
+format: html
+---
+
+## What is this?
+
+Here are a bunch of resources that *might* be handy for somebody looking to get into philosophy/political theory, or generally interested in the content I've put on Rogue Analysis. It isn't meant to be exhaustive, just stuff I've personally found useful.
+
+**CAVEATS:**
+
+-   I have yet to use some of these resources fully, but they seem useful to share
+
+-   This page may be a bit of a "living document", so potentially there will be changes
+
+-   Possibly not even worth saying, but none/some/all of this may or may not be helpful
+
+In any case:
+
+![](images/Collage_2022-09-09_14_32_45.jpg){fig-align="center" width="398"}
+
+## Workflow
+
+I hadn't really given my workflow much thought before starting my PhD. I tried to sort all my tools out just before so I could focus on reading/writing without unnecessary headaches. I vacillate between thinking I should just return to pen + paper or use fancy tools because they might have cool epistemic benefits. You can skip this part if you're happy with your set up.
+
+### Plain Text?
+
+After some browsing I came across ["The Plain Person's Guide to Plain Text Social Science." by Kieran Healy](https://kieranhealy.org/publications/plain-person-text/). This is addressed at new grad students deciding what software to use for their work. Healy makes the case for using tools that *"give you more control over the process of data analysis and writing"*. This seems like a good idea.
+
+Now I'm not following this guide to the letter, but its convinced me to implement some decent version control, use open source tools where possible, and write papers in markdown for easier formatting. Worth a look, but no use upending your workflow if you have a system that works for you.
+
+### Taking Notes
+
+Okay a confession - I did not have a good set up for *digital* note taking. I experimented a bit to see what works. Maybe it seems ridiculous that I hadn't sorted it out, but there are umpteen note taking apps that do cool things and could help me out.
+
+Generally my aim was to move to some kind of plain text set up because it enables a focus on content rather than format, would enable easy conversion to other formats, and allow for easy version control. [See here for some benefits of plain text notes](https://plaintext-productivity.net/2-01-why-plaintext-for-notes.html). I ended up settling with a mix of:
+
+-   Obsidian
+
+-   Goodnotes
+
+## Grad School in Philosophy/Political Theory
+
+### Mentoring
+
+The Minorities and Philosophy UK branch offer a [mentoring scheme for marginalised people](https://www.mapforthegap.org.uk/our-mentor-scheme) in academic philosophy. This is for any UK philosophy student or researcher who consider themselves to be members of a marginalised group.
+
+### Networks
+
+It can be helpful to join some philosophy networks to stay in the loop for papers/discussions/developments/conferences. I've found these networks to be useful:
+
+-   [Philosophy Bluesky](https://go.bsky.app/4uqLbgZ)
+
+-   [PhilPeople](https://philpeople.org/news)
+
+-   [Liverpool List email list](https://www.liverpool.ac.uk/philosophy/philos-l/)
+
+### Philosophy Grad School Tips
+
+We'll see how well this pans out, but I came across these two pieces that gave me suggestions to consider and a bit of reassurance:
+
+-   [12 Tips for Success in Philosophy Graduate School](https://liz-jackson.com/teaching-service/philosophy-graduate-school-resources/) - Liz Jackson
+
+-   [6 Tips for Graduate Political Theory Students](https://justice-everywhere.org/academia/6-tips-for-graduate-political-theory-students/ "6 Tips for Graduate Political Theory Students") - Bruno Leipold
+
+## Data Visualisation
+
+### Websites
+
+Some great sources for R visuals:
+
+-   [R Graph Gallery](https://www.r-graph-gallery.com/index.html) - great examples and ideas. Absolutely brilliant site that taught me a lot
+
+-   [Data to Viz](https://www.data-to-viz.com/)- even more great ideas and examples
+
+-   [htmlwidgets for R](http://gallery.htmlwidgets.org/) - cool interactivey stuff
+
+and D3/Observable:
+
+-   [D3 Graph Gallery](https://d3-graph-gallery.com/)
+
+-   [Observable](https://observablehq.com/explore) (how do more people not use this?)
+
+### Books
+
+-   [R for Data Science](https://r4ds.had.co.nz/)
+
+-   [ggplot2: Elegant Graphics for Data Analysis](https://ggplot2-book.org/)
+
+-   [Data Visualization: A Practical Introduction](https://socviz.co/)
+
+-   [Public Policy Analytics: Code & Context for Data Science in Government](https://urbanspatial.github.io/PublicPolicyAnalytics/index.html#)
+
+-   [Scott Murray's Interactive Data Visualization for the Web](http://www.hdip-data-analytics.com/_media/resources/interactive_data_visualization_for_the_web_2nd_edition.pdf)
+
+### Videos
+
+-   [A channel with some great videos on ggplot](https://www.youtube.com/watch?v=HPJn1CMvtmI)
+
+## Making a Website
+
+I made this website using Quarto, Github, and Netlify. I found these resources useful to get going:
+
+-   [Quarto Documentation](https://quarto.org/docs/websites/)
+
+-   [Creating a blog with Quarto in 10 steps](https://beamilz.com/posts/2022-06-05-creating-a-blog-with-quarto/en/) - Beatriz Milz
+
+-   [The ultimate guide to starting a Quarto blog](https://albert-rapp.de/posts/13_quarto_blog_writing_guide/13_quarto_blog_writing_guide.html) - Albert Rapp
