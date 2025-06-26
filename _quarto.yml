@@ -20,10 +20,10 @@ website:
         text: Research
       - href: teaching.qmd
         text: Teaching
-      - href: resources.qmd
-        text: Resources
       - href: blog.qmd
         text: Blog - Rogue Analysis 📈 
+      - href: resources.qmd
+        text: Resources
       - href: watermelon.html
         text: 🍉
     right:
