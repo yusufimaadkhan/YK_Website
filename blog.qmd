@@ -1,0 +1,16 @@
+---
+title: "Rogue Analysis 📈"
+listing:
+  contents: posts
+  sort: "date desc"
+  type: table
+  table-hover: true
+  fields: [date, title]
+  date-format: "D/M/YY" 
+  categories: true
+  sort-ui: true 
+  filter-ui: true 
+  feed: true
+page-layout: full
+#margin-header: subscribe_yk.html
+---

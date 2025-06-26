@@ -1,0 +1,267 @@
+---
+title: "The Gramsci of Life"
+format: html
+author: "Yusuf Imaad Khan"
+categories: [Historical Materialism, Social Epistemology]
+toc: false
+self-contained: true
+code-tools: true
+code-fold: false
+date: "2025-02-24"
+execute:
+  echo: true
+  warning: false
+  message: false
+---
+
+![](Gramsci.svg){fig-align="left" width="100"}
+
+> That aspect of the modern crisis which is bemoaned as a “wave of materialism” is related to what is called the “crisis of authority”. If the ruling class has lost its consensus, i.e. is no longer “leading” but only “dominant”, exercising coercive force alone, this means precisely that the great masses have become detached from their traditional ideologies, and no longer believe what they used to believe previously, etc. The crisis consists precisely in the fact that the old is dying and the new cannot be born; in this interregnum a great variety of morbid symptoms appear.
+>
+> ― Antonio Gramsci, [Selections From The Prison Notebooks](https://uberty.org/wp-content/uploads/2015/10/gramsci-prison-notebooks.pdf)
+
+> Dialectical determinism as opposed to mechanical, or formal-logical determinism, is also parametric determinism; it permits the adherent of historical materialism to understand the real place of human action in the way the historical process unfolds and the way the outcome of social crises is decided. Men and women indeed make their own history. The outcome of their actions is not mechanically predetermined. Most, if not all, historical crises have several possible outcomes, not innumerable fortuitous or arbitrary ones; that is why we use the expression ‘parametric determinism’ indicating several possibilities within a given set of parameters.
+>
+> ― Ernest Mandel, [How To Make No Sense of Marx](https://www.marxists.org/archive/mandel/1989/xx/nosense.htm)
+
+> Human beings are magical. Bios and Logos. Words made flesh, muscle and bone animated by hope and desire, belief materialized in deeds,
+deeds which crystallize our actualities. "It is man who brings society into
+being" (Fanon, 1967, p.11). And the maps of spring always have to be
+redrawn again, in undared forms.
+>
+> ― Sylvia Wynter, [The Pope Must Have Been Drunk, The King of Castile a Madman: Culture as Actuality, and the Caribbean Rethinking Modernity](https://monoskop.org/images/e/e4/Wynter_Sylvia_1995_The_Pope_Must_Have_Been_Drunk_the_King_of_Castile_a_Madman.pdf)
+
+
+> Everyone is quoting Gramsci on the interregnum, but that assumes that something new will be or could be born. I doubt it. I think what we must diagnose instead is a ruling class brain tumour: a growing inability to achieve any coherent understanding of global change as a basis for defining common interests and formulating large-scale strategies.
+>
+> ― Mike Davis, [Thanatos Triumphant](https://newleftreview.org/sidecar/posts/thanatos-triumphant)
+
+> Today, Gramsci’s life could probably have been saved. There are gigantic technological resources that democratic and progressive crisis-management could draw on. What we must let go of, is the false mantle of confidence and historical clarity that evoking the concepts of an earlier epoch entails. Abandoning talk of an interregnum may rob us of certainty. But rather than a council of despair this is simply a demand of realism. What that promises, is the chance to trade historic phantoms for new projects and the exploration of the actual possibilities of the present.
+>
+> ― Adam Tooze, [Chartbook 298 Built not Born - against "interregnum"-talk (Hegemony Notes #2)](https://adamtooze.substack.com/p/chartbook-298-built-not-born-against)
+
+> ...Earth History, that appalling record of injustice, cruelty, enslavement, hatred, murder --- that record, justified and glorified by every government and institution, of waste and misuse of human life, animal life, plant life, the air, the water, the planet? If that is who we are, what hope for us? History must be what we have escaped from. It is what we were, not what we are. History is what we need never do again.
+>
+> --- Ursula K. Le Guin, [Paradises Lost](https://www.are.na/block/16193190)
+
+------------------------------------------------------------------------
+
+```{ojs}
+//| echo: false
+//| output: false
+gramsciPic = FileAttachment("Gramsci.svg").image()
+```
+
+```{ojs}
+//| code-fold: true
+//| echo: false
+viewof gramsciLife = {
+  const pic = await gramsciPic;
+
+  // 1) height, width, and grid
+  const width = 300, // this one needs to be const for later
+    height = 300;
+
+  function initializeEmptyGrid() {
+    return Array(height)
+      .fill()
+      .map(() => Array(width).fill(false));
+  }
+
+  // Keep track of current grid & an optional backup so we can reset
+  let grid = initializeEmptyGrid();
+  let initialGrid = null;
+  let isRunning = false;
+
+  // 2) Create the main container to put everything in
+  const container = document.createElement("div");
+  container.style.fontFamily = "sans-serif";
+
+  // Sub-container for the controls (top bar)
+  const controlsDiv = document.createElement("div");
+  controlsDiv.style.marginBottom = "8px";
+  container.appendChild(controlsDiv);
+
+  // 3) Start/stop button
+  const startStopBtn = document.createElement("button");
+  startStopBtn.textContent = "Start";
+  startStopBtn.style.marginRight = "8px";
+  startStopBtn.onclick = () => {
+    isRunning = !isRunning;
+    startStopBtn.textContent = isRunning ? "Stop" : "Start";
+  };
+  controlsDiv.appendChild(startStopBtn);
+
+  // 4) Reset button
+  const resetBtn = document.createElement("button");
+  resetBtn.textContent = "Reset";
+  resetBtn.style.marginRight = "8px";
+  resetBtn.onclick = () => {
+    if (initialGrid) {
+      // Deep copy so we don't mutate original (can jump back to OG)
+      grid = JSON.parse(JSON.stringify(initialGrid));
+    } else {
+      grid = initializeEmptyGrid();
+    }
+    isRunning = false;
+    startStopBtn.textContent = "Start";
+    renderGrid(); // re-draw immediately
+  };
+  controlsDiv.appendChild(resetBtn);
+
+  // 5) Grid display container (below the controls)
+  const gridDiv = document.createElement("div");
+  gridDiv.style.display = "inline-block";
+  gridDiv.style.border = "1px solid #ccc";
+  container.appendChild(gridDiv);
+
+  // 6) Hidden canvas for image processing
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
+  canvas.style.display = "none"; // hide it (or comment out for debugging)
+  container.appendChild(canvas);
+
+  // 7) Function to process the attached image and update grid
+  function processImage(img) {
+    const ctx = canvas.getContext("2d");
+    ctx.imageSmoothingEnabled = false;
+
+    // Clear and fill white
+    ctx.fillStyle = "white";
+    ctx.fillRect(0, 0, width, height);
+
+    // Scale the uploaded image to fit 
+    const scale = Math.min(width / img.width, height / img.height);
+    const scaledW = img.width * scale;
+    const scaledH = img.height * scale;
+    const offsetX = (width - scaledW) / 2;
+    const offsetY = (height - scaledH) / 2;
+
+    // Draw the scaled image
+    ctx.drawImage(img, offsetX, offsetY, scaledW, scaledH);
+
+    // Read back pixels
+    const imageData = ctx.getImageData(0, 0, width, height);
+    const newGrid = initializeEmptyGrid();
+
+    // Convert brightness into booleans with improved thresholding
+    // this is to convert the image into a grid - is actually redundant because image is black and white. But this means it should be reusable.
+    const threshold = 128; // More balanced threshold
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        const i = (y * width + x) * 4;
+        // Use proper grayscale conversion weights
+        const brightness =
+          imageData.data[i] * 0.299 +
+          imageData.data[i + 1] * 0.587 +
+          imageData.data[i + 2] * 0.114;
+        newGrid[y][x] = brightness < threshold;
+      }
+    }
+    return newGrid;
+  }
+
+  // 8) Process the pre-attached image once at start
+  grid = processImage(pic);
+  initialGrid = JSON.parse(JSON.stringify(grid));
+  renderGrid(); // show it
+
+  // 9) Conway's Life step function with slight modification
+  function computeNextGeneration(current) {
+    const directions = [
+      [-1, -1],
+      [-1, 0],
+      [-1, 1],
+      [0, -1],
+      [0, 1],
+      [1, -1],
+      [1, 0],
+      [1, 1]
+    ];
+    const next = initializeEmptyGrid();
+
+    function countNeighbors(g, x, y) {
+      let count = 0;
+      for (const [dx, dy] of directions) {
+        const nx = (x + dx + width) % width;
+        const ny = (y + dy + height) % height;
+        if (g[ny][nx]) count++;
+      }
+      return count;
+    }
+
+    for (let y = 0; y < height; y++) {
+      for (let x = 0; x < width; x++) {
+        const neighbors = countNeighbors(current, x, y);
+
+        if (current[y][x]) {
+          // Classic survival rules but slightly more permissive
+          next[y][x] = neighbors === 2 || neighbors === 3 || neighbors === 4;
+        } else {
+          // Classic birth rule
+          next[y][x] = neighbors === 3;
+        }
+      }
+    }
+    return next;
+  }
+
+  // 10) Render the grid into gridDiv
+  function renderGrid() {
+    gridDiv.innerHTML = "";
+    for (let y = 0; y < height; y++) {
+      const rowDiv = document.createElement("div");
+      rowDiv.style.display = "flex";
+      for (let x = 0; x < width; x++) {
+        const cellDiv = document.createElement("div");
+        cellDiv.style.width = "1px";
+        cellDiv.style.height = "1px";
+        cellDiv.style.backgroundColor = grid[y][x] ? "black" : "white";
+        rowDiv.appendChild(cellDiv);
+      }
+      gridDiv.appendChild(rowDiv);
+    }
+  }
+
+  // 11) Now the generator loop for stepping in the simulation
+  while (true) {
+    if (isRunning) {
+      grid = computeNextGeneration(grid);
+      renderGrid();
+    }
+    // Show the container, then sleep 100ms
+    yield container;
+    await Promises.delay(100);
+  }
+}
+
+```
+
+------------------------------------------------------------------------
+
+{{< video https://www.youtube.com/watch?v=rtQl4XChQ90&ab_channel=MarvinGaye-Topic >}}
+
+------------------------------------------------------------------------
+
+![](images/IMG_2041.jpeg)
+
+------------------------------------------------------------------------
+
+::: {.callout-note collapse="true"}
+## What is going on here?
+
+I wanted to just throw this together with very little accompanying explanation, but that seems needlessly obscure and against the sort of transparency and clarity I've aimed for with this blog so far. 
+
+In a nutshell, this post is a curation of some things I was thinking about recently. The overall backdrop concerns the trajectory of history and crisis fighting amidst world historical processes.
+
+- The first six quotes are selections from writing I find illuminating but difficult to reconcile. 
+
+- The visualisation is an image of Gramsci that turns into a version of the [game of life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life). I thought this would be an interesting twist on the whole "the old is dying and the new cannot be born" thing. As soon as you press start and the simulation begins, the filled in colour disappears because completely filled areas cannot survive according to the rules. The version of the rules I've implemented is slightly more permissive by allowing more neighbours to survive. This leads to more interesting dynamics and the complete replacement of Gramsci's portrait with a growing maze of pixels. But maybe that just reflects my own prejudices. 
+
+- The video is a song I like that is related to these themes - [Marvin Gaye's version of "Where Are We Going?"](https://en.wikipedia.org/wiki/Where_Are_We_Going). Gaye's version seems to achieve a funky ominous vibe that at once conveys open-endedness but also deep uncertainty about the future. The funky rhythms betray a sense of regularity, but it wouldn't make for such great listening if crisis was signified by a foghorn interrupting at irregular intervals. 
+
+- The image is a sign I saw on a walk.
+
+I leave it to the reader to take what they want from this. It might just be a needless indulgence or a strange scrapbook.
+:::

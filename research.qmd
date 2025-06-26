@@ -1,0 +1,10 @@
+---
+title: "Research"
+format: html
+---
+
+In progress. 
+
+[Why not reflect on the vastness of human knowledge and the challenge of archiving it all, instead?](https://phiresky.github.io/blog/2025/visualizing-all-books-in-isbn-space)
+
+![](images/balance.jpg){fig-align="center" width="500"}
