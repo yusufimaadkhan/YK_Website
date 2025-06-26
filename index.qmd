@@ -26,7 +26,7 @@ In between my studies, I worked in the UK Government Economic Service in a few a
 
 I am also the Graphics Editor at [Phenomenal World](https://www.phenomenalworld.org/about/), where I make charts.
 
-Welcome to my website! Here you can find my blog - [Rogue Analysis](blog.qmd)📈, and a [page of resources](resources.qmd) I've found handy.
+Welcome to my website! Here you can find my blog - [Rogue Analysis](blog.qmd)📈, and a [page of resources](resource-links.qmd) I've found handy.
 
 ::: {.callout-note collapse="true"}
 ## Disambiguation

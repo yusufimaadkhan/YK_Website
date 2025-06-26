@@ -22,7 +22,7 @@ website:
         text: Teaching
       - href: blog.qmd
         text: Blog - Rogue Analysis 📈 
-      - href: resources.qmd
+      - href: resource-links.qmd
         text: Resources
       - href: watermelon.html
         text: 🍉
