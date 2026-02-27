@@ -21,7 +21,7 @@ website:
       - href: teaching.qmd
         text: Teaching
       - href: blog.qmd
-        text: Blog - Rogue Analysis 📈 
+        text: Rogue Analysis 📈 
       - href: resource-links.qmd
         text: Resources
       - href: watermelon.html
