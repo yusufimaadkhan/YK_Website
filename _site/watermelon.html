@@ -1,0 +1,212 @@
+<!-- The code for the watermelon emitter largely draws from Taylor Gipple's website "Do we feel the bern"? https://web.archive.org/web/20191231231918/https://dowefeelthebern.com/#expand -->
+ <!-- You know that one? The one with the flying Bernie's? I suppose there is something poetic in the guy turning out to support a genocide and then this piece of code is drawn from his failed campaign... -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Watermelon</title>
+    <style>
+        @font-face {
+            font-family: 'CustomFont';
+            src: url('OPTIBuffer-Bold.otf') format('opentype');
+        }
+        body {
+            margin: 0;
+            overflow: hidden;
+            background-color: #fff;
+        }
+        
+        /* Keyframe animation for desktop (double-width scroll) */
+        @keyframes scrollBackgroundDesktop {
+            0% {
+                background-position: 0 center;
+            }
+            100% {
+                background-position: -200vw center;
+            }
+        }
+
+        /* Keyframe animation for mobile (single-width scroll) */
+        @keyframes scrollBackgroundMobile {
+            0% {
+                background-position: 0 center;
+            }
+            100% {
+                background-position: -100vw center;
+            }
+        }
+        
+        #myCanvas {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background: url('Flag_of_Palestine_(vertical).svg') repeat-x top center;
+            animation: scrollBackgroundDesktop linear infinite;
+            animation-duration: 30s; /* Default speed for desktop */
+            background-size: auto 100%; /* Desktop-specific size */
+            will-change: background-position;
+        }
+        
+        /* Styles for mobile view */
+        @media (max-width: 768px) {
+            #myCanvas {
+                background-size: cover; /* Ensures full height coverage on mobile */
+                animation: scrollBackgroundMobile linear infinite;
+                animation-duration: 10s; /* Slower on mobile */
+            }
+        }
+
+        #watermelon {
+            font-family: 'CustomFont', sans-serif;
+            font-size: 70px;
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+    </style>
+</head>
+<body>
+    <div id="watermelon">🍉Click me🍉</div>
+    <canvas id="myCanvas"></canvas>
+    <audio id="song" src="audio.mp3" preload="auto" loop></audio>
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paper.js/0.12.11/paper-full.min.js"></script>
+    <script>
+        var mediaElement;
+        var playing = false;
+        var playedOnce = false;
+
+        document.getElementById('watermelon').addEventListener('click', function() {
+            var song = document.getElementById('song');
+            song.play();
+            playing = true;
+            playedOnce = true;
+            document.getElementById('watermelon').style.display = 'none';
+            document.getElementById('myCanvas').style.display = 'block';
+            paper.view.viewSize = new paper.Size(window.innerWidth, window.innerHeight);
+        });
+
+        paper.install(window);
+        window.onload = function() {
+            paper.setup('myCanvas');
+            
+            var melons = [];
+            var possibleMelons = ["🍉", "🍉"];
+
+            var Melon = Base.extend({
+                initialize: function(stageWidth, stageHeight, time, rotateFactor, size) {
+                    var p1 = new Point(0, stageHeight);
+                    var p2 = new Point(time / 2, 0);
+                    var p3 = new Point(time, stageHeight);
+                    this.a = (p3.x * (-p1.y + p2.y) + p2.x * (p1.y - p3.y) + p1.x * (-p2.y + p3.y)) / ((p1.x - p2.x) * (p1.x - p3.x) * (p2.x - p3.x));
+                    this.b = (p3.x * p3.x * (p1.y - p2.y) + p1.x * p1.x * (p2.y - p3.y) + p2.x * p2.x * (-p1.y + p3.y)) / ((p1.x - p2.x) * (p1.x - p3.x) * (p2.x - p3.x));
+                    this.c = (p3.x * (p2.x * (p2.x - p3.x) * p1.y + p1.x * (-p1.x + p3.x) * p2.y) + p1.x * (p1.x - p2.x) * p2.x * p3.y) / ((p1.x - p2.x) * (p1.x - p3.x) * (p2.x - p3.x));
+                    this.rotateFactor = rotateFactor;
+                    this.endX = stageWidth / 2;
+                    var melonId = possibleMelons[Math.floor(Math.random() * possibleMelons.length)];
+                    this.melon = new PointText(p1);
+                    this.melon.content = melonId;
+                    this.melon.fillColor = 'black';
+                    this.melon.fontSize = size;
+                    this.stateTime = 0;
+                    this.totalTime = time;
+                    this.endPoint = p3;
+                    this.isAlive = true;
+                },
+                update: function(delta) {
+                    if (this.isAlive) {
+                        this.stateTime += delta;
+                        this.melon.position.y = this.a * this.stateTime * this.stateTime + this.b * this.stateTime + this.c;
+                        this.melon.position.x = this.stateTime / this.totalTime * this.endX;
+                        this.melon.rotate(delta * this.rotateFactor);
+                        if (this.stateTime > this.totalTime + 1) {
+                            this.melon.remove();
+                            this.isAlive = false;
+                        }
+                    }
+                }
+            });
+
+            var TextManager = Base.extend({
+                initialize: function() {
+                    this.stateTime = 0;
+                    this.text = new PointText(view.center);
+                    this.text.paragraphStyle.justification = 'center';
+                    this.text.characterStyle.fontSize = 15;
+                    this.text.characterStyle.font = 'monospace';
+                    this.text.fillColor = 'black';
+                },
+                update: function(delta, playing) {
+                    this.stateTime += delta;
+                    if (!playing) {
+                        if (playedOnce)
+                            this.text.content = "Please wait, reloading more watermelons";
+                        else
+                            this.text.content = "🍉";
+                        if (Math.floor(this.stateTime % 1.5) == 0) {
+                            this.text.characterStyle.fontSize = 15;
+                        } else {
+                            this.text.characterStyle.fontSize = 17;
+                        }
+                    } else {
+                        this.text.content = "";
+                    }
+                }
+            });
+
+            var MelonEmitter = Base.extend({
+                initialize: function(rate) {
+                    this.rate = rate;
+                    this.lastEmit = 0;
+                    this.stateTime = 0;
+                },
+                update: function(delta) {
+                    this.stateTime += delta;
+                    if (this.lastEmit + this.rate < this.stateTime) {
+                        var numMelons = Math.random() < 0.2 ? 3 : 1; // Occasionally emit 3 melons at once
+                        for (var i = 0; i < numMelons; i++) {
+                            var randomX = (Math.random() * view.size.width) - (view.size.width / 2);
+                            var randomY = (Math.random() * view.size.height) - (view.size.height / 2);
+                            var randomRotate = Math.random() * 200 - 100;
+                            var randomSize = Math.random() * 100 + 50; // Sizes between 50 and 150
+                            melons.push(new Melon(view.size.width + randomX, view.size.height + randomY, 2, randomRotate, randomSize));
+                        }
+                        this.lastEmit = this.stateTime;
+                    }
+                },
+                clear: function() {
+                    for (var i = 0; i < melons.length; i++) {
+                        melons[i].remove();
+                    }
+                }
+            });
+
+            var melonEmitterInstance = new MelonEmitter(0.15);
+            var textManager = new TextManager();
+
+            view.onFrame = function(event) {
+                melonEmitterInstance.update(event.delta);
+                for (var i = 0; i < melons.length; i++) {
+                    if (melons[i].isAlive == false) {
+                        melons.splice(i, 1);
+                    } else {
+                        melons[i].update(event.delta);
+                    }
+                }
+                textManager.update(event.delta, playing);
+            };
+
+            window.onresize = function() {
+                paper.view.viewSize = new paper.Size(window.innerWidth, window.innerHeight);
+            };
+        };
+    </script>
+</body>
+</html>
