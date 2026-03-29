@@ -70,17 +70,23 @@ format:
           }
 
 
-          /* Blur the essay until CAPTCHA is clicked */
-          body.gated main.content,
-          body.gated #quarto-margin-sidebar,
-          body.gated #title-block-header {
+          /* Blur by default — JS removes after CAPTCHA */
+          main.content,
+          #quarto-margin-sidebar,
+          #title-block-header {
             filter: blur(6px);
             pointer-events: none;
             user-select: none;
           }
-          body.gated {
-            overflow: hidden;
+          body { overflow: hidden; }
+          body.unblurred main.content,
+          body.unblurred #quarto-margin-sidebar,
+          body.unblurred #title-block-header {
+            filter: none;
+            pointer-events: auto;
+            user-select: auto;
           }
+          body.unblurred { overflow: auto; }
 
           /* reCAPTCHA gate */
           #captcha-overlay {
@@ -235,10 +241,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.body.appendChild(gate);
   document.body.appendChild(document.getElementById('takeover'));
 
-  // Blur the page
-  document.body.classList.add('gated');
-
-  // Fake CAPTCHA — click the checkbox, unlock audio, unblur, dismiss
+  // Fake CAPTCHA — click the checkbox, unlock audio, unblur, arm scroll trigger
   document.getElementById('captcha-left').addEventListener('click', () => {
     checkbox.classList.add('checked');
 
@@ -253,21 +256,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     setTimeout(() => {
       gate.classList.add('dismissed');
-      document.body.classList.remove('gated');
+      document.body.classList.add('unblurred');
+      // Only arm the scroll trigger AFTER captcha is done
+      armScrollTrigger();
     }, 600);
   });
 
-  // Scroll trigger
-  if (!sentinel) return;
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && !triggered) {
-        triggered = true;
-        launch();
-      }
-    });
-  }, { threshold: 0.1 });
-  observer.observe(sentinel);
+  function armScrollTrigger() {
+    if (!sentinel) return;
+    // Scroll to top so observer doesn't fire immediately on refresh
+    window.scrollTo(0, 0);
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && !triggered) {
+          triggered = true;
+          launch();
+        }
+      });
+    }, { threshold: 0.1 });
+    observer.observe(sentinel);
+  }
 
   function launch() {
     const overlay = document.getElementById('takeover');
