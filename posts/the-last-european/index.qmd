@@ -1,0 +1,298 @@
+---
+title: "The Last European"
+subtitle: "On Jürgen Habermas"
+author:
+  - "Yusuf Imaad Khan"
+  - "Richard Paul-Astley"
+date: "March 29 2026"
+format:
+  html:
+    toc: false
+    toc-depth: 3
+    reference-location: margin
+    embed-resources: true
+    css: []
+    include-in-header:
+      text: |
+        <style>
+          main {
+            font-family: 'Georgia', 'Times New Roman', serif !important;
+            line-height: 1.9;
+            color: #2c2c2c;
+          }
+          main h1, main h2, main h3,
+          main p, main li, main blockquote,
+          main .title, main .subtitle, main .author {
+            font-family: 'Georgia', serif !important;
+          }
+          .trigger-zone { height: 1px; opacity: 0; }
+          blockquote {
+            border-left: 3px solid #999;
+            padding-left: 1em;
+            color: #555;
+            font-style: italic;
+          }
+          sup { font-size: 0.7em; }
+
+          #takeover {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100dvh;
+            background: #000;
+            z-index: 99999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+          }
+          #takeover.active {
+            display: flex !important;
+            animation: crashIn 0.3s ease-out;
+          }
+          #takeover video {
+            width: 100vw;
+            height: 100dvh;
+            object-fit: cover;
+          }
+          #takeover-text {
+            position: absolute;
+            color: rgba(255, 255, 255, 0.75);
+            font-family: 'Georgia', serif;
+            font-size: 2.5rem;
+            text-align: center;
+            line-height: 1.6;
+            pointer-events: none;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+          }
+          @keyframes crashIn {
+            0% { opacity: 0; transform: scale(1.3); }
+            100% { opacity: 1; transform: scale(1); }
+          }
+
+
+          /* Blur the essay until CAPTCHA is clicked */
+          body.gated main.content,
+          body.gated #quarto-margin-sidebar,
+          body.gated #title-block-header {
+            filter: blur(6px);
+            pointer-events: none;
+            user-select: none;
+          }
+          body.gated {
+            overflow: hidden;
+          }
+
+          /* reCAPTCHA gate */
+          #captcha-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100vw; height: 100vh;
+            background: rgba(255,255,255,0.15);
+            z-index: 80000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+          #captcha-overlay.dismissed { display: none; }
+          #captcha-box {
+            background: #f9f9f9;
+            border: 1px solid #d3d3d3;
+            border-radius: 3px;
+            padding: 14px 14px 14px 14px;
+            width: 304px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+            font-family: Roboto, Helvetica, Arial, sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+          }
+          #captcha-left {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            cursor: pointer;
+          }
+          #captcha-checkbox {
+            width: 28px; height: 28px;
+            border: 2px solid #c1c1c1;
+            border-radius: 3px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.15s;
+            flex-shrink: 0;
+          }
+          #captcha-checkbox:hover { border-color: #a0a0a0; }
+          #captcha-checkbox.checked {
+            border-color: #4caf50;
+            background: #fff;
+          }
+          #captcha-checkbox .checkmark {
+            display: none;
+            width: 20px; height: 20px;
+          }
+          #captcha-checkbox.checked .checkmark { display: block; }
+          #captcha-label {
+            font-size: 14px;
+            color: #555;
+            user-select: none;
+          }
+          #captcha-brand {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1px;
+          }
+          #captcha-brand svg { width: 32px; height: 32px; }
+          #captcha-brand span {
+            font-size: 7px;
+            color: #555;
+            letter-spacing: -0.01em;
+          }
+          #captcha-brand small {
+            font-size: 6px;
+            color: #aaa;
+          }
+        </style>
+---
+
+## I. Modernity's Wager
+
+Liberal democracies are coming apart. Not from without, as their Cold War architects feared, but from within: a slow structural failure of the normative foundations on which the entire post-war order was built.[^1] The institutions constructed after 1945 to ensure that the worst could never recur are collapsing. The public sphere (*Öffentlichkeit*), that great mediating structure through which citizens were supposed to reach rational consensus, has been gutted and repurposed as an apparatus of manipulation, spectacle, and algorithmic rage.[^2] We are living through a crisis of democratic legitimacy so severe that it has become difficult even to articulate what has been lost, because the very capacity for rational articulation is threatened.
+
+[^1]: See V-Dem Institute, ["Unraveling The Democratic Era?"](https://www.tandfonline.com/doi/full/10.1080/13562517.2025.2466001) (2026).
+
+[^2]: See Habermas, [*Strukturwandel der Öffentlichkeit*](https://www.tandfonline.com/doi/full/10.1080/13562517.2025.2466001) (1962).
+
+The wager of modernity is that what reason has learned it cannot simply unlearn. That wager is now being called in.
+
+At this moment the work of Jürgen Habermas, who died in March 2026 at the age of ninety-six, demands not merely reappraisal but *reconstruction*. Habermas understood, decades before it became obvious to anyone else, that a democratic order which cannot give a rational account of its own legitimacy will eventually be unable to defend itself against those who reject the premise of rational legitimacy altogether. Habermas spent his entire career constructing that account, systematically, architectonically, with a monastic rigour, producing across seven decades the most formidable philosophical defence of the Enlightenment project since Kant.[^3]
+
+[^3]: McCarthy's introduction to [*Theorie des kommunikativen Handelns*](https://www.tandfonline.com/doi/full/10.1080/13562517.2025.2466001) (1981) provides a lucid map of the system.
+
+It is not clear that we understood what he was doing while he was alive. It is becoming clear, as the ground gives way beneath us, that we cannot afford to look away now. What Habermas would never give up, what he refused across every debate, every concession to his critics, was the claim that communicative reason could not be let down without surrendering the normative ground of democracy itself. He would never run around that commitment, never desert it. Others would abandon the Enlightenment project when it became unfashionable or hard. He would not. He knew what the stakes were, and so should we.
+
+::: {#sentinel .trigger-zone}
+:::
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+## II. The Validity Basis of Speech
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+## III. Between System and Lifeworld
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+## IV. Constitutional Patriotism Reconsidered
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+
+------------------------------------------------------------------------
+
+### References
+
+::: {#refs}
+Nope
+:::
+
+```{=html}
+<div id="captcha-overlay">
+  <div id="captcha-box">
+    <div id="captcha-left">
+      <div id="captcha-checkbox">
+        <svg class="checkmark" viewBox="0 0 24 24" fill="none" stroke="#4caf50" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 10 18 20 6"/></svg>
+      </div>
+      <span id="captcha-label">I'm not a robot</span>
+    </div>
+    <div id="captcha-brand">
+      <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg"><g fill="none"><path d="M32 2a30 30 0 1 1 0 60 30 30 0 0 1 0-60z" fill="#4285f4"/><path d="M32 12a20 20 0 1 1 0 40 20 20 0 0 1 0-40z" fill="#fff"/><path d="M32 22a10 10 0 1 1 0 20 10 10 0 0 1 0-20z" fill="#4285f4"/></g></svg>
+      <span>reCAPTCHA</span>
+      <small>Privacy - Terms</small>
+    </div>
+  </div>
+</div>
+
+<div id="takeover">
+  <video id="lecture-vid" src="habermas-lecture.mp4" preload="auto" playsinline></video>
+  <div id="takeover-text">I ain't writing all that.<br>Free Palestine.</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const vid = document.getElementById('lecture-vid');
+  const sentinel = document.getElementById('sentinel');
+  const gate = document.getElementById('captcha-overlay');
+  const checkbox = document.getElementById('captcha-checkbox');
+  let audioCtx;
+  let triggered = false;
+
+  vid.load();
+
+  // Move captcha and takeover out of <main> so they escape the blur
+  document.body.appendChild(gate);
+  document.body.appendChild(document.getElementById('takeover'));
+
+  // Blur the page
+  document.body.classList.add('gated');
+
+  // Fake CAPTCHA — click the checkbox, unlock audio, unblur, dismiss
+  document.getElementById('captcha-left').addEventListener('click', () => {
+    checkbox.classList.add('checked');
+
+    // Belt 1: AudioContext routing — unlocks audio pipeline
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const source = audioCtx.createMediaElementSource(vid);
+    source.connect(audioCtx.destination);
+    audioCtx.resume();
+
+    // Belt 2: bless the video element with a user-gesture play
+    vid.play().then(() => { vid.pause(); vid.currentTime = 0; }).catch(() => {});
+
+    setTimeout(() => {
+      gate.classList.add('dismissed');
+      document.body.classList.remove('gated');
+    }, 600);
+  });
+
+  // Scroll trigger
+  if (!sentinel) return;
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && !triggered) {
+        triggered = true;
+        launch();
+      }
+    });
+  }, { threshold: 0.1 });
+  observer.observe(sentinel);
+
+  function launch() {
+    const overlay = document.getElementById('takeover');
+    gate.classList.add('dismissed');
+
+    // Kick AudioContext in case iOS suspended it
+    if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+
+    overlay.classList.add('active');
+    vid.currentTime = 0;
+    vid.play().catch(() => {
+      // Last resort: muted autoplay + unmute on next tap
+      vid.muted = true;
+      vid.play().catch(() => {});
+      function goLoud() {
+        vid.muted = false;
+        vid.volume = 1.0;
+        if (audioCtx && audioCtx.state === 'suspended') audioCtx.resume();
+        ['pointerdown','keydown','touchstart'].forEach(e =>
+          document.removeEventListener(e, goLoud, true));
+      }
+      ['pointerdown','keydown','touchstart'].forEach(e =>
+        document.addEventListener(e, goLoud, true));
+    });
+  }
+});
+</script>
+```
