@@ -93,6 +93,12 @@ h1, h2, h3, h4, .title {
     font-weight: 400;  /* General Sans regular — light-touch headings */
 }
 
+/* homepage: hide the about-block h1 — the navbar already introduces the name,
+   and the duplicate two inches below it was template furniture (2026-08-11) */
+.about-entity .title {
+    display: none;
+}
+
 /* navbar brand stays left at every viewport width — Quarto's mx-auto centres
    it next to the hamburger when the menu collapses (<992px); user wants left */
 .navbar .navbar-brand-container.mx-auto {

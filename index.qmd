@@ -42,7 +42,7 @@ I completed my MSc in the Philosophy of the Social Sciences at the LSE in the De
 
 In between my studies, I worked in the UK Government Economic Service in a few areas including international climate finance and local policy analysis. I am also the Graphics Editor at [Phenomenal World](https://www.phenomenalworld.org/about/), where I make [charts](charts.html).
 
-Welcome to my website! Here you can find my blog - [Rogue Analysis](blog.qmd)📈, and a [page of resources](resource-links.qmd) I've found handy.
+Sometimes I write a blog called [Rogue Analysis](blog.qmd) 📈. I also keep a [page of resources](resource-links.qmd) I've found handy.
 
 ::: {.callout-note collapse="true"}
 ## Disambiguation
