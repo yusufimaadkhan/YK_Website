@@ -62,10 +62,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -76,18 +72,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-8fdb60cc607797eed9f9084820682789.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
-  "copy-button": false,
-  "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -132,7 +116,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <span class="navbar-title">Yusuf Imaad Khan</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -148,7 +131,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../blog.html"> 
-<span class="menu-text">Rogue Analysis 📈</span></a>
+<span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../resource-links.html"> 
@@ -196,7 +179,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">LSE Profile</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../index.xml"><i class="bi bi-rss" role="img">
+    <a class="dropdown-item" href="../../blog.xml"><i class="bi bi-rss" role="img">
 </i> 
  <span class="dropdown-text"></span></a>
   </li>  
@@ -882,6 +865,130 @@ Warning
 <li id="fn8"><p>See here too - <a href="https://www.parliament.uk/site-information/foi/transparency-publications/hoc-transparency-publications/financial-information/financial-assistance-to-opposition-parties/" class="uri">https://www.parliament.uk/site-information/foi/transparency-publications/hoc-transparency-publications/financial-information/financial-assistance-to-opposition-parties/</a><a href="#fnref8" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
+<script>
+/* Navbar sparkline hover (hovering nav item plots a fresh random walk
+   beneath it, keeps ticking when you hover!)*/
+(function () {
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  var N = 22;          /* points in the visible window */
+  var TICK_MS = 90;    /* drift speed while hovering */
+  var DRAW_MS = 400;   /* initial left-to-right draw */
+
+  function init() {
+    var nav = document.querySelector('.navbar');
+    if (!nav) return;
+    var links = nav.querySelectorAll('.navbar-nav .nav-link');
+    if (!links.length) return;
+
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var svg = document.createElementNS(SVGNS, 'svg');
+    svg.setAttribute('class', 'yk-nav-spark');
+    svg.setAttribute('aria-hidden', 'true');
+    var path = document.createElementNS(SVGNS, 'path');
+    var dot = document.createElementNS(SVGNS, 'circle');
+    dot.setAttribute('r', '2');
+    svg.appendChild(path);
+    svg.appendChild(dot);
+    nav.appendChild(svg);
+
+    var ys = [], w = 0, h = 14, step = 0, timer = null, startTimer = null;
+
+    function nextY(y) {
+      y += (Math.random() - 0.5) * 3.4;
+      return Math.min(h - 2, Math.max(2, y));
+    }
+
+    function render() {
+      var d = 'M';
+      for (var i = 0; i < N; i++) {
+        d += (i ? 'L' : '') + (i * step).toFixed(1) + ',' + ys[i].toFixed(1);
+      }
+      path.setAttribute('d', d);
+      dot.setAttribute('cx', ((N - 1) * step).toFixed(1));
+      dot.setAttribute('cy', ys[N - 1].toFixed(1));
+      /* SVG y grows downward: lower final y = the walk went up */
+      dot.setAttribute('fill', ys[N - 1] < ys[0] ? '#8ff0a4' : '#ffa198');
+    }
+
+    function stopTicking() {
+      if (timer) { clearInterval(timer); timer = null; }
+      if (startTimer) { clearTimeout(startTimer); startTimer = null; }
+    }
+
+    function startTicking() {
+      path.style.transition = 'none';
+      path.style.strokeDasharray = 'none';
+      timer = setInterval(function () {
+        ys.shift();
+        ys.push(nextY(ys[N - 2]));
+        render();
+      }, TICK_MS);
+    }
+
+    function draw(link) {
+      stopTicking();
+
+      var text = link.querySelector('.menu-text') || link;
+      var r = text.getBoundingClientRect();
+      var nr = nav.getBoundingClientRect();
+      w = Math.max(r.width, 26);
+      step = w / (N - 1);
+
+      svg.setAttribute('width', w);
+      svg.setAttribute('height', h);
+      svg.style.left = (r.left - nr.left + (r.width - w) / 2) + 'px';
+      svg.style.top = (r.bottom - nr.top - 3) + 'px';
+
+      /* seed a fresh walk */
+      ys = [];
+      var y = h * 0.55;
+      for (var i = 0; i < N; i++) { y = nextY(y); ys.push(y); }
+      render();
+
+      if (reduced) {
+        /* no drawing animation, no drift, just....chart */
+        path.style.strokeDasharray = 'none';
+        svg.style.opacity = '1';
+        return;
+      }
+
+      /* animate the initial draw, then go live */
+      var len = path.getTotalLength();
+      path.style.transition = 'none';
+      path.style.strokeDasharray = len;
+      path.style.strokeDashoffset = len;
+      dot.style.transition = 'none';
+      dot.style.opacity = '0';
+      void svg.getBoundingClientRect();
+      path.style.transition = 'stroke-dashoffset ' + DRAW_MS + 'ms ease-out';
+      path.style.strokeDashoffset = '0';
+      dot.style.transition = 'opacity .15s ease ' + (DRAW_MS - 80) + 'ms';
+      dot.style.opacity = '1';
+      svg.style.opacity = '1';
+      startTimer = setTimeout(startTicking, DRAW_MS);
+    }
+
+    function hide() {
+      stopTicking();
+      svg.style.opacity = '0';
+    }
+
+    links.forEach(function (l) {
+      l.addEventListener('mouseenter', function () { draw(l); });
+      l.addEventListener('mouseleave', hide);
+      l.addEventListener('focus', function () { draw(l); });
+      l.addEventListener('blur', hide);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
 <script type="ojs-module-contents">
 eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6Ilxua2V5ID0gU3dhdGNoZXMoY2hhcnQuc2NhbGVzLmNvbG9yKVxuXG5ncmFwaCA9IEZpbGVBdHRhY2htZW50KFwidHJ1c3NqLmpzb25cIikuanNvbigpIC8vIHNjcmFwZWQgYW5kIGNsZWFuZWQgZnJvbSBieWxpbmUgdGltZXMgYXJ0aWNsZVxuXG4vL2J5bGluZVxuXG5jaGFydCA9IEZvcmNlR3JhcGgoZ3JhcGgsIHtcbiAgbm9kZUlkOiBkID0+IGQuaWQsXG4gIG5vZGVHcm91cDogZCA9PiBkLmdyb3VwLFxuICBub2RlVGV4dDogZCA9PiBkLmluZm8sXG4gIG5vZGVUaXRsZTogZCA9PiBgJHtkLmlkfSAoJHtkLmdyb3VwfSkgJHtkLmluZm99YCxcbiAgbGlua1N0cm9rZVdpZHRoOiBsID0+IE1hdGguc3FydChsLnZhbHVlKS8yMCxcbiAgbm9kZVJhZGl1czogbCA9PiBNYXRoLnNxcnQobC52YWx1ZSkvMTAsXG4gIG5vZGVTdHJlbmd0aDogLTE1MDAsIC8vIG4gPT4gKE1hdGguc3FydChuLnZhbHVlLCAxKSkqLTEsXG4gIHdpZHRoLFxuICBoZWlnaHQ6IDQwMCxcbiAgaW52YWxpZGF0aW9uIC8vIGEgcHJvbWlzZSB0byBzdG9wIHRoZSBzaW11bGF0aW9uIHdoZW4gdGhlIGNlbGwgaXMgcmUtcnVuXG59KTtcblxuLy8gRml4aW5nIGl0XG5cbi8vIENvcHlyaWdodCAyMDIxIE9ic2VydmFibGUsIEluYy4gLSBzb21lIGVkaXRzIGZyb20gWUtcbi8vIFJlbGVhc2VkIHVuZGVyIHRoZSBJU0MgbGljZW5zZS5cbi8vIGh0dHBzOi8vb2JzZXJ2YWJsZWhxLmNvbS9AZDMvZGlzam9pbnQtZm9yY2UtZGlyZWN0ZWQtZ3JhcGhcbmZ1bmN0aW9uIEZvcmNlR3JhcGgoe1xuICBub2RlcywgLy8gYW4gaXRlcmFibGUgb2Ygbm9kZSBvYmplY3RzICh0eXBpY2FsbHkgW3tpZH0sIOKApl0pXG4gIGxpbmtzIC8vIGFuIGl0ZXJhYmxlIG9mIGxpbmsgb2JqZWN0cyAodHlwaWNhbGx5IFt7c291cmNlLCB0YXJnZXR9LCDigKZdKVxufSwge1xuICBub2RlSWQgPSBkID0+IGQuaWQsIC8vIGdpdmVuIGQgaW4gbm9kZXMsIHJldHVybnMgYSB1bmlxdWUgaWRlbnRpZmllciAoc3RyaW5nKVxuICBub2RlR3JvdXAsIC8vIGdpdmVuIGQgaW4gbm9kZXMsIHJldHVybnMgYW4gKG9yZGluYWwpIHZhbHVlIGZvciBjb2xvclxuICBub2RlR3JvdXBzLCAvLyBhbiBhcnJheSBvZiBvcmRpbmFsIHZhbHVlcyByZXByZXNlbnRpbmcgdGhlIG5vZGUgZ3JvdXBzXG4gIG5vZGVUaXRsZSwgLy8gZ2l2ZW4gZCBpbiBub2RlcywgYSB0aXRsZSBzdHJpbmdcbiAgbm9kZVRleHQsXG4gIG5vZGVGaWxsID0gXCJjdXJyZW50Q29sb3JcIiwgLy8gbm9kZSBzdHJva2UgZmlsbCAoaWYgbm90IHVzaW5nIGEgZ3JvdXAgY29sb3IgZW5jb2RpbmcpXG4gIG5vZGVTdHJva2UgPSBcIiNmZmZcIiwgLy8gbm9kZSBzdHJva2UgY29sb3JcbiAgbm9kZVN0cm9rZVdpZHRoID0gMCwgLy8gbm9kZSBzdHJva2Ugd2lkdGgsIGluIHBpeGVsc1xuICBub2RlU3Ryb2tlT3BhY2l0eSA9IDEsIC8vIG5vZGUgc3Ryb2tlIG9wYWNpdHlcbiAgbm9kZVJhZGl1cyA9IDEwMCwgLy8gbm9kZSByYWRpdXMsIGluIHBpeGVsc1xuICBub2RlU3RyZW5ndGgsIC8vID0gLTkwMCxcbiAgbGlua1NvdXJjZSA9ICh7c291cmNlfSkgPT4gc291cmNlLCAvLyBnaXZlbiBkIGluIGxpbmtzLCByZXR1cm5zIGEgbm9kZSBpZGVudGlmaWVyIHN0cmluZ1xuICBsaW5rVGFyZ2V0ID0gKHt0YXJnZXR9KSA9PiB0YXJnZXQsIC8vIGdpdmVuIGQgaW4gbGlua3MsIHJldHVybnMgYSBub2RlIGlkZW50aWZpZXIgc3RyaW5nXG4gIGxpbmtTdHJva2UgPSBcIiM5OTlcIiwgLy8gbGluayBzdHJva2UgY29sb3JcbiAgbGlua1N0cm9rZU9wYWNpdHkgPSAwLjYsIC8vIGxpbmsgc3Ryb2tlIG9wYWNpdHlcbiAgbGlua1N0cm9rZVdpZHRoID0gMS41LCAvLyBnaXZlbiBkIGluIGxpbmtzLCByZXR1cm5zIGEgc3Ryb2tlIHdpZHRoIGluIHBpeGVsc1xuICBsaW5rU3Ryb2tlTGluZWNhcCA9IFwicm91bmRcIiwgLy8gbGluayBzdHJva2UgbGluZWNhcFxuICBsaW5rU3RyZW5ndGgsXG4gIGNvbG9ycyA9IGQzLnNjaGVtZVRhYmxlYXUxMCwgLy8gYW4gYXJyYXkgb2YgY29sb3Igc3RyaW5ncywgZm9yIHRoZSBub2RlIGdyb3Vwc1xuICB3aWR0aCA9IDY0MCwgLy8gb3V0ZXIgd2lkdGgsIGluIHBpeGVsc1xuICBoZWlnaHQgPSA0MDAsIC8vIG91dGVyIGhlaWdodCwgaW4gcGl4ZWxzXG4gIGludmFsaWRhdGlvbiAvLyB3aGVuIHRoaXMgcHJvbWlzZSByZXNvbHZlcywgc3RvcCB0aGUgc2ltdWxhdGlvblxufSA9IHt9KSB7XG4gIC8vIENvbXB1dGUgdmFsdWVzLlxuICBjb25zdCBOID0gZDMubWFwKG5vZGVzLCBub2RlSWQpLm1hcChpbnRlcm4pO1xuICBjb25zdCBMUyA9IGQzLm1hcChsaW5rcywgbGlua1NvdXJjZSkubWFwKGludGVybik7XG4gIGNvbnN0IExUID0gZDMubWFwKGxpbmtzLCBsaW5rVGFyZ2V0KS5tYXAoaW50ZXJuKTtcbiAgaWYgKG5vZGVUaXRsZSA9PT0gdW5kZWZpbmVkKSBub2RlVGl0bGUgPSAoXywgaSkgPT4gTltpXTtcbiAgY29uc3QgVCA9IG5vZGVUaXRsZSA9PSBudWxsID8gbnVsbCA6IGQzLm1hcChub2Rlcywgbm9kZVRpdGxlKTtcbiAgY29uc3QgRyA9IG5vZGVHcm91cCA9PSBudWxsID8gbnVsbCA6IGQzLm1hcChub2Rlcywgbm9kZUdyb3VwKS5tYXAoaW50ZXJuKTtcbiAgY29uc3QgTlQgPSBub2RlVGV4dCA9PSBudWxsID8gbnVsbCA6IGQzLm1hcChub2Rlcywgbm9kZVRleHQpLm1hcChpbnRlcm4pO1xuICBjb25zdCBXID0gdHlwZW9mIGxpbmtTdHJva2VXaWR0aCAhPT0gXCJmdW5jdGlvblwiID8gbnVsbCA6IGQzLm1hcChsaW5rcywgbGlua1N0cm9rZVdpZHRoKTtcbiAgY29uc3QgUiA9IHR5cGVvZiBub2RlUmFkaXVzICE9PSBcImZ1bmN0aW9uXCIgPyBudWxsIDogZDMubWFwKGxpbmtzLCBub2RlUmFkaXVzKTtcbiAgY29uc3QgTlMgPSB0eXBlb2Ygbm9kZVN0cmVuZ3RoICE9PSBcImZ1bmN0aW9uXCIgPyBudWxsIDogZDMubWFwKGxpbmtzLCBub2RlU3RyZW5ndGgpO1xuXG4gIC8vIFJlcGxhY2UgdGhlIGlucHV0IG5vZGVzIGFuZCBsaW5rcyB3aXRoIG11dGFibGUgb2JqZWN0cyBmb3IgdGhlIHNpbXVsYXRpb24uXG4gIG5vZGVzID0gZDMubWFwKG5vZGVzLCAoXywgaSkgPT4gKHtpZDogTltpXX0pKTtcbiAgbGlua3MgPSBkMy5tYXAobGlua3MsIChfLCBpKSA9PiAoe3NvdXJjZTogTFNbaV0sIHRhcmdldDogTFRbaV19KSk7XG5cbiAgLy8gQ29tcHV0ZSBkZWZhdWx0IGRvbWFpbnMuXG4gIGlmIChHICYmIG5vZGVHcm91cHMgPT09IHVuZGVmaW5lZCkgbm9kZUdyb3VwcyA9IGQzLnNvcnQoRyk7XG5cbiAgLy8gQ29uc3RydWN0IHRoZSBzY2FsZXMuXG4gIGNvbnN0IGNvbG9yID0gbm9kZUdyb3VwID09IG51bGwgPyBudWxsIDogZDMuc2NhbGVPcmRpbmFsKG5vZGVHcm91cHMsIGNvbG9ycyk7XG5cbiAgLy8gQ29uc3RydWN0IHRoZSBmb3JjZXMuXG4gIGNvbnN0IGZvcmNlTm9kZSA9IGQzLmZvcmNlTWFueUJvZHkoKTtcbiAgY29uc3QgZm9yY2VMaW5rID0gZDMuZm9yY2VMaW5rKGxpbmtzKS5pZCgoe2luZGV4OiBpfSkgPT4gTltpXSk7XG4gIGlmIChub2RlU3RyZW5ndGggIT09IHVuZGVmaW5lZCkgZm9yY2VOb2RlLnN0cmVuZ3RoKG5vZGVTdHJlbmd0aCk7XG4gIGlmIChsaW5rU3RyZW5ndGggIT09IHVuZGVmaW5lZCkgZm9yY2VMaW5rLnN0cmVuZ3RoKGxpbmtTdHJlbmd0aCk7XG5cbiAgY29uc3Qgc2ltdWxhdGlvbiA9IGQzLmZvcmNlU2ltdWxhdGlvbihub2RlcylcbiAgICAgIC5mb3JjZShcImxpbmtcIiwgZm9yY2VMaW5rKVxuICAgICAgLmZvcmNlKFwiY2hhcmdlXCIsIGZvcmNlTm9kZSlcbiAgICAgIC5mb3JjZShcInhcIiwgZDMuZm9yY2VYKCkpXG4gICAgICAuZm9yY2UoXCJ5XCIsIGQzLmZvcmNlWSgpKVxuICAgICAgLm9uKFwidGlja1wiLCB0aWNrZWQpO1xuXG4gIGNvbnN0IHN2ZyA9IGQzLmNyZWF0ZShcInN2Z1wiKVxuICAgICAgLmF0dHIoXCJ3aWR0aFwiLCB3aWR0aClcbiAgICAgIC5hdHRyKFwiaGVpZ2h0XCIsIGhlaWdodClcbiAgICAgIC5hdHRyKFwidmlld0JveFwiLCBbLXdpZHRoIC8gMiwgLWhlaWdodCAvIDIsIHdpZHRoLCBoZWlnaHRdKVxuICAgICAgLmF0dHIoXCJzdHlsZVwiLCBcIm1heC13aWR0aDogMTAwJTsgaGVpZ2h0OiBhdXRvOyBoZWlnaHQ6IGludHJpbnNpYztcIik7XG5cbiAgY29uc3QgbGluayA9IHN2Zy5hcHBlbmQoXCJnXCIpXG4gICAgICAuYXR0cihcInN0cm9rZVwiLCBsaW5rU3Ryb2tlKVxuICAgICAgLmF0dHIoXCJzdHJva2Utb3BhY2l0eVwiLCBsaW5rU3Ryb2tlT3BhY2l0eSlcbiAgICAgIC5hdHRyKFwic3Ryb2tlLXdpZHRoXCIsIHR5cGVvZiBsaW5rU3Ryb2tlV2lkdGggIT09IFwiZnVuY3Rpb25cIiA/IGxpbmtTdHJva2VXaWR0aCA6IG51bGwpXG4gICAgICAuYXR0cihcInN0cm9rZS1saW5lY2FwXCIsIGxpbmtTdHJva2VMaW5lY2FwKVxuICAgIC5zZWxlY3RBbGwoXCJsaW5lXCIpXG4gICAgLmRhdGEobGlua3MpXG4gICAgLmpvaW4oXCJsaW5lXCIpO1xuXG4gIGlmIChXKSBsaW5rLmF0dHIoXCJzdHJva2Utd2lkdGhcIiwgKHtpbmRleDogaX0pID0+IFdbaV0pO1xuXG4gIGNvbnN0IG5vZGUgPSBzdmcuYXBwZW5kKFwiZ1wiKVxuICAgICAgLmF0dHIoXCJmaWxsXCIsIG5vZGVGaWxsKVxuICAgICAgLmF0dHIoXCJzdHJva2VcIiwgbm9kZVN0cm9rZSlcbiAgICAgIC5hdHRyKFwic3Ryb2tlLW9wYWNpdHlcIiwgbm9kZVN0cm9rZU9wYWNpdHkpXG4gICAgICAuYXR0cihcInN0cm9rZS13aWR0aFwiLCBub2RlU3Ryb2tlV2lkdGgpXG4gICAgLnNlbGVjdEFsbChcImNpcmNsZVwiKVxuICAgIC5kYXRhKG5vZGVzKVxuICAgIC5qb2luKFwiY2lyY2xlXCIpXG4gICAgICAvLy5hdHRyKFwiclwiLCBub2RlUmFkaXVzKVxuICAgICAgLmF0dHIoXCJyXCIsIHR5cGVvZiBub2RlUmFkaXVzICE9PSBcImZ1bmN0aW9uXCIgPyBub2RlUmFkaXVzIDogbnVsbClcbiAgICAgIC5jYWxsKGRyYWcoc2ltdWxhdGlvbikpO1xuXG4gIGlmIChHKSBub2RlLmF0dHIoXCJmaWxsXCIsICh7aW5kZXg6IGl9KSA9PiBjb2xvcihHW2ldKSk7XG4gIGlmIChUKSBub2RlLmFwcGVuZChcInRpdGxlXCIpLnRleHQoKHtpbmRleDogaX0pID0+IFRbaV0pO1xuICBpZiAoUikgbm9kZS5hdHRyKFwiclwiLCAoe2luZGV4OiBpfSkgPT4gUltpXSk7XG4gIGlmIChOUykgbm9kZS5hdHRyKFwibm9kZS1zdHJlbmd0aFwiLCAoe2luZGV4OiBpfSkgPT4gTlNbaV0pO1xuXG4gIC8vIEhhbmRsZSBpbnZhbGlkYXRpb24uXG4gIGlmIChpbnZhbGlkYXRpb24gIT0gbnVsbCkgaW52YWxpZGF0aW9uLnRoZW4oKCkgPT4gc2ltdWxhdGlvbi5zdG9wKCkpO1xuXG4gIGZ1bmN0aW9uIGludGVybih2YWx1ZSkge1xuICAgIHJldHVybiB2YWx1ZSAhPT0gbnVsbCAmJiB0eXBlb2YgdmFsdWUgPT09IFwib2JqZWN0XCIgPyB2YWx1ZS52YWx1ZU9mKCkgOiB2YWx1ZTtcbiAgfVxuXG4gIGZ1bmN0aW9uIHRpY2tlZCgpIHtcbiAgICBsaW5rXG4gICAgICAuYXR0cihcIngxXCIsIGQgPT4gZC5zb3VyY2UueClcbiAgICAgIC5hdHRyKFwieTFcIiwgZCA9PiBkLnNvdXJjZS55KVxuICAgICAgLmF0dHIoXCJ4MlwiLCBkID0+IGQudGFyZ2V0LngpXG4gICAgICAuYXR0cihcInkyXCIsIGQgPT4gZC50YXJnZXQueSlcbiAgICAgIC5hdHRyKFwiclwiLCBkID0+IGQudmFsdWUpO1xuXG4gICAgbm9kZVxuICAgICAgLmF0dHIoXCJjeFwiLCBkID0+IGQueClcbiAgICAgIC5hdHRyKFwiY3lcIiwgZCA9PiBkLnkpO1xuICB9XG5cbiAgZnVuY3Rpb24gZHJhZyhzaW11bGF0aW9uKSB7ICAgIFxuICAgIGZ1bmN0aW9uIGRyYWdzdGFydGVkKGV2ZW50KSB7XG4gICAgICBpZiAoIWV2ZW50LmFjdGl2ZSkgc2ltdWxhdGlvbi5hbHBoYVRhcmdldCgwLjMpLnJlc3RhcnQoKTtcbiAgICAgIGV2ZW50LnN1YmplY3QuZnggPSBldmVudC5zdWJqZWN0Lng7XG4gICAgICBldmVudC5zdWJqZWN0LmZ5ID0gZXZlbnQuc3ViamVjdC55O1xuICAgIH1cbiAgICBcbiAgICBmdW5jdGlvbiBkcmFnZ2VkKGV2ZW50KSB7XG4gICAgICBldmVudC5zdWJqZWN0LmZ4ID0gZXZlbnQueDtcbiAgICAgIGV2ZW50LnN1YmplY3QuZnkgPSBldmVudC55O1xuICAgIH1cbiAgICBcbiAgICBmdW5jdGlvbiBkcmFnZW5kZWQoZXZlbnQpIHtcbiAgICAgIGlmICghZXZlbnQuYWN0aXZlKSBzaW11bGF0aW9uLmFscGhhVGFyZ2V0KDApO1xuICAgICAgZXZlbnQuc3ViamVjdC5meCA9IG51bGw7XG4gICAgICBldmVudC5zdWJqZWN0LmZ5ID0gbnVsbDtcbiAgICB9XG4gICAgXG4gICAgcmV0dXJuIGQzLmRyYWcoKVxuICAgICAgLm9uKFwic3RhcnRcIiwgZHJhZ3N0YXJ0ZWQpXG4gICAgICAub24oXCJkcmFnXCIsIGRyYWdnZWQpXG4gICAgICAub24oXCJlbmRcIiwgZHJhZ2VuZGVkKTtcbiAgfVxuXG4gIHJldHVybiBPYmplY3QuYXNzaWduKHN2Zy5ub2RlKCksIHtzY2FsZXM6IHtjb2xvcn19KTtcbn1cblxuaW1wb3J0IHtob3d0b30gZnJvbSBcIkBkMy9leGFtcGxlLWNvbXBvbmVudHNcIlxuXG5pbXBvcnQge1N3YXRjaGVzfSBmcm9tIFwiQGQzL2NvbG9yLWxlZ2VuZFwiXG5cbiJ9XX0=
 </script>
@@ -1034,7 +1141,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/www\.yusufimaadkhan\.com\/blog");
+      var filterRegex = new RegExp("https:\/\/www\.yusufimaadkhan\.com");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -2184,7 +2291,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </a>
   </li>  
     <li class="nav-item compact">
-    <a class="nav-link" href="../../index.xml">
+    <a class="nav-link" href="../../blog.xml">
       <i class="bi bi-rss" role="img">
 </i> 
     </a>

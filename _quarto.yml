@@ -9,8 +9,9 @@ project:
 
 website:
   title: "Yusuf Imaad Khan"
-  site-url: https://www.yusufimaadkhan.com/blog
+  site-url: https://www.yusufimaadkhan.com
   description: "Rogue Analysis - Yusuf Imaad Khan's blog"
+  search: false   # search disabled (was on by default) — set true or delete this line to restore
   navbar:
     background: primary
     left:
@@ -21,7 +22,7 @@ website:
       - href: teaching.qmd
         text: Teaching
       - href: blog.qmd
-        text: Rogue Analysis 📈 
+        text: Blog
       - href: resource-links.qmd
         text: Resources
       - href: watermelon.html
@@ -49,7 +50,7 @@ website:
             text: LSE Profile
             href: https://www.lse.ac.uk/government/people/research-students/yusuf-imaad-khan
           - icon: rss
-            href: index.xml
+            href: blog.xml
   #reader-mode: true
   page-footer:
     left: "Built with [Quarto](https://quarto.org/), [GitHub](https://github.com/), [Netlify](https://netlify.com/), and [☕](/tea.qmd). [License: CC BY-SA 4.0.](https://creativecommons.org/licenses/by-sa/4.0/)"
@@ -67,7 +68,7 @@ website:
       - icon: book
         href: https://www.lse.ac.uk/government/people/research-students/yusuf-imaad-khan
       - icon: rss
-        href: index.xml
+        href: blog.xml
 
 format:
   html:
@@ -79,6 +80,8 @@ format:
     include-in-header:
       - text: |
           <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    include-after-body:
+      - _nav-sparkline.html
     
 editor: visual
 

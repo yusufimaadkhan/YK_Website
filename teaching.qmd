@@ -3,7 +3,7 @@ title: "Teaching"
 format: html
 ---
 
--   In 2024-2025, I am coordinating SICO (Suffering in the Company of Others)[^1] in the LSE Department of Philosophy, Logic and Scientific Method. This is a support group for philosophers interested in computational modelling and coding. It is open to undergraduate, MSc, and PhD students!
+-   In 2024-2025, I coordinated SICO (Suffering in the Company of Others)[^1] in the LSE Department of Philosophy, Logic and Scientific Method. This is a support group for philosophers interested in computational modelling and coding. It is open to undergraduate, MSc, and PhD students!
 
 -   In 2023-24, I taught [GV262 "Contemporary Political Theory"](https://www.lse.ac.uk/resources/calendar2023-2024/courseGuides/GV/2023_GV262.htm) as part of undergraduate degrees in the LSE Department of Government.
 

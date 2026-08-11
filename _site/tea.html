@@ -26,10 +26,6 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="site_libs/quarto-nav/headroom.min.js"></script>
 <script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
 <script src="site_libs/quarto-html/quarto.js"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -40,18 +36,6 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="site_libs/bootstrap/bootstrap-8fdb60cc607797eed9f9084820682789.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
-  "copy-button": false,
-  "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -83,7 +67,6 @@ ul.task-list li input[type="checkbox"] {
     <span class="navbar-title">Yusuf Imaad Khan</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -99,7 +82,7 @@ ul.task-list li input[type="checkbox"] {
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./blog.html"> 
-<span class="menu-text">Rogue Analysis 📈</span></a>
+<span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./resource-links.html"> 
@@ -147,7 +130,7 @@ ul.task-list li input[type="checkbox"] {
  <span class="dropdown-text">LSE Profile</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="./index.xml"><i class="bi bi-rss" role="img">
+    <a class="dropdown-item" href="./blog.xml"><i class="bi bi-rss" role="img">
 </i> 
  <span class="dropdown-text"></span></a>
   </li>  
@@ -208,6 +191,130 @@ ul.task-list li input[type="checkbox"] {
 
 
 </main> <!-- /main -->
+<script>
+/* Navbar sparkline hover (hovering nav item plots a fresh random walk
+   beneath it, keeps ticking when you hover!)*/
+(function () {
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  var N = 22;          /* points in the visible window */
+  var TICK_MS = 90;    /* drift speed while hovering */
+  var DRAW_MS = 400;   /* initial left-to-right draw */
+
+  function init() {
+    var nav = document.querySelector('.navbar');
+    if (!nav) return;
+    var links = nav.querySelectorAll('.navbar-nav .nav-link');
+    if (!links.length) return;
+
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var svg = document.createElementNS(SVGNS, 'svg');
+    svg.setAttribute('class', 'yk-nav-spark');
+    svg.setAttribute('aria-hidden', 'true');
+    var path = document.createElementNS(SVGNS, 'path');
+    var dot = document.createElementNS(SVGNS, 'circle');
+    dot.setAttribute('r', '2');
+    svg.appendChild(path);
+    svg.appendChild(dot);
+    nav.appendChild(svg);
+
+    var ys = [], w = 0, h = 14, step = 0, timer = null, startTimer = null;
+
+    function nextY(y) {
+      y += (Math.random() - 0.5) * 3.4;
+      return Math.min(h - 2, Math.max(2, y));
+    }
+
+    function render() {
+      var d = 'M';
+      for (var i = 0; i < N; i++) {
+        d += (i ? 'L' : '') + (i * step).toFixed(1) + ',' + ys[i].toFixed(1);
+      }
+      path.setAttribute('d', d);
+      dot.setAttribute('cx', ((N - 1) * step).toFixed(1));
+      dot.setAttribute('cy', ys[N - 1].toFixed(1));
+      /* SVG y grows downward: lower final y = the walk went up */
+      dot.setAttribute('fill', ys[N - 1] < ys[0] ? '#8ff0a4' : '#ffa198');
+    }
+
+    function stopTicking() {
+      if (timer) { clearInterval(timer); timer = null; }
+      if (startTimer) { clearTimeout(startTimer); startTimer = null; }
+    }
+
+    function startTicking() {
+      path.style.transition = 'none';
+      path.style.strokeDasharray = 'none';
+      timer = setInterval(function () {
+        ys.shift();
+        ys.push(nextY(ys[N - 2]));
+        render();
+      }, TICK_MS);
+    }
+
+    function draw(link) {
+      stopTicking();
+
+      var text = link.querySelector('.menu-text') || link;
+      var r = text.getBoundingClientRect();
+      var nr = nav.getBoundingClientRect();
+      w = Math.max(r.width, 26);
+      step = w / (N - 1);
+
+      svg.setAttribute('width', w);
+      svg.setAttribute('height', h);
+      svg.style.left = (r.left - nr.left + (r.width - w) / 2) + 'px';
+      svg.style.top = (r.bottom - nr.top - 3) + 'px';
+
+      /* seed a fresh walk */
+      ys = [];
+      var y = h * 0.55;
+      for (var i = 0; i < N; i++) { y = nextY(y); ys.push(y); }
+      render();
+
+      if (reduced) {
+        /* no drawing animation, no drift, just....chart */
+        path.style.strokeDasharray = 'none';
+        svg.style.opacity = '1';
+        return;
+      }
+
+      /* animate the initial draw, then go live */
+      var len = path.getTotalLength();
+      path.style.transition = 'none';
+      path.style.strokeDasharray = len;
+      path.style.strokeDashoffset = len;
+      dot.style.transition = 'none';
+      dot.style.opacity = '0';
+      void svg.getBoundingClientRect();
+      path.style.transition = 'stroke-dashoffset ' + DRAW_MS + 'ms ease-out';
+      path.style.strokeDashoffset = '0';
+      dot.style.transition = 'opacity .15s ease ' + (DRAW_MS - 80) + 'ms';
+      dot.style.opacity = '1';
+      svg.style.opacity = '1';
+      startTimer = setTimeout(startTicking, DRAW_MS);
+    }
+
+    function hide() {
+      stopTicking();
+      svg.style.opacity = '0';
+    }
+
+    links.forEach(function (l) {
+      l.addEventListener('mouseenter', function () { draw(l); });
+      l.addEventListener('mouseleave', hide);
+      l.addEventListener('focus', function () { draw(l); });
+      l.addEventListener('blur', hide);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
 <script id="quarto-html-after-body" type="application/javascript">
 window.document.addEventListener("DOMContentLoaded", function (event) {
   const toggleBodyColorMode = (bsSheetEl) => {
@@ -298,7 +405,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/www\.yusufimaadkhan\.com\/blog");
+      var filterRegex = new RegExp("https:\/\/www\.yusufimaadkhan\.com");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -673,7 +780,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </a>
   </li>  
     <li class="nav-item compact">
-    <a class="nav-link" href="./index.xml">
+    <a class="nav-link" href="./blog.xml">
       <i class="bi bi-rss" role="img">
 </i> 
     </a>

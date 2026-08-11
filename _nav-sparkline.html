@@ -1,0 +1,124 @@
+<script>
+/* Navbar sparkline hover (hovering nav item plots a fresh random walk
+   beneath it, keeps ticking when you hover!)*/
+(function () {
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  var N = 22;          /* points in the visible window */
+  var TICK_MS = 90;    /* drift speed while hovering */
+  var DRAW_MS = 400;   /* initial left-to-right draw */
+
+  function init() {
+    var nav = document.querySelector('.navbar');
+    if (!nav) return;
+    var links = nav.querySelectorAll('.navbar-nav .nav-link');
+    if (!links.length) return;
+
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var svg = document.createElementNS(SVGNS, 'svg');
+    svg.setAttribute('class', 'yk-nav-spark');
+    svg.setAttribute('aria-hidden', 'true');
+    var path = document.createElementNS(SVGNS, 'path');
+    var dot = document.createElementNS(SVGNS, 'circle');
+    dot.setAttribute('r', '2');
+    svg.appendChild(path);
+    svg.appendChild(dot);
+    nav.appendChild(svg);
+
+    var ys = [], w = 0, h = 14, step = 0, timer = null, startTimer = null;
+
+    function nextY(y) {
+      y += (Math.random() - 0.5) * 3.4;
+      return Math.min(h - 2, Math.max(2, y));
+    }
+
+    function render() {
+      var d = 'M';
+      for (var i = 0; i < N; i++) {
+        d += (i ? 'L' : '') + (i * step).toFixed(1) + ',' + ys[i].toFixed(1);
+      }
+      path.setAttribute('d', d);
+      dot.setAttribute('cx', ((N - 1) * step).toFixed(1));
+      dot.setAttribute('cy', ys[N - 1].toFixed(1));
+      /* SVG y grows downward: lower final y = the walk went up */
+      dot.setAttribute('fill', ys[N - 1] < ys[0] ? '#8ff0a4' : '#ffa198');
+    }
+
+    function stopTicking() {
+      if (timer) { clearInterval(timer); timer = null; }
+      if (startTimer) { clearTimeout(startTimer); startTimer = null; }
+    }
+
+    function startTicking() {
+      path.style.transition = 'none';
+      path.style.strokeDasharray = 'none';
+      timer = setInterval(function () {
+        ys.shift();
+        ys.push(nextY(ys[N - 2]));
+        render();
+      }, TICK_MS);
+    }
+
+    function draw(link) {
+      stopTicking();
+
+      var text = link.querySelector('.menu-text') || link;
+      var r = text.getBoundingClientRect();
+      var nr = nav.getBoundingClientRect();
+      w = Math.max(r.width, 26);
+      step = w / (N - 1);
+
+      svg.setAttribute('width', w);
+      svg.setAttribute('height', h);
+      svg.style.left = (r.left - nr.left + (r.width - w) / 2) + 'px';
+      svg.style.top = (r.bottom - nr.top - 3) + 'px';
+
+      /* seed a fresh walk */
+      ys = [];
+      var y = h * 0.55;
+      for (var i = 0; i < N; i++) { y = nextY(y); ys.push(y); }
+      render();
+
+      if (reduced) {
+        /* no drawing animation, no drift, just....chart */
+        path.style.strokeDasharray = 'none';
+        svg.style.opacity = '1';
+        return;
+      }
+
+      /* animate the initial draw, then go live */
+      var len = path.getTotalLength();
+      path.style.transition = 'none';
+      path.style.strokeDasharray = len;
+      path.style.strokeDashoffset = len;
+      dot.style.transition = 'none';
+      dot.style.opacity = '0';
+      void svg.getBoundingClientRect();
+      path.style.transition = 'stroke-dashoffset ' + DRAW_MS + 'ms ease-out';
+      path.style.strokeDashoffset = '0';
+      dot.style.transition = 'opacity .15s ease ' + (DRAW_MS - 80) + 'ms';
+      dot.style.opacity = '1';
+      svg.style.opacity = '1';
+      startTimer = setTimeout(startTicking, DRAW_MS);
+    }
+
+    function hide() {
+      stopTicking();
+      svg.style.opacity = '0';
+    }
+
+    links.forEach(function (l) {
+      l.addEventListener('mouseenter', function () { draw(l); });
+      l.addEventListener('mouseleave', hide);
+      l.addEventListener('focus', function () { draw(l); });
+      l.addEventListener('blur', hide);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>

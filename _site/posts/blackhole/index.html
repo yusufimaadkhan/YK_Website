@@ -62,10 +62,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
-<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="../../site_libs/quarto-search/fuse.min.js"></script>
-<script src="../../site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="../../">
 <script src="../../site_libs/quarto-html/quarto.js"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
@@ -76,18 +72,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="../../site_libs/bootstrap/bootstrap-8fdb60cc607797eed9f9084820682789.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
-  "location": "navbar",
-  "copy-button": false,
-  "collapse-after": 3,
-  "panel-placement": "end",
-  "type": "overlay",
-  "limit": 50,
-  "keyboard-shortcut": [
-    "f",
-    "/",
-    "s"
-  ],
-  "show-item-context": false,
   "language": {
     "search-no-results-text": "No results",
     "search-matching-documents-text": "matching documents",
@@ -121,7 +105,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <span class="navbar-title">Yusuf Imaad Khan</span>
     </a>
   </div>
-            <div id="quarto-search" class="" title="Search"></div>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
   <span class="navbar-toggler-icon"></span>
 </button>
@@ -137,7 +120,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../blog.html"> 
-<span class="menu-text">Rogue Analysis 📈</span></a>
+<span class="menu-text">Blog</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="../../resource-links.html"> 
@@ -185,7 +168,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
  <span class="dropdown-text">LSE Profile</span></a>
   </li>  
         <li>
-    <a class="dropdown-item" href="../../index.xml"><i class="bi bi-rss" role="img">
+    <a class="dropdown-item" href="../../blog.xml"><i class="bi bi-rss" role="img">
 </i> 
  <span class="dropdown-text"></span></a>
   </li>  
@@ -614,6 +597,130 @@ WARNING
 <li id="fn1"><p>Full credits for code <a href="https://observablehq.com/@tomlarkworthy/wormhole">https://observablehq.com/@tomlarkworthy/wormhole</a> - Tom Larkworthy<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
 </ol>
 </section></div></main> <!-- /main -->
+<script>
+/* Navbar sparkline hover (hovering nav item plots a fresh random walk
+   beneath it, keeps ticking when you hover!)*/
+(function () {
+  var SVGNS = 'http://www.w3.org/2000/svg';
+  var N = 22;          /* points in the visible window */
+  var TICK_MS = 90;    /* drift speed while hovering */
+  var DRAW_MS = 400;   /* initial left-to-right draw */
+
+  function init() {
+    var nav = document.querySelector('.navbar');
+    if (!nav) return;
+    var links = nav.querySelectorAll('.navbar-nav .nav-link');
+    if (!links.length) return;
+
+    var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    var svg = document.createElementNS(SVGNS, 'svg');
+    svg.setAttribute('class', 'yk-nav-spark');
+    svg.setAttribute('aria-hidden', 'true');
+    var path = document.createElementNS(SVGNS, 'path');
+    var dot = document.createElementNS(SVGNS, 'circle');
+    dot.setAttribute('r', '2');
+    svg.appendChild(path);
+    svg.appendChild(dot);
+    nav.appendChild(svg);
+
+    var ys = [], w = 0, h = 14, step = 0, timer = null, startTimer = null;
+
+    function nextY(y) {
+      y += (Math.random() - 0.5) * 3.4;
+      return Math.min(h - 2, Math.max(2, y));
+    }
+
+    function render() {
+      var d = 'M';
+      for (var i = 0; i < N; i++) {
+        d += (i ? 'L' : '') + (i * step).toFixed(1) + ',' + ys[i].toFixed(1);
+      }
+      path.setAttribute('d', d);
+      dot.setAttribute('cx', ((N - 1) * step).toFixed(1));
+      dot.setAttribute('cy', ys[N - 1].toFixed(1));
+      /* SVG y grows downward: lower final y = the walk went up */
+      dot.setAttribute('fill', ys[N - 1] < ys[0] ? '#8ff0a4' : '#ffa198');
+    }
+
+    function stopTicking() {
+      if (timer) { clearInterval(timer); timer = null; }
+      if (startTimer) { clearTimeout(startTimer); startTimer = null; }
+    }
+
+    function startTicking() {
+      path.style.transition = 'none';
+      path.style.strokeDasharray = 'none';
+      timer = setInterval(function () {
+        ys.shift();
+        ys.push(nextY(ys[N - 2]));
+        render();
+      }, TICK_MS);
+    }
+
+    function draw(link) {
+      stopTicking();
+
+      var text = link.querySelector('.menu-text') || link;
+      var r = text.getBoundingClientRect();
+      var nr = nav.getBoundingClientRect();
+      w = Math.max(r.width, 26);
+      step = w / (N - 1);
+
+      svg.setAttribute('width', w);
+      svg.setAttribute('height', h);
+      svg.style.left = (r.left - nr.left + (r.width - w) / 2) + 'px';
+      svg.style.top = (r.bottom - nr.top - 3) + 'px';
+
+      /* seed a fresh walk */
+      ys = [];
+      var y = h * 0.55;
+      for (var i = 0; i < N; i++) { y = nextY(y); ys.push(y); }
+      render();
+
+      if (reduced) {
+        /* no drawing animation, no drift, just....chart */
+        path.style.strokeDasharray = 'none';
+        svg.style.opacity = '1';
+        return;
+      }
+
+      /* animate the initial draw, then go live */
+      var len = path.getTotalLength();
+      path.style.transition = 'none';
+      path.style.strokeDasharray = len;
+      path.style.strokeDashoffset = len;
+      dot.style.transition = 'none';
+      dot.style.opacity = '0';
+      void svg.getBoundingClientRect();
+      path.style.transition = 'stroke-dashoffset ' + DRAW_MS + 'ms ease-out';
+      path.style.strokeDashoffset = '0';
+      dot.style.transition = 'opacity .15s ease ' + (DRAW_MS - 80) + 'ms';
+      dot.style.opacity = '1';
+      svg.style.opacity = '1';
+      startTimer = setTimeout(startTicking, DRAW_MS);
+    }
+
+    function hide() {
+      stopTicking();
+      svg.style.opacity = '0';
+    }
+
+    links.forEach(function (l) {
+      l.addEventListener('mouseenter', function () { draw(l); });
+      l.addEventListener('mouseleave', hide);
+      l.addEventListener('focus', function () { draw(l); });
+      l.addEventListener('blur', hide);
+    });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+})();
+</script>
 <script type="ojs-module-contents">
 eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlxyXG5pbXBvcnQge3NsaWRlcn0gZnJvbSBcIkBqYXNoa2VuYXMvaW5wdXRzXCI7XHJcbmltcG9ydCB7Y2hlY2tib3h9IGZyb20gXCJAamFzaGtlbmFzL2lucHV0c1wiXHJcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IlxyXG4vLyBkZWZhdWx0c1xyXG5mb3JlZ3JvdW5kID0gXCIjNDQ2ZTliXCI7IC8vXCIjMDAwMDAwXCI7XHJcbnRoaWNrbmVzcyA9IDY7XHJcbnNrZXdfeSA9IDA7XHJcbm9mZnNldF95ID0gLTAuMTM7XHJcbnNjYWxlX3ggPSAwLjczO1xyXG5zY2FsZV95ID0gMC4wNDtcclxubGluZXMgPSAxNDtcclxuYXJjcyA9IDMyO1xyXG5zZWdtZW50cyA9IDEyO1xyXG5yb3VnaF9wcm9qID0gKDEraW50X3JhdGUpLygxK2dyb3d0aF9yYXRlKVxyXG5jYW52YXNfdyA9IDEwMDAwICogTWF0aC5sb2cocm91Z2hfcHJvaileMiAvL2NhbnZhc19zaXplICA7XHJcbmNhbnZhc19oID0gMTAwMDAgKiBNYXRoLmxvZyhyb3VnaF9wcm9qKV4yIC8vY2FudmFzX3NpemVcclxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0zIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoidmlld29mIGNoMSA9IGNoZWNrYm94KHtcclxuICB0aXRsZTogXCJEbyB5b3Ugd2FudCB0byBhY2NlcHQgdGhlIGdvdmVybm1lbnQncyBmaXNjYWwgcnVsZXM/XCIsXHJcbiAgb3B0aW9uczogW1xyXG4gICAgeyB2YWx1ZTogXCJ5ZXNcIiwgbGFiZWw6IFwiWWVzXCIgfSxcclxuICAgIHsgdmFsdWU6IFwiYWxzbyB5ZXNcIiwgbGFiZWw6IFwiQWxzbyBZZXNcIiB9XHJcbiAgXSxcclxuICB2YWx1ZTogW1wieWVzXCJdXHJcbn0pXHJcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBpbnRfcmF0ZSA9IHNsaWRlcih7XHJcbiAgbWluOiAwLjAwMixcclxuICBtYXg6IDAuMDgsXHJcbiAgc3RlcDogMC4wMDAxLFxyXG4gIHZhbHVlOiAwLjAxLFxyXG4gIGZvcm1hdDogXCIuMDAlXCIsXHJcbiAgdGl0bGU6IFwiV2hhdCBkbyB5b3UgcmVja29uIHRoZSBlZmZlY3RpdmUgaW50ZXJlc3QgcmF0ZSBvbiB0aGUgbmF0aW9uYWwgZGVidCB3aWxsIGJlP1wiXHJcbn0pXHJcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBncm93dGhfcmF0ZSA9IHNsaWRlcih7XHJcbiAgbWluOiAtMC4wNCxcclxuICBtYXg6IDAuMDgsXHJcbiAgc3RlcDogMC4wMDAxLFxyXG4gIHZhbHVlOiAtMC4wMixcclxuICBmb3JtYXQ6IFwiLjAwJVwiLFxyXG4gIHRpdGxlOiBcIldoYXQgZG8geW91IHJlY2tvbiBHRFAgZ3Jvd3RoIHJhdGUgd2lsbCBiZT9cIlxyXG59KVxyXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTYiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ2aWV3b2Ygc2NhbGVfeV9pbnYgPSBzbGlkZXIoe1xyXG4gIG1pbjogMC4yLFxyXG4gIG1heDogMixcclxuICB2YWx1ZTogLjk1LFxyXG4gIHRpdGxlOiBcIkRlbnNpdHkgb2YgTWVkaWEgQ292ZXJhZ2VcIlxyXG59KVxyXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTciLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJcclxuLy8gaHR0cHM6Ly9vYnNlcnZhYmxlaHEuY29tL0B0b21sYXJrd29ydGh5L3dvcm1ob2xlIC0gY3JlZGl0cyB0byBUb20gTGFya3dvcnRoeVxyXG5cclxudmlld29mIGFuaW1hdGVkX3dvcm1ob2xlID0ge1xyXG4gIHZhciBjdHggPSBET00uY29udGV4dDJkKGNhbnZhc193LCBjYW52YXNfaCk7XHJcbiAgLy8gV2UgZmx1c2ggZmlsbCB0aGUgZm9yZWdyb3VuZCBjb2xvciBzbyB0aGF0IGl0IGZhZGVzIGludG8gdGhlIG5hdHVyYWwgbWluaW11bVxyXG4gIC8vIG9mIHRoZSBmb3JlZ3JvdW5kIHdpbGxcclxuICBjdHgubGluZUNhcCA9IFwicm91bmRcIjsgXHJcbiAgXHJcbiAgdmFyIHNlZ19zY2FsZV96ID0gMC4xO1xyXG4gIHZhciBsaW5lU2VnU3RlcCA9IDAuMTtcclxuICB2YXIgdGhldGFPZmZzZXQgPSAwLjU7XHJcbiAgXHJcbiAgZnVuY3Rpb24gdW5pdFRvU2NyZWVuKHVuaXRDb29yZHMpIHtcclxuICAgIHJldHVybiBbMC41ICogY2FudmFzX3cgKyAwLjUgKiBjYW52YXNfdyAqIHVuaXRDb29yZHNbMF0sXHJcbiAgICAgICAgICAgIDAuNSAqIGNhbnZhc19oICsgMC41ICogY2FudmFzX2ggKiB1bml0Q29vcmRzWzFdXTtcclxuICB9XHJcbiAgXHJcbiAgZnVuY3Rpb24gcXVhZHJhdGljKHgsIGEsIGIsIGMpIHtcclxuICAgIHJldHVybiB4ICogYSAqIGEgKyB4ICogYiArIGM7XHJcbiAgfVxyXG4gIFxyXG4gIGZ1bmN0aW9uIGFyY1BvaW50KGFyYywgc2VnbWVudCkge1xyXG4gICAgcmV0dXJuIFtzZWdtZW50ICogc2NhbGVfeCAqIHNlZ19zY2FsZV96ICogTWF0aC5jb3MoMiAqIGFyYyAqIE1hdGguUEkpLFxyXG4gICAgICAgICAgICBvZmZzZXRfeSArIHNjYWxlX3lfaW52IC8gKHNlZ21lbnQgKiBzZWdtZW50ICsgMSkgKyBxdWFkcmF0aWMoc2VnbWVudCwgMCwgc2NhbGVfeSwgc2tld195KSAqIE1hdGguc2luKDIgKiBhcmMgKiBNYXRoLlBJKV07XHJcbiAgfVxyXG4gIFxyXG4gIGZ1bmN0aW9uIHNlZ21lbnRfZihzZWdtZW50KSB7XHJcbiAgICByZXR1cm4gKDEgKyBzZWdtZW50KSAtIChEYXRlLm5vdygpICUgMTAwMCkgLyAxMDAwO1xyXG4gIH1cclxuICBcclxuICBmdW5jdGlvbiBsaW5lX3coc2VnbWVudCkge1xyXG4gICAgdmFyIHVuaXQgPSBzZWdtZW50X2Yoc2VnbWVudCkgLyBzZWdtZW50cztcclxuICAgIHJldHVybiBNYXRoLm1heCgodW5pdCArIE1hdGgubWluKDAsIC0gMiAqIHVuaXQgKyAxKSkgKiB0aGlja25lc3MsIDAuMSk7XHJcbiAgfVxyXG4gIFxyXG4gIHdoaWxlICh0cnVlKSB7XHJcbiAgICBjdHguZ2xvYmFsQ29tcG9zaXRlT3BlcmF0aW9uID0gXCJkZXN0aW5hdGlvbi1vdXRcIjtcclxuICAgIGN0eC5maWxsU3R5bGUgPSBcImJsYWNrXCI7XHJcbiAgICBjdHguZmlsbFJlY3QoMCwwLCBjYW52YXNfdywgY2FudmFzX2gpO1xyXG4gICAgY3R4Lmdsb2JhbENvbXBvc2l0ZU9wZXJhdGlvbiA9IFwic291cmNlLW92ZXJcIjtcclxuICAgIFxyXG4gICAgLy8gUmluZ3NcclxuICAgIGZvciAodmFyIHNlZ21lbnQgPSAwOyBzZWdtZW50IDwgc2VnbWVudHM7IHNlZ21lbnQrKykge1xyXG4gICAgICBjdHgubGluZVdpZHRoID0gbGluZV93KHNlZ21lbnQpO1xyXG4gICAgICBjdHguc3Ryb2tlU3R5bGUgPSBmb3JlZ3JvdW5kO1xyXG4gICAgICBjdHguYmVnaW5QYXRoKCk7XHJcbiAgICAgIFxyXG4gICAgICBmb3IgKHZhciBhcmMgPSB0aGV0YU9mZnNldDsgYXJjIDw9IGFyY3MgKyB0aGV0YU9mZnNldDsgYXJjKyspIHtcclxuICAgICAgICB2YXIgYXJjX2YgPSBhcmMgLyBhcmNzO1xyXG4gICAgICAgIHZhciBhcmNfcG9zID0gdW5pdFRvU2NyZWVuKGFyY1BvaW50KGFyY19mLCBzZWdtZW50X2Yoc2VnbWVudCkpKTtcclxuICAgICAgICBjdHgubGluZVRvLmFwcGx5KGN0eCwgYXJjX3Bvcyk7XHJcbiAgICAgIH1cclxuICAgICAgY3R4LnN0cm9rZSgpO1xyXG4gICAgfVxyXG4gICAgLy8gSW53YXJkIGxpbmVzXHJcbiAgICBmb3IgKHZhciBsaW5lID0gdGhldGFPZmZzZXQ7IGxpbmUgPCBsaW5lczsgbGluZSsrKSB7XHJcbiAgICAgIGN0eC5zdHJva2VTdHlsZSA9IGZvcmVncm91bmQ7XHJcbiAgICAgIGN0eC5iZWdpblBhdGgoKTtcclxuICAgICAgdmFyIGxpbmVfZiA9IGxpbmUgLyBsaW5lcztcclxuICAgICAgZm9yICh2YXIgc2VnbWVudCA9IC0zOyBzZWdtZW50IDwgc2VnbWVudHMtMTsgc2VnbWVudCs9IGxpbmVTZWdTdGVwKSB7XHJcbiAgICAgICAgY3R4LmJlZ2luUGF0aCgpO1xyXG4gICAgICAgIGN0eC5tb3ZlVG8uYXBwbHkoY3R4LCB1bml0VG9TY3JlZW4oYXJjUG9pbnQobGluZV9mLCBzZWdtZW50X2Yoc2VnbWVudCAtIGxpbmVTZWdTdGVwKSkpKTtcclxuICAgICAgICB2YXIgYXJjX3BvcyA9IHVuaXRUb1NjcmVlbihhcmNQb2ludChsaW5lX2YsIHNlZ21lbnRfZihzZWdtZW50KSkpO1xyXG4gICAgICAgIGN0eC5saW5lVG8uYXBwbHkoY3R4LCBhcmNfcG9zKTtcclxuICAgICAgICBjdHgubGluZVdpZHRoID0gbGluZV93KHNlZ21lbnQpO1xyXG4gICAgICAgIGN0eC5zdHJva2UoKTtcclxuICAgICAgfVxyXG4gICAgfVxyXG4gICAgXHJcbiAgICB5aWVsZCBjdHguY2FudmFzXHJcbiAgfSAgXHJcbn1cclxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdjaDEnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnaW50X3JhdGUnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnZ3Jvd3RoX3JhdGUnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnc2NhbGVfeV9pbnYnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnYW5pbWF0ZWRfd29ybWhvbGUnKSJ9XX0=
 </script>
@@ -766,7 +873,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   }
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/www\.yusufimaadkhan\.com\/blog");
+      var filterRegex = new RegExp("https:\/\/www\.yusufimaadkhan\.com");
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
@@ -1375,7 +1482,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     </a>
   </li>  
     <li class="nav-item compact">
-    <a class="nav-link" href="../../index.xml">
+    <a class="nav-link" href="../../blog.xml">
       <i class="bi bi-rss" role="img">
 </i> 
     </a>
