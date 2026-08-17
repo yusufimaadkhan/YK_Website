@@ -1,7 +1,10 @@
 project:
   type: website
-  resources: 
+  resources:
     - audio.mp3
+    # charts.html is copied verbatim without being parsed, so Quarto can't
+    # discover its image/audio refs — charts-assets must be declared here.
+    - charts-assets
     - Flag_of_Palestine_(vertical).svg
     - OPTIBuffer-Bold.otf
     - .well-known
