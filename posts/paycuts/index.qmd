@@ -4,7 +4,7 @@ author: "Yusuf Imaad Khan"
 date: "2023-04-27"
 categories: [LSE, Unions, Strikes, Employment]
 editor: visual
-self-contained: true
+#self-contained: true  # cut: inlined assets made pages 4-15MB; real files cache across pages
 toc: true
 toc-depth: 2
 code-tools: true

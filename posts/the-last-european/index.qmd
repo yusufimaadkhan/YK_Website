@@ -5,12 +5,15 @@ author:
   - "Yusuf Imaad Khan"
   - "Richard Paul-Astley"
 date: "March 29 2026"
+# The lecture video is referenced from a raw <video> tag, which Quarto does not
+# scan for resources — without this it never reaches _site and 404s live.
+resources:
+  - habermas-lecture.mp4
 format:
   html:
     toc: false
     toc-depth: 3
     reference-location: margin
-    embed-resources: true
     css: []
     include-in-header:
       text: |
@@ -222,7 +225,7 @@ Nope
 </div>
 
 <div id="takeover">
-  <video id="lecture-vid" src="habermas-lecture.mp4" preload="auto" playsinline></video>
+  <video id="lecture-vid" src="habermas-lecture.mp4" preload="metadata" playsinline></video>
   <div id="takeover-text">I ain't writing all that.<br>Free Palestine.</div>
 </div>
 

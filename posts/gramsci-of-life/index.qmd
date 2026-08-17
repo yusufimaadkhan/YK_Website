@@ -4,7 +4,7 @@ format: html
 author: "Yusuf Imaad Khan"
 categories: [Historical Materialism, Social Epistemology]
 toc: false
-self-contained: true
+#self-contained: true  # cut: inlined assets made pages 4-15MB; real files cache across pages
 code-tools: true
 code-fold: false
 date: "2025-02-24"
