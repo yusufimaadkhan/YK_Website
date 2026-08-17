@@ -80,9 +80,10 @@ format:
       #dark: cyborg #darkly
     css: styles.css
     toc: true
-    include-in-header:
-      - text: |
-          <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    # IBM Plex Sans <link> removed 2026-08-17: a leftover from before the font
+    # overhaul, it cost a DNS + TLS round trip to fonts.googleapis.com on every
+    # page to serve one fallback rule. Recia and General Sans are self-hosted in
+    # styles.css, so the site now makes no external font requests.
     include-after-body:
       - _nav-sparkline.html
     
