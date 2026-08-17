@@ -2,9 +2,8 @@ project:
   type: website
   resources:
     - audio.mp3
-    # charts.html is copied verbatim without being parsed, so Quarto can't
-    # discover its image/audio refs — charts-assets must be declared here.
-    - charts-assets
+    - fonts          # whole dir so the licence ships with the woff2 files
+    - charts-assets  # charts.html isn't parsed, so its refs aren't discovered
     - Flag_of_Palestine_(vertical).svg
     - OPTIBuffer-Bold.otf
     - .well-known
@@ -80,19 +79,11 @@ format:
       #dark: cyborg #darkly
     css: styles.css
     toc: true
-    # IBM Plex Sans <link> removed 2026-08-17: a leftover from before the font
-    # overhaul, it cost a DNS + TLS round trip to fonts.googleapis.com on every
-    # page to serve one fallback rule. Recia and General Sans are self-hosted in
-    # styles.css, so the site now makes no external font requests.
-    #
-    # Preload the two fonts used above the fold. Without this the browser can't
-    # discover them until it has fetched AND parsed styles.css, putting them last
-    # on a ~1s critical path (html 0.69s -> css 0.13s -> parse -> font 0.18s).
-    # Paths must be absolute — posts sit at varying depths; crossorigin is
-    # required for font preload even same-origin.
+    # preload the above-the-fold fonts — otherwise they aren't discovered until
+    # styles.css has been fetched and parsed. crossorigin is required for fonts.
     include-in-header:
       - text: |
-          <link rel="preload" href="/fonts/recia-400.woff2" as="font" type="font/woff2" crossorigin>
+          <link rel="preload" href="/fonts/charter-400.woff2" as="font" type="font/woff2" crossorigin>
           <link rel="preload" href="/fonts/generalsans-400.woff2" as="font" type="font/woff2" crossorigin>
     include-after-body:
       - _nav-sparkline.html

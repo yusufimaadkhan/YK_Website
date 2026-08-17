@@ -1,32 +1,35 @@
 /* css styles */
 
-/* ── self-hosted fonts (downloaded from Fontshare 2026-08-11, ITF Free Font License) ── */
+/* ── self-hosted fonts ──────────────────────────────────────────────────────
+   Charter (Matthew Carter): replaced Recia 2026-08-17 — sturdier on screen.
+   Licence in fonts/CHARTER-LICENSE.txt; keep it alongside the files.
+   General Sans: Fontshare, ITF Free Font License, 2026-08-11.             */
 @font-face {
-    font-family: 'Recia';
-    src: url('fonts/recia-400.woff2') format('woff2');
+    font-family: 'Charter';
+    src: url('fonts/charter-400.woff2') format('woff2');
     font-weight: 400;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
-    font-family: 'Recia';
-    src: url('fonts/recia-400i.woff2') format('woff2');
+    font-family: 'Charter';
+    src: url('fonts/charter-400i.woff2') format('woff2');
     font-weight: 400;
     font-style: italic;
     font-display: swap;
 }
 @font-face {
-    font-family: 'Recia';
-    src: url('fonts/recia-500.woff2') format('woff2');
-    font-weight: 500;
+    font-family: 'Charter';
+    src: url('fonts/charter-700.woff2') format('woff2');
+    font-weight: 700;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
-    font-family: 'Recia';
-    src: url('fonts/recia-700.woff2') format('woff2');
+    font-family: 'Charter';
+    src: url('fonts/charter-700i.woff2') format('woff2');
     font-weight: 700;
-    font-style: normal;
+    font-style: italic;
     font-display: swap;
 }
 @font-face {
@@ -51,19 +54,8 @@
     font-display: swap;
 }
 
-/* ── metric-matched fallback ───────────────────────────────────────────────
-   font-display: swap means Georgia shows for ~1s before Recia arrives. Measured
-   x-heights: Recia 0.5230 em, Georgia 0.4814 em — Georgia renders 8.6% smaller,
-   so the swap jumped size and reflowed the prose. Scaling Georgia up by
-   0.5230/0.4814 = 108.63% makes the swap a change of shape, not of size.
-   No ascent/descent overrides needed: line-height is set explicitly below, so
-   line boxes don't depend on font metrics.
-   General Sans needs no equivalent — Arial/Helvetica are within 1.6% of it. */
-@font-face {
-    font-family: 'Recia Fallback';
-    src: local('Georgia');
-    size-adjust: 108.63%;
-}
+/* Georgia needs no size-adjust: its x-height (0.4814em) matches Charter's
+   (0.4810em), so the font-display: swap handover is invisible. */
 
 /*
 .navbar {
@@ -74,30 +66,60 @@
 
 /* Set base font size and scale everything automatically */
 html {
-    font-size: 12pt !important;  /* deliberate density — decided 2026-08-11 (was 14pt) */
+    font-size: 13pt !important;  /* 13pt from 2026-08-17 — Charter's smaller x-height read weedy at 12pt */
 }
 
-/* Fallback font for anything the type system below doesn't claim.
-   Was IBM Plex Sans (a leftover from before the 2026-08-11 font overhaul), which
-   cost a Google Fonts round trip on every page purely to serve this one rule.
-   General Sans is already self-hosted above, so the fallback now costs nothing. */
+/* Fallback for anything the type system below doesn't claim. Was IBM Plex Sans,
+   which cost a Google Fonts request per page just for this rule (cut 2026-08-17). */
 body {
     font-family: "General Sans", sans-serif !important;
     font-weight: 400 !important;
     font-size: 1rem !important;
 }
 
-/* ── type system (2026-08-11): Recia essays / General Sans chrome ─────────
+/* ── type system (2026-08-11): serif essays / General Sans chrome ─────────
    Serif is the essay voice: body prose ONLY. Every title/heading anywhere,
-   plus navbar/meta/TOC/footer, is General Sans. Fonts are self-hosted via the
-   @font-face rules at the top of this file — no external font requests. */
+   plus navbar/meta/TOC/footer, is General Sans.
+   Prose colour #494746 — warm dark grey, 9.24:1 (AAA); replaces spacelab's
+   #6c757d, which only just cleared AA at 4.69:1. */
 main.content p, main.content li, main.content blockquote,
 main.content .footnotes, main.content figcaption {
-    font-family: "Recia", "Recia Fallback", Georgia, serif !important;
+    font-family: "Charter", Georgia, serif !important;
+    color: #494746;
 }
-main.content p, main.content li {
-    line-height: 1.65;
+
+/* ── reading measurements, after the LRB (2026-08-17) ─────────────────────
+   Theirs: 19px / 700px column / 24px gap. Leading 1.46 not their 1.37 —
+   that's tuned to Quadraat, and Charter's x-height is 6.4% larger. */
+main.content p, main.content li, main.content blockquote,
+main.content .footnotes {
+    font-size: 1.1rem;      /* ≈19px */
+    line-height: 1.46;
 }
+main.content p, main.content li, main.content blockquote,
+main.content .footnotes, main.content figcaption,
+main.content h1, main.content h2, main.content h3, main.content h4 {
+    max-width: 700px;   /* the reading column; figures/images stay unconstrained */
+}
+main.content p, main.content blockquote {
+    margin-bottom: 1.26em;
+}
+
+/* ── chart titles/captions written as ::: {style="..."} divs ──────────────
+   The text sits in a <p> inside the div, so the prose rules above beat the
+   div's inline style. Hand each property back where it was actually declared. */
+main.content div[style*="font-size"] p {
+    font-size: inherit;
+    max-width: none;
+}
+main.content div[style*="line-height"] p {
+    line-height: inherit;
+}
+main.content div[style*="color"] p {
+    color: inherit;
+}
+/* font-family deliberately not handed back: the blocks declaring
+   'Source Serif Pro' would fall back to Times — it was never self-hosted. */
 
 h1, h2, h3, h4, h5, h6, .title, .subtitle,
 .quarto-title .title, .quarto-title .subtitle, .about-entity .title,
@@ -108,6 +130,13 @@ nav[role=doc-toc], .footer {
 }
 h1, h2, h3, h4, .title {
     font-weight: 400;  /* General Sans regular — light-touch headings */
+}
+
+/* Headings: same warm hue as the body, just darker. Not pure black — that
+   reads cold beside the warm grey prose (2026-08-17) */
+h1, h2, h3, h4,
+.quarto-title .title, .quarto-title .subtitle {
+    color: #2f2d2c;
 }
 
 /* homepage: hide the about-block h1 — the navbar already introduces the name,
@@ -124,11 +153,58 @@ h1, h2, h3, h4, .title {
 }
 
 /* links match the navbar blue — one hue across the site (decided 2026-08-11) */
-main.content a, #quarto-margin-sidebar a {
+#quarto-margin-sidebar a {
     color: #446E9C;
 }
+
+/* In-prose links (2026-08-17): body colour with a thin blue underline, rather
+   than blue text — citation-heavy posts were reading as a field of blue.
+   Keeping the underline is what makes them findable without colour. */
+main.content a {
+    color: inherit;
+    text-decoration-line: underline;
+    text-decoration-color: #446E9C;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.15em;
+}
 main.content a:hover {
-    color: #35577b;
+    color: #446E9C;
+    text-decoration-color: #446E9C;
+}
+
+/* ── blog listing (2026-08-18) ─────────────────────────────────────────────
+   No underline on titles: it sat 11.5px above the row rule, giving two lines
+   under every entry. The row rule already separates them; hover restores it.
+   NB Quarto puts the class on the <a> itself, not a wrapper. */
+.quarto-listing a.listing-title {
+    color: #2f2d2c;
+    text-decoration: none;
+}
+.quarto-listing a.listing-title:hover {
+    text-decoration: underline;
+    text-decoration-color: #446E9C;
+    text-underline-offset: 0.15em;
+}
+.quarto-listing span.listing-date {
+    color: #8a8785;      /* metadata recedes */
+    font-size: 0.85rem;
+}
+/* row rule warmed from spacelab's cool #e2e3e5 */
+.quarto-listing table > :not(caption) > * > * {
+    border-bottom-color: #e8e5e2;
+}
+/* column headers are furniture, not content */
+.quarto-listing thead th,
+.quarto-listing thead th a.sort {
+    color: #8a8785 !important;
+    font-size: 0.8rem;
+    font-weight: 400;
+    text-decoration: none;
+}
+/* categories are secondary navigation — they were competing with the essays */
+.quarto-listing-category .category {
+    color: #494746;
+    font-size: 0.9rem;
 }
 
 /* ── navbar hover: random-walk sparkline ───────────────────────────────────

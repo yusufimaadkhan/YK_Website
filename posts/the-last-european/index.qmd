@@ -5,10 +5,8 @@ author:
   - "Yusuf Imaad Khan"
   - "Richard Paul-Astley"
 date: "March 29 2026"
-# The lecture video is referenced from a raw <video> tag, which Quarto does not
-# scan for resources — without this it never reaches _site and 404s live.
 resources:
-  - habermas-lecture.mp4
+  - habermas-lecture.mp4   # raw <video> tag — Quarto won't find it otherwise
 format:
   html:
     toc: false
@@ -18,16 +16,6 @@ format:
     include-in-header:
       text: |
         <style>
-          main {
-            font-family: 'Georgia', 'Times New Roman', serif !important;
-            line-height: 1.9;
-            color: #2c2c2c;
-          }
-          main h1, main h2, main h3,
-          main p, main li, main blockquote,
-          main .title, main .subtitle, main .author {
-            font-family: 'Georgia', serif !important;
-          }
           .trigger-zone { height: 1px; opacity: 0; }
           blockquote {
             border-left: 3px solid #999;
