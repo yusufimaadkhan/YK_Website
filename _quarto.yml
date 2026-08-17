@@ -84,6 +84,16 @@ format:
     # overhaul, it cost a DNS + TLS round trip to fonts.googleapis.com on every
     # page to serve one fallback rule. Recia and General Sans are self-hosted in
     # styles.css, so the site now makes no external font requests.
+    #
+    # Preload the two fonts used above the fold. Without this the browser can't
+    # discover them until it has fetched AND parsed styles.css, putting them last
+    # on a ~1s critical path (html 0.69s -> css 0.13s -> parse -> font 0.18s).
+    # Paths must be absolute — posts sit at varying depths; crossorigin is
+    # required for font preload even same-origin.
+    include-in-header:
+      - text: |
+          <link rel="preload" href="/fonts/recia-400.woff2" as="font" type="font/woff2" crossorigin>
+          <link rel="preload" href="/fonts/generalsans-400.woff2" as="font" type="font/woff2" crossorigin>
     include-after-body:
       - _nav-sparkline.html
     

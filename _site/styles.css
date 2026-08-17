@@ -51,6 +51,20 @@
     font-display: swap;
 }
 
+/* ── metric-matched fallback ───────────────────────────────────────────────
+   font-display: swap means Georgia shows for ~1s before Recia arrives. Measured
+   x-heights: Recia 0.5230 em, Georgia 0.4814 em — Georgia renders 8.6% smaller,
+   so the swap jumped size and reflowed the prose. Scaling Georgia up by
+   0.5230/0.4814 = 108.63% makes the swap a change of shape, not of size.
+   No ascent/descent overrides needed: line-height is set explicitly below, so
+   line boxes don't depend on font metrics.
+   General Sans needs no equivalent — Arial/Helvetica are within 1.6% of it. */
+@font-face {
+    font-family: 'Recia Fallback';
+    src: local('Georgia');
+    size-adjust: 108.63%;
+}
+
 /*
 .navbar {
     background: #557EB8;
@@ -79,7 +93,7 @@ body {
    @font-face rules at the top of this file — no external font requests. */
 main.content p, main.content li, main.content blockquote,
 main.content .footnotes, main.content figcaption {
-    font-family: "Recia", Georgia, serif !important;
+    font-family: "Recia", "Recia Fallback", Georgia, serif !important;
 }
 main.content p, main.content li {
     line-height: 1.65;
