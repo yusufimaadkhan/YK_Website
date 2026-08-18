@@ -1,6 +1,7 @@
 ---
 title: "Teaching"
 format: html
+toc: false   # no headings — without this Quarto reserves an empty margin column
 ---
 
 -   In 2024-2025, I coordinated SICO (Suffering in the Company of Others)[^1] in the LSE Department of Philosophy, Logic and Scientific Method. This is a support group for philosophers interested in computational modelling and coding. It is open to undergraduate, MSc, and PhD students!

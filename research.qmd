@@ -1,6 +1,7 @@
 ---
 title: "Research"
 format: html
+toc: false   # no headings — without this Quarto reserves an empty margin column
 ---
 
 In progress.

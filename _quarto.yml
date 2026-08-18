@@ -79,7 +79,6 @@ format:
       #dark: cyborg #darkly
     css: styles.css
     toc: true
-    toc-location: left
     # preload the above-the-fold fonts — otherwise they aren't discovered until
     # styles.css has been fetched and parsed. crossorigin is required for fonts.
     include-in-header:

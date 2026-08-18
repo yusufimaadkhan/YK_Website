@@ -1,5 +1,6 @@
 ---
 title: "Tea ☕"
+toc: false   # no headings — without this Quarto reserves an empty margin column
 ---
 
 Woah you actually clicked on this? Here's a masala chai recipe for your troubles:

@@ -106,7 +106,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="../../styles.css">
 </head>
 
-<body class="floating nav-fixed quarto-light">
+<body class="nav-fixed fullcontent quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -196,13 +196,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <!-- content -->
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
-  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    
-</nav>
-<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
-    </div>
+    
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
@@ -391,66 +386,66 @@ $ imput_tot_remun_b4_sal_sac &lt;dbl&gt; 176, 250, 369, 308, 303, 190, 309, 408,
 <div class="cell" data-warning="false" data-message="false">
 <details class="code-fold hidden">
 <summary>Code</summary>
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="162" data-source-offset="-11"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 161;"><span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a>viewof facet_cat <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">toggle</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Combine together?"</span><span class="op">,</span> <span class="dt">values</span><span class="op">:</span> [<span class="kw">null</span><span class="op">,</span> <span class="st">"paycut_amount"</span>]})<span class="op">;</span></span>
-<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {Plot} <span class="im">from</span> <span class="st">"@mkfreeman/plot-tooltip"</span><span class="op">;</span></span>
-<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a>boxdata <span class="op">=</span> <span class="fu">transpose</span>(remun_head_paycut_df_convert)<span class="op">;</span></span>
-<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">610</span><span class="op">,</span></span>
-<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marginBottom</span><span class="op">:</span> <span class="dv">60</span><span class="op">,</span></span>
-<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {</span>
-<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a>    <span class="dt">className</span><span class="op">:</span> <span class="st">"axis-lab"</span><span class="op">,</span></span>
-<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Head of University Salary (£000s)→"</span><span class="op">,</span></span>
-<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a>    <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a>    <span class="dt">nice</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a>    <span class="dt">ticks</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span></span>
-<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a>    <span class="dt">labelOffset</span><span class="op">:</span> <span class="dv">55</span></span>
-<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {</span>
-<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Pay cuts"</span><span class="op">,</span></span>
-<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a>    <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a>    <span class="dt">ticks</span><span class="op">:</span> <span class="kw">null</span></span>
-<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a>  <span class="dt">facet</span><span class="op">:</span> {<span class="dt">data</span><span class="op">:</span> boxdata<span class="op">,</span> <span class="dt">y</span><span class="op">:</span> facet_cat<span class="op">,</span> <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">70</span>}<span class="op">,</span></span>
-<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a>  <span class="dt">sort</span><span class="op">:</span> {<span class="dt">fy</span><span class="op">:</span> <span class="st">"y"</span>}<span class="op">,</span></span>
-<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a>  <span class="dt">fy</span><span class="op">:</span> {<span class="dt">label</span><span class="op">:</span><span class="st">"Pay cuts"</span><span class="op">,</span><span class="dt">domain</span><span class="op">:</span> [<span class="st">"100%"</span><span class="op">,</span> <span class="st">"80%"</span><span class="op">,</span> <span class="st">"60%"</span><span class="op">,</span> <span class="st">"50%"</span><span class="op">,</span> <span class="st">"25%"</span><span class="op">,</span> <span class="st">"20%"</span>]}<span class="op">,</span></span>
-<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-195"><a href="#cb3-195" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">frame</span>()<span class="op">,</span></span>
-<span id="cb3-196"><a href="#cb3-196" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-197"><a href="#cb3-197" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">dot</span>(boxdata<span class="op">,</span> </span>
-<span id="cb3-198"><a href="#cb3-198" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb3-199"><a href="#cb3-199" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">dodgeY</span>({</span>
-<span id="cb3-200"><a href="#cb3-200" aria-hidden="true" tabindex="-1"></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"imput_tot_remun_b4_sal_sac"</span><span class="op">,</span> </span>
-<span id="cb3-201"><a href="#cb3-201" aria-hidden="true" tabindex="-1"></a>      <span class="dt">fill</span><span class="op">:</span> <span class="st">"paycut_amount"</span><span class="op">,</span></span>
-<span id="cb3-202"><a href="#cb3-202" aria-hidden="true" tabindex="-1"></a>      <span class="dt">stroke</span><span class="op">:</span> <span class="st">"black"</span><span class="op">,</span></span>
-<span id="cb3-203"><a href="#cb3-203" aria-hidden="true" tabindex="-1"></a>      <span class="dt">anchor</span><span class="op">:</span> <span class="st">"middle"</span><span class="op">,</span> </span>
-<span id="cb3-204"><a href="#cb3-204" aria-hidden="true" tabindex="-1"></a>      <span class="dt">r</span><span class="op">:</span> <span class="fl">5.5</span><span class="op">,</span></span>
-<span id="cb3-205"><a href="#cb3-205" aria-hidden="true" tabindex="-1"></a>      <span class="dt">fillOpacity</span><span class="op">:</span> <span class="fl">0.8</span><span class="op">,</span></span>
-<span id="cb3-206"><a href="#cb3-206" aria-hidden="true" tabindex="-1"></a>      <span class="dt">padding</span><span class="op">:</span> <span class="fl">0.5</span><span class="op">,</span></span>
-<span id="cb3-207"><a href="#cb3-207" aria-hidden="true" tabindex="-1"></a>      <span class="dt">title</span><span class="op">:</span> (d) <span class="kw">=&gt;</span><span class="vs">`</span><span class="sc">${</span>d<span class="op">.</span><span class="at">he_provider</span><span class="sc">}</span><span class="vs"> </span><span class="sc">\n</span><span class="vs"> VC Salary: £</span><span class="sc">${</span>d<span class="op">.</span><span class="at">imput_tot_remun_b4_sal_sac</span><span class="sc">}</span><span class="vs">,000 </span><span class="sc">\n</span><span class="vs"> Pay cuts: </span><span class="sc">${</span>d<span class="op">.</span><span class="at">paycut_amount</span><span class="sc">}</span><span class="vs">`</span></span>
-<span id="cb3-208"><a href="#cb3-208" aria-hidden="true" tabindex="-1"></a>      }))</span>
-<span id="cb3-209"><a href="#cb3-209" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb3-210"><a href="#cb3-210" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span></span>
-<span id="cb3-211"><a href="#cb3-211" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-212"><a href="#cb3-212" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> {</span>
-<span id="cb3-213"><a href="#cb3-213" aria-hidden="true" tabindex="-1"></a>  <span class="dt">legend</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
-<span id="cb3-214"><a href="#cb3-214" aria-hidden="true" tabindex="-1"></a>  <span class="dt">domain</span><span class="op">:</span> [<span class="st">"100%"</span><span class="op">,</span> <span class="st">"80%"</span><span class="op">,</span> <span class="st">"60%"</span><span class="op">,</span> <span class="st">"50%"</span><span class="op">,</span> <span class="st">"25%"</span><span class="op">,</span> <span class="st">"20%"</span>]<span class="op">,</span></span>
-<span id="cb3-215"><a href="#cb3-215" aria-hidden="true" tabindex="-1"></a>  <span class="dt">scheme</span><span class="op">:</span> <span class="st">"Reds"</span><span class="op">,</span></span>
-<span id="cb3-216"><a href="#cb3-216" aria-hidden="true" tabindex="-1"></a>  <span class="dt">reverse</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb3-217"><a href="#cb3-217" aria-hidden="true" tabindex="-1"></a>  <span class="dt">style</span><span class="op">:</span> {</span>
-<span id="cb3-218"><a href="#cb3-218" aria-hidden="true" tabindex="-1"></a>  <span class="dt">fontSize</span><span class="op">:</span> <span class="st">"1em"</span>}</span>
-<span id="cb3-219"><a href="#cb3-219" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb3-220"><a href="#cb3-220" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb3-221"><a href="#cb3-221" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="161" data-source-offset="-11"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 160;"><span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a>viewof facet_cat <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">toggle</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Combine together?"</span><span class="op">,</span> <span class="dt">values</span><span class="op">:</span> [<span class="kw">null</span><span class="op">,</span> <span class="st">"paycut_amount"</span>]})<span class="op">;</span></span>
+<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {Plot} <span class="im">from</span> <span class="st">"@mkfreeman/plot-tooltip"</span><span class="op">;</span></span>
+<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a>boxdata <span class="op">=</span> <span class="fu">transpose</span>(remun_head_paycut_df_convert)<span class="op">;</span></span>
+<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">610</span><span class="op">,</span></span>
+<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marginBottom</span><span class="op">:</span> <span class="dv">60</span><span class="op">,</span></span>
+<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {</span>
+<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a>    <span class="dt">className</span><span class="op">:</span> <span class="st">"axis-lab"</span><span class="op">,</span></span>
+<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Head of University Salary (£000s)→"</span><span class="op">,</span></span>
+<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a>    <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a>    <span class="dt">nice</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a>    <span class="dt">ticks</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span></span>
+<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a>    <span class="dt">labelOffset</span><span class="op">:</span> <span class="dv">55</span></span>
+<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {</span>
+<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Pay cuts"</span><span class="op">,</span></span>
+<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a>    <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a>    <span class="dt">ticks</span><span class="op">:</span> <span class="kw">null</span></span>
+<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a>  <span class="dt">facet</span><span class="op">:</span> {<span class="dt">data</span><span class="op">:</span> boxdata<span class="op">,</span> <span class="dt">y</span><span class="op">:</span> facet_cat<span class="op">,</span> <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">70</span>}<span class="op">,</span></span>
+<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a>  <span class="dt">sort</span><span class="op">:</span> {<span class="dt">fy</span><span class="op">:</span> <span class="st">"y"</span>}<span class="op">,</span></span>
+<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a>  <span class="dt">fy</span><span class="op">:</span> {<span class="dt">label</span><span class="op">:</span><span class="st">"Pay cuts"</span><span class="op">,</span><span class="dt">domain</span><span class="op">:</span> [<span class="st">"100%"</span><span class="op">,</span> <span class="st">"80%"</span><span class="op">,</span> <span class="st">"60%"</span><span class="op">,</span> <span class="st">"50%"</span><span class="op">,</span> <span class="st">"25%"</span><span class="op">,</span> <span class="st">"20%"</span>]}<span class="op">,</span></span>
+<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">frame</span>()<span class="op">,</span></span>
+<span id="cb3-195"><a href="#cb3-195" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-196"><a href="#cb3-196" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">dot</span>(boxdata<span class="op">,</span> </span>
+<span id="cb3-197"><a href="#cb3-197" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb3-198"><a href="#cb3-198" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">dodgeY</span>({</span>
+<span id="cb3-199"><a href="#cb3-199" aria-hidden="true" tabindex="-1"></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"imput_tot_remun_b4_sal_sac"</span><span class="op">,</span> </span>
+<span id="cb3-200"><a href="#cb3-200" aria-hidden="true" tabindex="-1"></a>      <span class="dt">fill</span><span class="op">:</span> <span class="st">"paycut_amount"</span><span class="op">,</span></span>
+<span id="cb3-201"><a href="#cb3-201" aria-hidden="true" tabindex="-1"></a>      <span class="dt">stroke</span><span class="op">:</span> <span class="st">"black"</span><span class="op">,</span></span>
+<span id="cb3-202"><a href="#cb3-202" aria-hidden="true" tabindex="-1"></a>      <span class="dt">anchor</span><span class="op">:</span> <span class="st">"middle"</span><span class="op">,</span> </span>
+<span id="cb3-203"><a href="#cb3-203" aria-hidden="true" tabindex="-1"></a>      <span class="dt">r</span><span class="op">:</span> <span class="fl">5.5</span><span class="op">,</span></span>
+<span id="cb3-204"><a href="#cb3-204" aria-hidden="true" tabindex="-1"></a>      <span class="dt">fillOpacity</span><span class="op">:</span> <span class="fl">0.8</span><span class="op">,</span></span>
+<span id="cb3-205"><a href="#cb3-205" aria-hidden="true" tabindex="-1"></a>      <span class="dt">padding</span><span class="op">:</span> <span class="fl">0.5</span><span class="op">,</span></span>
+<span id="cb3-206"><a href="#cb3-206" aria-hidden="true" tabindex="-1"></a>      <span class="dt">title</span><span class="op">:</span> (d) <span class="kw">=&gt;</span><span class="vs">`</span><span class="sc">${</span>d<span class="op">.</span><span class="at">he_provider</span><span class="sc">}</span><span class="vs"> </span><span class="sc">\n</span><span class="vs"> VC Salary: £</span><span class="sc">${</span>d<span class="op">.</span><span class="at">imput_tot_remun_b4_sal_sac</span><span class="sc">}</span><span class="vs">,000 </span><span class="sc">\n</span><span class="vs"> Pay cuts: </span><span class="sc">${</span>d<span class="op">.</span><span class="at">paycut_amount</span><span class="sc">}</span><span class="vs">`</span></span>
+<span id="cb3-207"><a href="#cb3-207" aria-hidden="true" tabindex="-1"></a>      }))</span>
+<span id="cb3-208"><a href="#cb3-208" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb3-209"><a href="#cb3-209" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span></span>
+<span id="cb3-210"><a href="#cb3-210" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-211"><a href="#cb3-211" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> {</span>
+<span id="cb3-212"><a href="#cb3-212" aria-hidden="true" tabindex="-1"></a>  <span class="dt">legend</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb3-213"><a href="#cb3-213" aria-hidden="true" tabindex="-1"></a>  <span class="dt">domain</span><span class="op">:</span> [<span class="st">"100%"</span><span class="op">,</span> <span class="st">"80%"</span><span class="op">,</span> <span class="st">"60%"</span><span class="op">,</span> <span class="st">"50%"</span><span class="op">,</span> <span class="st">"25%"</span><span class="op">,</span> <span class="st">"20%"</span>]<span class="op">,</span></span>
+<span id="cb3-214"><a href="#cb3-214" aria-hidden="true" tabindex="-1"></a>  <span class="dt">scheme</span><span class="op">:</span> <span class="st">"Reds"</span><span class="op">,</span></span>
+<span id="cb3-215"><a href="#cb3-215" aria-hidden="true" tabindex="-1"></a>  <span class="dt">reverse</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb3-216"><a href="#cb3-216" aria-hidden="true" tabindex="-1"></a>  <span class="dt">style</span><span class="op">:</span> {</span>
+<span id="cb3-217"><a href="#cb3-217" aria-hidden="true" tabindex="-1"></a>  <span class="dt">fontSize</span><span class="op">:</span> <span class="st">"1em"</span>}</span>
+<span id="cb3-218"><a href="#cb3-218" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb3-219"><a href="#cb3-219" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb3-220"><a href="#cb3-220" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div>
@@ -1086,234 +1081,233 @@ window._ojs.runtime.interpretFromScriptTags();
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="an">categories:</span><span class="co"> [LSE, Unions, Strikes, Employment]</span></span>
 <span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="an">editor:</span><span class="co"> visual</span></span>
 <span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="co">#self-contained: true  # cut: inlined assets made pages 4-15MB; real files cache across pages</span></span>
-<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> true</span></span>
-<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="an">toc-depth:</span><span class="co"> 2</span></span>
-<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="an">code-tools:</span><span class="co"> true</span></span>
-<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="an">code-fold:</span><span class="co"> true</span></span>
-<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a><span class="al">![](scarred_meme.jpg)</span>{fig-align="center" width="526"}</span>
-<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a>In response to UCU's <span class="co">[</span><span class="ot">marking and assessment boycott (MAB)</span><span class="co">](https://www.ucu.org.uk/MAB2023)</span>, universities are threatening disproportionate and unjust pay deductions. This is unnecessary. Ulster University and London Metropolitan University have publicly said they will make no deductions (for the moment). <span class="co">[</span><span class="ot">Queen Mary University of London has managed to get a commitment</span><span class="co">](https://twitter.com/qm_ucu/status/1651493114446528512?s=20)</span> from senior management to not deduct in response to MAB (for now and on the basis of a prior local agreement). <span class="co">[</span><span class="ot">Hertfordshire University has managed to reduce deductions</span><span class="co">](https://twitter.com/UCU_UHerts/status/1651242998057803777?s=20)</span> from 100% to a school by school formula. Meanwhile, 67 other universities have decided on arbitrarily large pay deductions in the midst of a cost of living crisis.</span>
-<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a>Wealthy vice chancellors stand behind this disgraceful choice. So I think it only makes sense to take a look at their salaries in light of this choice. On average, this group earn £300k and most of them are deciding to deduct between 50% and 100% of salaries. If we were to cut the salaries of the median vice chancellor by 50%, this would be £150k. That still leaves them comfortably <span class="co">[</span><span class="ot">in the top 2% of earners by income in the UK</span><span class="co">](https://ifs.org.uk/publications/characteristics-and-incomes-top-1)</span>.</span>
-<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a>Perhaps one might respond by saying the mechanisms that led to the decision to cut pay are more complex than blaming a single figurehead vice-chancellor. Agreed. But what is the point of these people if they are not accountable or liable for the decisions taken in the institutions they purport to run? Worse, there is an utter hypocrisy in leading an organisation where you condone pay cuts whilst sitting in the top 2% of earners.</span>
-<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a>I've taken the list of pay cut threats that <span class="co">[</span><span class="ot">Dr Kait Clark</span><span class="co">](https://twitter.com/DrKaitClark/status/1649038370029314052)</span> compiled. I then combined this with <span class="co">[</span><span class="ot">HESA data</span><span class="co">](https://www.hesa.ac.uk/data-and-analysis/finances/statements/senior-pay)</span> on head of provider (or vice chancellor) remuneration. Here is a glimpse of the dataset:</span>
-<span id="cb4-23"><a href="#cb4-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
-<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
-<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
-<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
-<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="co"># Get paycut info - https://twitter.com/DrKaitClark/status/1649038370029314052</span></span>
-<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a><span class="co"># I chucked this data into a csv - you can find it on my github. I'll link this. Will probably need updating as things change.</span></span>
-<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>paycut_threats <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"paycut_threats.csv"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">paycut_amount=</span><span class="fu">as.character</span>(paycut_amount))</span>
-<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a><span class="co"># Get VC salary data</span></span>
-<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>remun_2122_head <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dt031-table-11_head_of_provider_remuneration.csv"</span>, </span>
-<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>    <span class="at">skip =</span> <span class="dv">17</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ukprn,total_remuneration_before_salary_sacrifice) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">tot_remun_b4_sal_sac_21_22 =</span> total_remuneration_before_salary_sacrifice)</span>
-<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a><span class="co"># And get VC salary data for previous year if data missing</span></span>
-<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>remun_2021_head  <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dt031-table-11_head_of_provider_remuneration_PREVIOUS_YEAR.csv"</span>, </span>
-<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>    <span class="at">skip =</span> <span class="dv">17</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> </span>
-<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ukprn,he_provider,total_remuneration_before_salary_sacrifice) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">tot_remun_b4_sal_sac_20_21 =</span> total_remuneration_before_salary_sacrifice)</span>
-<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a><span class="co"># merge this year VC salary and last year VC salary</span></span>
-<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>remun_head_df <span class="ot">&lt;-</span> remun_2021_head <span class="sc">%&gt;%</span> </span>
-<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(remun_2122_head,<span class="at">by=</span><span class="st">"ukprn"</span>) <span class="sc">%&gt;%</span></span>
-<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">imput_tot_remun_b4_sal_sac =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(tot_remun_b4_sal_sac_21_22),tot_remun_b4_sal_sac_20_21,tot_remun_b4_sal_sac_21_22)) <span class="sc">%&gt;%</span> <span class="co"># impute with last year if missing</span></span>
-<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">he_provider_short =</span> <span class="fu">str_remove_all</span>(he_provider, <span class="st">"The University of |University of |The |the | University"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ukprn,he_provider,he_provider_short,imput_tot_remun_b4_sal_sac)</span>
-<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a><span class="fu">remove</span>(remun_2021_head,remun_2122_head) <span class="co"># drop objects we're done with</span></span>
-<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a><span class="co"># merge the VC salaries with the paycut %s</span></span>
-<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>remun_head_paycut_df <span class="ot">&lt;-</span> paycut_threats <span class="sc">%&gt;%</span> </span>
-<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sigh - do some name editing so all the merging works out</span></span>
-<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">university =</span><span class="fu">case_match</span>(university,</span>
-<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"QMUL"</span><span class="sc">~</span><span class="st">"Queen Mary of London"</span>,</span>
-<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"OU"</span><span class="sc">~</span><span class="st">"Open"</span>,</span>
-<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"Queen Margaret"</span><span class="sc">~</span><span class="st">"Queen Margaret, Edinburgh"</span>,</span>
-<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"SOAS"</span><span class="sc">~</span><span class="st">"SOAS of London"</span>,</span>
-<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"UEA"</span><span class="sc">~</span><span class="st">"East Anglia"</span>,</span>
-<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"Cardiff Met"</span><span class="sc">~</span><span class="st">"Cardiff Metropolitan"</span>,</span>
-<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"CCCU"</span><span class="sc">~</span><span class="st">"Canterbury Christ Church"</span>,</span>
-<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"London Met"</span><span class="sc">~</span><span class="st">"London Metropolitan"</span>,</span>
-<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"MMU"</span><span class="sc">~</span><span class="st">"Manchester Metropolitan"</span>,</span>
-<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"Northumbria"</span><span class="sc">~</span><span class="st">"Northumbria at Newcastle"</span>,</span>
-<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"UCL"</span><span class="sc">~</span><span class="st">"University College London"</span>,</span>
-<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"UOC"</span><span class="sc">~</span><span class="st">"Chester"</span>,</span>
-<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"USW"</span><span class="sc">~</span><span class="st">"South Wales"</span>,</span>
-<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"UWE"</span><span class="sc">~</span><span class="st">"West of England, Bristol"</span>,</span>
-<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"UWS"</span><span class="sc">~</span><span class="st">"West of Scotland"</span>,</span>
-<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"Birkbeck"</span><span class="sc">~</span><span class="st">"Birkbeck College"</span>,</span>
-<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"City"</span><span class="sc">~</span><span class="st">"City, of London"</span>,</span>
-<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"DMU"</span><span class="sc">~</span><span class="st">"De Montfort"</span>,</span>
-<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"KCL"</span><span class="sc">~</span><span class="st">"King's College London"</span>,</span>
-<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"LJMU"</span><span class="sc">~</span><span class="st">"Liverpool John Moores"</span>,</span>
-<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"UCLan"</span><span class="sc">~</span><span class="st">"Central Lancashire"</span>,</span>
-<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"UEL"</span><span class="sc">~</span><span class="st">"East London"</span>,</span>
-<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">.default =</span> university</span>
-<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>                                       )) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>  <span class="co"># finally merge it</span></span>
-<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(remun_head_df,<span class="at">by=</span><span class="fu">c</span>(<span class="st">"university"</span><span class="ot">=</span><span class="st">"he_provider_short"</span>)) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a>  <span class="co"># exclude London met and ulster who are actually not doing any paycuts!</span></span>
-<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>paycut_amount<span class="sc">==</span><span class="st">"0%"</span>,</span>
-<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a>         </span>
-<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a>  <span class="co"># exclude Northumbria because their salary data is dodgy. Its like 60k one year. Then 0 year before. Then when I googled its like 250k. I'm just gonna exclude to be safe</span></span>
-<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span>university<span class="sc">==</span><span class="st">"Northumbria at Newcastle"</span>) <span class="sc">%&gt;%</span> </span>
-<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">imput_tot_remun_b4_sal_sac=</span><span class="fu">ifelse</span>(university<span class="sc">==</span><span class="st">"Bristol"</span>,<span class="dv">285</span>,imput_tot_remun_b4_sal_sac)) <span class="sc">%&gt;%</span>  <span class="co"># 285 for Bristol - https://www.bristol.ac.uk/university/governance/executive/vice-chancellor-and-president/</span></span>
-<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filter the unis that have recently come to agreements</span></span>
-<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>university<span class="sc">%in%</span><span class="fu">c</span>(<span class="st">"Queen Mary of London"</span>,<span class="st">"Hertfordshire"</span>))</span>
-<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(remun_head_paycut_df) # summary stats</span></span>
-<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a><span class="co"># Ok so dodgy salary data at Northumbria aside. Drop it and caveat in the visual. Go make it.</span></span>
-<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(remun_head_paycut_df)</span>
-<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a>Next, I put this into a visual comparing head of university salary to the paycut threat, You can hover over and check who is who. Do let me know if the list of pay cuts needs updating.</span>
-<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution collapse="true"}</span>
-<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a><span class="fu">## Caveats</span></span>
-<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a>Here are some caveats to my analysis:</span>
-<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Where vice chancellor/head of uni remuneration data is missing in HESA for this year, I have used previous years data</span>
-<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>If it is still missing, I've looked up the VC salary e.g. for Bristol</span>
-<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-136"><a href="#cb4-136" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>I dropped Northumbria because the HESA figure seemed incorrect in comparison to light research (60k vs a few 100k). Also, the previous year of data was empty for them, and googling the salary came up with slightly out of date results</span>
-<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-138"><a href="#cb4-138" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>I took the list <span class="co">[</span><span class="ot">Dr Kait Clark</span><span class="co">](https://twitter.com/DrKaitClark/status/1649038370029314052)</span> compiled and updated it for developments at Hertfordshire and QMUL</span>
-<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb4-140"><a href="#cb4-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-143"><a href="#cb4-143" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
-<span id="cb4-144"><a href="#cb4-144" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
-<span id="cb4-145"><a href="#cb4-145" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
-<span id="cb4-146"><a href="#cb4-146" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
-<span id="cb4-147"><a href="#cb4-147" aria-hidden="true" tabindex="-1"></a><span class="fu">ojs_define</span>(<span class="at">remun_head_paycut_df_convert =</span> remun_head_paycut_df)</span>
-<span id="cb4-148"><a href="#cb4-148" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a><span class="al">![](line.svg)</span>{width="70" height="5"}</span>
-<span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a>::: {style="margin-top:-1.2rem;font-size: 22px;"}</span>
-<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Wealthy vice chancellors are threatening</span><span class="co">]</span>{style="color: black;"} <span class="co">[</span><span class="ot">huge pay cuts</span><span class="co">]</span>{style="color: #a50f15;"} <span class="co">[</span><span class="ot">in response to the boycotts (MAB). On average, this group earns £300k and we are in a cost of living crisis</span><span class="co">]</span>{style="color: black"}</span>
-<span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a>::: {style="color: #5a6570; margin-bottom: -0.7rem;font-size: 0.9em;"}</span>
-<span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a>**Hover** to see institution names.</span>
-<span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb4-159"><a href="#cb4-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-162"><a href="#cb4-162" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
-<span id="cb4-163"><a href="#cb4-163" aria-hidden="true" tabindex="-1"></a><span class="co">//| warning: false</span></span>
-<span id="cb4-164"><a href="#cb4-164" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
-<span id="cb4-165"><a href="#cb4-165" aria-hidden="true" tabindex="-1"></a><span class="co">//| message: false</span></span>
-<span id="cb4-166"><a href="#cb4-166" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-167"><a href="#cb4-167" aria-hidden="true" tabindex="-1"></a><span class="co">// toggle</span></span>
-<span id="cb4-168"><a href="#cb4-168" aria-hidden="true" tabindex="-1"></a>viewof facet_cat <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">toggle</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Combine together?"</span><span class="op">,</span> <span class="dt">values</span><span class="op">:</span> [<span class="kw">null</span><span class="op">,</span> <span class="st">"paycut_amount"</span>]})<span class="op">;</span></span>
-<span id="cb4-169"><a href="#cb4-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-170"><a href="#cb4-170" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {Plot} <span class="im">from</span> <span class="st">"@mkfreeman/plot-tooltip"</span><span class="op">;</span></span>
-<span id="cb4-171"><a href="#cb4-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-172"><a href="#cb4-172" aria-hidden="true" tabindex="-1"></a>boxdata <span class="op">=</span> <span class="fu">transpose</span>(remun_head_paycut_df_convert)<span class="op">;</span></span>
-<span id="cb4-173"><a href="#cb4-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-174"><a href="#cb4-174" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb4-175"><a href="#cb4-175" aria-hidden="true" tabindex="-1"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">610</span><span class="op">,</span></span>
-<span id="cb4-176"><a href="#cb4-176" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marginBottom</span><span class="op">:</span> <span class="dv">60</span><span class="op">,</span></span>
-<span id="cb4-177"><a href="#cb4-177" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-178"><a href="#cb4-178" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {</span>
-<span id="cb4-179"><a href="#cb4-179" aria-hidden="true" tabindex="-1"></a>    <span class="dt">className</span><span class="op">:</span> <span class="st">"axis-lab"</span><span class="op">,</span></span>
-<span id="cb4-180"><a href="#cb4-180" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Head of University Salary (£000s)→"</span><span class="op">,</span></span>
-<span id="cb4-181"><a href="#cb4-181" aria-hidden="true" tabindex="-1"></a>    <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb4-182"><a href="#cb4-182" aria-hidden="true" tabindex="-1"></a>    <span class="dt">nice</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb4-183"><a href="#cb4-183" aria-hidden="true" tabindex="-1"></a>    <span class="dt">ticks</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span></span>
-<span id="cb4-184"><a href="#cb4-184" aria-hidden="true" tabindex="-1"></a>    <span class="dt">labelOffset</span><span class="op">:</span> <span class="dv">55</span></span>
-<span id="cb4-185"><a href="#cb4-185" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb4-186"><a href="#cb4-186" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-187"><a href="#cb4-187" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {</span>
-<span id="cb4-188"><a href="#cb4-188" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Pay cuts"</span><span class="op">,</span></span>
-<span id="cb4-189"><a href="#cb4-189" aria-hidden="true" tabindex="-1"></a>    <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb4-190"><a href="#cb4-190" aria-hidden="true" tabindex="-1"></a>    <span class="dt">ticks</span><span class="op">:</span> <span class="kw">null</span></span>
-<span id="cb4-191"><a href="#cb4-191" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb4-192"><a href="#cb4-192" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-193"><a href="#cb4-193" aria-hidden="true" tabindex="-1"></a>  <span class="dt">facet</span><span class="op">:</span> {<span class="dt">data</span><span class="op">:</span> boxdata<span class="op">,</span> <span class="dt">y</span><span class="op">:</span> facet_cat<span class="op">,</span> <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">70</span>}<span class="op">,</span></span>
-<span id="cb4-194"><a href="#cb4-194" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-195"><a href="#cb4-195" aria-hidden="true" tabindex="-1"></a>  <span class="dt">sort</span><span class="op">:</span> {<span class="dt">fy</span><span class="op">:</span> <span class="st">"y"</span>}<span class="op">,</span></span>
-<span id="cb4-196"><a href="#cb4-196" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-197"><a href="#cb4-197" aria-hidden="true" tabindex="-1"></a>  <span class="dt">fy</span><span class="op">:</span> {<span class="dt">label</span><span class="op">:</span><span class="st">"Pay cuts"</span><span class="op">,</span><span class="dt">domain</span><span class="op">:</span> [<span class="st">"100%"</span><span class="op">,</span> <span class="st">"80%"</span><span class="op">,</span> <span class="st">"60%"</span><span class="op">,</span> <span class="st">"50%"</span><span class="op">,</span> <span class="st">"25%"</span><span class="op">,</span> <span class="st">"20%"</span>]}<span class="op">,</span></span>
-<span id="cb4-198"><a href="#cb4-198" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-199"><a href="#cb4-199" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb4-200"><a href="#cb4-200" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-201"><a href="#cb4-201" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">frame</span>()<span class="op">,</span></span>
-<span id="cb4-202"><a href="#cb4-202" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-203"><a href="#cb4-203" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">dot</span>(boxdata<span class="op">,</span> </span>
-<span id="cb4-204"><a href="#cb4-204" aria-hidden="true" tabindex="-1"></a>    </span>
-<span id="cb4-205"><a href="#cb4-205" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">dodgeY</span>({</span>
-<span id="cb4-206"><a href="#cb4-206" aria-hidden="true" tabindex="-1"></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"imput_tot_remun_b4_sal_sac"</span><span class="op">,</span> </span>
-<span id="cb4-207"><a href="#cb4-207" aria-hidden="true" tabindex="-1"></a>      <span class="dt">fill</span><span class="op">:</span> <span class="st">"paycut_amount"</span><span class="op">,</span></span>
-<span id="cb4-208"><a href="#cb4-208" aria-hidden="true" tabindex="-1"></a>      <span class="dt">stroke</span><span class="op">:</span> <span class="st">"black"</span><span class="op">,</span></span>
-<span id="cb4-209"><a href="#cb4-209" aria-hidden="true" tabindex="-1"></a>      <span class="dt">anchor</span><span class="op">:</span> <span class="st">"middle"</span><span class="op">,</span> </span>
-<span id="cb4-210"><a href="#cb4-210" aria-hidden="true" tabindex="-1"></a>      <span class="dt">r</span><span class="op">:</span> <span class="fl">5.5</span><span class="op">,</span></span>
-<span id="cb4-211"><a href="#cb4-211" aria-hidden="true" tabindex="-1"></a>      <span class="dt">fillOpacity</span><span class="op">:</span> <span class="fl">0.8</span><span class="op">,</span></span>
-<span id="cb4-212"><a href="#cb4-212" aria-hidden="true" tabindex="-1"></a>      <span class="dt">padding</span><span class="op">:</span> <span class="fl">0.5</span><span class="op">,</span></span>
-<span id="cb4-213"><a href="#cb4-213" aria-hidden="true" tabindex="-1"></a>      <span class="dt">title</span><span class="op">:</span> (d) <span class="kw">=&gt;</span><span class="vs">`</span><span class="sc">${</span>d<span class="op">.</span><span class="at">he_provider</span><span class="sc">}</span><span class="vs"> </span><span class="sc">\n</span><span class="vs"> VC Salary: £</span><span class="sc">${</span>d<span class="op">.</span><span class="at">imput_tot_remun_b4_sal_sac</span><span class="sc">}</span><span class="vs">,000 </span><span class="sc">\n</span><span class="vs"> Pay cuts: </span><span class="sc">${</span>d<span class="op">.</span><span class="at">paycut_amount</span><span class="sc">}</span><span class="vs">`</span></span>
-<span id="cb4-214"><a href="#cb4-214" aria-hidden="true" tabindex="-1"></a>      }))</span>
-<span id="cb4-215"><a href="#cb4-215" aria-hidden="true" tabindex="-1"></a>      </span>
-<span id="cb4-216"><a href="#cb4-216" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span></span>
-<span id="cb4-217"><a href="#cb4-217" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-218"><a href="#cb4-218" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> {</span>
-<span id="cb4-219"><a href="#cb4-219" aria-hidden="true" tabindex="-1"></a>  <span class="dt">legend</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
-<span id="cb4-220"><a href="#cb4-220" aria-hidden="true" tabindex="-1"></a>  <span class="dt">domain</span><span class="op">:</span> [<span class="st">"100%"</span><span class="op">,</span> <span class="st">"80%"</span><span class="op">,</span> <span class="st">"60%"</span><span class="op">,</span> <span class="st">"50%"</span><span class="op">,</span> <span class="st">"25%"</span><span class="op">,</span> <span class="st">"20%"</span>]<span class="op">,</span></span>
-<span id="cb4-221"><a href="#cb4-221" aria-hidden="true" tabindex="-1"></a>  <span class="dt">scheme</span><span class="op">:</span> <span class="st">"Reds"</span><span class="op">,</span></span>
-<span id="cb4-222"><a href="#cb4-222" aria-hidden="true" tabindex="-1"></a>  <span class="dt">reverse</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
-<span id="cb4-223"><a href="#cb4-223" aria-hidden="true" tabindex="-1"></a>  <span class="dt">style</span><span class="op">:</span> {</span>
-<span id="cb4-224"><a href="#cb4-224" aria-hidden="true" tabindex="-1"></a>  <span class="dt">fontSize</span><span class="op">:</span> <span class="st">"1em"</span>}</span>
-<span id="cb4-225"><a href="#cb4-225" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
-<span id="cb4-226"><a href="#cb4-226" aria-hidden="true" tabindex="-1"></a>  </span>
-<span id="cb4-227"><a href="#cb4-227" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> false</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="an">code-tools:</span><span class="co"> true</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="an">code-fold:</span><span class="co"> true</span></span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true" tabindex="-1"></a><span class="al">![](scarred_meme.jpg)</span>{fig-align="center" width="526"}</span>
+<span id="cb4-14"><a href="#cb4-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-15"><a href="#cb4-15" aria-hidden="true" tabindex="-1"></a>In response to UCU's <span class="co">[</span><span class="ot">marking and assessment boycott (MAB)</span><span class="co">](https://www.ucu.org.uk/MAB2023)</span>, universities are threatening disproportionate and unjust pay deductions. This is unnecessary. Ulster University and London Metropolitan University have publicly said they will make no deductions (for the moment). <span class="co">[</span><span class="ot">Queen Mary University of London has managed to get a commitment</span><span class="co">](https://twitter.com/qm_ucu/status/1651493114446528512?s=20)</span> from senior management to not deduct in response to MAB (for now and on the basis of a prior local agreement). <span class="co">[</span><span class="ot">Hertfordshire University has managed to reduce deductions</span><span class="co">](https://twitter.com/UCU_UHerts/status/1651242998057803777?s=20)</span> from 100% to a school by school formula. Meanwhile, 67 other universities have decided on arbitrarily large pay deductions in the midst of a cost of living crisis.</span>
+<span id="cb4-16"><a href="#cb4-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-17"><a href="#cb4-17" aria-hidden="true" tabindex="-1"></a>Wealthy vice chancellors stand behind this disgraceful choice. So I think it only makes sense to take a look at their salaries in light of this choice. On average, this group earn £300k and most of them are deciding to deduct between 50% and 100% of salaries. If we were to cut the salaries of the median vice chancellor by 50%, this would be £150k. That still leaves them comfortably <span class="co">[</span><span class="ot">in the top 2% of earners by income in the UK</span><span class="co">](https://ifs.org.uk/publications/characteristics-and-incomes-top-1)</span>.</span>
+<span id="cb4-18"><a href="#cb4-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-19"><a href="#cb4-19" aria-hidden="true" tabindex="-1"></a>Perhaps one might respond by saying the mechanisms that led to the decision to cut pay are more complex than blaming a single figurehead vice-chancellor. Agreed. But what is the point of these people if they are not accountable or liable for the decisions taken in the institutions they purport to run? Worse, there is an utter hypocrisy in leading an organisation where you condone pay cuts whilst sitting in the top 2% of earners.</span>
+<span id="cb4-20"><a href="#cb4-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-21"><a href="#cb4-21" aria-hidden="true" tabindex="-1"></a>I've taken the list of pay cut threats that <span class="co">[</span><span class="ot">Dr Kait Clark</span><span class="co">](https://twitter.com/DrKaitClark/status/1649038370029314052)</span> compiled. I then combined this with <span class="co">[</span><span class="ot">HESA data</span><span class="co">](https://www.hesa.ac.uk/data-and-analysis/finances/statements/senior-pay)</span> on head of provider (or vice chancellor) remuneration. Here is a glimpse of the dataset:</span>
+<span id="cb4-22"><a href="#cb4-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-25"><a href="#cb4-25" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-26"><a href="#cb4-26" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb4-27"><a href="#cb4-27" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb4-28"><a href="#cb4-28" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: true</span></span>
+<span id="cb4-29"><a href="#cb4-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-30"><a href="#cb4-30" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyverse)</span>
+<span id="cb4-31"><a href="#cb4-31" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(janitor)</span>
+<span id="cb4-32"><a href="#cb4-32" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(readr)</span>
+<span id="cb4-33"><a href="#cb4-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-34"><a href="#cb4-34" aria-hidden="true" tabindex="-1"></a><span class="co"># Get paycut info - https://twitter.com/DrKaitClark/status/1649038370029314052</span></span>
+<span id="cb4-35"><a href="#cb4-35" aria-hidden="true" tabindex="-1"></a><span class="co"># I chucked this data into a csv - you can find it on my github. I'll link this. Will probably need updating as things change.</span></span>
+<span id="cb4-36"><a href="#cb4-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-37"><a href="#cb4-37" aria-hidden="true" tabindex="-1"></a>paycut_threats <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"paycut_threats.csv"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-38"><a href="#cb4-38" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb4-39"><a href="#cb4-39" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">paycut_amount=</span><span class="fu">as.character</span>(paycut_amount))</span>
+<span id="cb4-40"><a href="#cb4-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-41"><a href="#cb4-41" aria-hidden="true" tabindex="-1"></a><span class="co"># Get VC salary data</span></span>
+<span id="cb4-42"><a href="#cb4-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-43"><a href="#cb4-43" aria-hidden="true" tabindex="-1"></a>remun_2122_head <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dt031-table-11_head_of_provider_remuneration.csv"</span>, </span>
+<span id="cb4-44"><a href="#cb4-44" aria-hidden="true" tabindex="-1"></a>    <span class="at">skip =</span> <span class="dv">17</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-45"><a href="#cb4-45" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb4-46"><a href="#cb4-46" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ukprn,total_remuneration_before_salary_sacrifice) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-47"><a href="#cb4-47" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">tot_remun_b4_sal_sac_21_22 =</span> total_remuneration_before_salary_sacrifice)</span>
+<span id="cb4-48"><a href="#cb4-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-49"><a href="#cb4-49" aria-hidden="true" tabindex="-1"></a><span class="co"># And get VC salary data for previous year if data missing</span></span>
+<span id="cb4-50"><a href="#cb4-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-51"><a href="#cb4-51" aria-hidden="true" tabindex="-1"></a>remun_2021_head  <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">"dt031-table-11_head_of_provider_remuneration_PREVIOUS_YEAR.csv"</span>, </span>
+<span id="cb4-52"><a href="#cb4-52" aria-hidden="true" tabindex="-1"></a>    <span class="at">skip =</span> <span class="dv">17</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-53"><a href="#cb4-53" aria-hidden="true" tabindex="-1"></a>  <span class="fu">clean_names</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb4-54"><a href="#cb4-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ukprn,he_provider,total_remuneration_before_salary_sacrifice) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-55"><a href="#cb4-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">tot_remun_b4_sal_sac_20_21 =</span> total_remuneration_before_salary_sacrifice)</span>
+<span id="cb4-56"><a href="#cb4-56" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-57"><a href="#cb4-57" aria-hidden="true" tabindex="-1"></a><span class="co"># merge this year VC salary and last year VC salary</span></span>
+<span id="cb4-58"><a href="#cb4-58" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-59"><a href="#cb4-59" aria-hidden="true" tabindex="-1"></a>remun_head_df <span class="ot">&lt;-</span> remun_2021_head <span class="sc">%&gt;%</span> </span>
+<span id="cb4-60"><a href="#cb4-60" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(remun_2122_head,<span class="at">by=</span><span class="st">"ukprn"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb4-61"><a href="#cb4-61" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">imput_tot_remun_b4_sal_sac =</span> <span class="fu">ifelse</span>(<span class="fu">is.na</span>(tot_remun_b4_sal_sac_21_22),tot_remun_b4_sal_sac_20_21,tot_remun_b4_sal_sac_21_22)) <span class="sc">%&gt;%</span> <span class="co"># impute with last year if missing</span></span>
+<span id="cb4-62"><a href="#cb4-62" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">he_provider_short =</span> <span class="fu">str_remove_all</span>(he_provider, <span class="st">"The University of |University of |The |the | University"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-63"><a href="#cb4-63" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(ukprn,he_provider,he_provider_short,imput_tot_remun_b4_sal_sac)</span>
+<span id="cb4-64"><a href="#cb4-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-65"><a href="#cb4-65" aria-hidden="true" tabindex="-1"></a><span class="fu">remove</span>(remun_2021_head,remun_2122_head) <span class="co"># drop objects we're done with</span></span>
+<span id="cb4-66"><a href="#cb4-66" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-67"><a href="#cb4-67" aria-hidden="true" tabindex="-1"></a><span class="co"># merge the VC salaries with the paycut %s</span></span>
+<span id="cb4-68"><a href="#cb4-68" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-69"><a href="#cb4-69" aria-hidden="true" tabindex="-1"></a>remun_head_paycut_df <span class="ot">&lt;-</span> paycut_threats <span class="sc">%&gt;%</span> </span>
+<span id="cb4-70"><a href="#cb4-70" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-71"><a href="#cb4-71" aria-hidden="true" tabindex="-1"></a>  <span class="co"># sigh - do some name editing so all the merging works out</span></span>
+<span id="cb4-72"><a href="#cb4-72" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-73"><a href="#cb4-73" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">university =</span><span class="fu">case_match</span>(university,</span>
+<span id="cb4-74"><a href="#cb4-74" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"QMUL"</span><span class="sc">~</span><span class="st">"Queen Mary of London"</span>,</span>
+<span id="cb4-75"><a href="#cb4-75" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"OU"</span><span class="sc">~</span><span class="st">"Open"</span>,</span>
+<span id="cb4-76"><a href="#cb4-76" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"Queen Margaret"</span><span class="sc">~</span><span class="st">"Queen Margaret, Edinburgh"</span>,</span>
+<span id="cb4-77"><a href="#cb4-77" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"SOAS"</span><span class="sc">~</span><span class="st">"SOAS of London"</span>,</span>
+<span id="cb4-78"><a href="#cb4-78" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"UEA"</span><span class="sc">~</span><span class="st">"East Anglia"</span>,</span>
+<span id="cb4-79"><a href="#cb4-79" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"Cardiff Met"</span><span class="sc">~</span><span class="st">"Cardiff Metropolitan"</span>,</span>
+<span id="cb4-80"><a href="#cb4-80" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"CCCU"</span><span class="sc">~</span><span class="st">"Canterbury Christ Church"</span>,</span>
+<span id="cb4-81"><a href="#cb4-81" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"London Met"</span><span class="sc">~</span><span class="st">"London Metropolitan"</span>,</span>
+<span id="cb4-82"><a href="#cb4-82" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"MMU"</span><span class="sc">~</span><span class="st">"Manchester Metropolitan"</span>,</span>
+<span id="cb4-83"><a href="#cb4-83" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"Northumbria"</span><span class="sc">~</span><span class="st">"Northumbria at Newcastle"</span>,</span>
+<span id="cb4-84"><a href="#cb4-84" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"UCL"</span><span class="sc">~</span><span class="st">"University College London"</span>,</span>
+<span id="cb4-85"><a href="#cb4-85" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"UOC"</span><span class="sc">~</span><span class="st">"Chester"</span>,</span>
+<span id="cb4-86"><a href="#cb4-86" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"USW"</span><span class="sc">~</span><span class="st">"South Wales"</span>,</span>
+<span id="cb4-87"><a href="#cb4-87" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"UWE"</span><span class="sc">~</span><span class="st">"West of England, Bristol"</span>,</span>
+<span id="cb4-88"><a href="#cb4-88" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"UWS"</span><span class="sc">~</span><span class="st">"West of Scotland"</span>,</span>
+<span id="cb4-89"><a href="#cb4-89" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"Birkbeck"</span><span class="sc">~</span><span class="st">"Birkbeck College"</span>,</span>
+<span id="cb4-90"><a href="#cb4-90" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"City"</span><span class="sc">~</span><span class="st">"City, of London"</span>,</span>
+<span id="cb4-91"><a href="#cb4-91" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"DMU"</span><span class="sc">~</span><span class="st">"De Montfort"</span>,</span>
+<span id="cb4-92"><a href="#cb4-92" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"KCL"</span><span class="sc">~</span><span class="st">"King's College London"</span>,</span>
+<span id="cb4-93"><a href="#cb4-93" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"LJMU"</span><span class="sc">~</span><span class="st">"Liverpool John Moores"</span>,</span>
+<span id="cb4-94"><a href="#cb4-94" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"UCLan"</span><span class="sc">~</span><span class="st">"Central Lancashire"</span>,</span>
+<span id="cb4-95"><a href="#cb4-95" aria-hidden="true" tabindex="-1"></a>                                    <span class="st">"UEL"</span><span class="sc">~</span><span class="st">"East London"</span>,</span>
+<span id="cb4-96"><a href="#cb4-96" aria-hidden="true" tabindex="-1"></a>                                     <span class="at">.default =</span> university</span>
+<span id="cb4-97"><a href="#cb4-97" aria-hidden="true" tabindex="-1"></a>                                       )) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-98"><a href="#cb4-98" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-99"><a href="#cb4-99" aria-hidden="true" tabindex="-1"></a>  <span class="co"># finally merge it</span></span>
+<span id="cb4-100"><a href="#cb4-100" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-101"><a href="#cb4-101" aria-hidden="true" tabindex="-1"></a>  <span class="fu">left_join</span>(remun_head_df,<span class="at">by=</span><span class="fu">c</span>(<span class="st">"university"</span><span class="ot">=</span><span class="st">"he_provider_short"</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-102"><a href="#cb4-102" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-103"><a href="#cb4-103" aria-hidden="true" tabindex="-1"></a>  <span class="co"># exclude London met and ulster who are actually not doing any paycuts!</span></span>
+<span id="cb4-104"><a href="#cb4-104" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-105"><a href="#cb4-105" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>paycut_amount<span class="sc">==</span><span class="st">"0%"</span>,</span>
+<span id="cb4-106"><a href="#cb4-106" aria-hidden="true" tabindex="-1"></a>         </span>
+<span id="cb4-107"><a href="#cb4-107" aria-hidden="true" tabindex="-1"></a>  <span class="co"># exclude Northumbria because their salary data is dodgy. Its like 60k one year. Then 0 year before. Then when I googled its like 250k. I'm just gonna exclude to be safe</span></span>
+<span id="cb4-108"><a href="#cb4-108" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-109"><a href="#cb4-109" aria-hidden="true" tabindex="-1"></a>         <span class="sc">!</span>university<span class="sc">==</span><span class="st">"Northumbria at Newcastle"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb4-110"><a href="#cb4-110" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-111"><a href="#cb4-111" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">imput_tot_remun_b4_sal_sac=</span><span class="fu">ifelse</span>(university<span class="sc">==</span><span class="st">"Bristol"</span>,<span class="dv">285</span>,imput_tot_remun_b4_sal_sac)) <span class="sc">%&gt;%</span>  <span class="co"># 285 for Bristol - https://www.bristol.ac.uk/university/governance/executive/vice-chancellor-and-president/</span></span>
+<span id="cb4-112"><a href="#cb4-112" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-113"><a href="#cb4-113" aria-hidden="true" tabindex="-1"></a>  <span class="co"># Filter the unis that have recently come to agreements</span></span>
+<span id="cb4-114"><a href="#cb4-114" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-115"><a href="#cb4-115" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span>university<span class="sc">%in%</span><span class="fu">c</span>(<span class="st">"Queen Mary of London"</span>,<span class="st">"Hertfordshire"</span>))</span>
+<span id="cb4-116"><a href="#cb4-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-117"><a href="#cb4-117" aria-hidden="true" tabindex="-1"></a><span class="co">#summary(remun_head_paycut_df) # summary stats</span></span>
+<span id="cb4-118"><a href="#cb4-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-119"><a href="#cb4-119" aria-hidden="true" tabindex="-1"></a><span class="co"># Ok so dodgy salary data at Northumbria aside. Drop it and caveat in the visual. Go make it.</span></span>
+<span id="cb4-120"><a href="#cb4-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-121"><a href="#cb4-121" aria-hidden="true" tabindex="-1"></a><span class="fu">glimpse</span>(remun_head_paycut_df)</span>
+<span id="cb4-122"><a href="#cb4-122" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-123"><a href="#cb4-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-124"><a href="#cb4-124" aria-hidden="true" tabindex="-1"></a>Next, I put this into a visual comparing head of university salary to the paycut threat, You can hover over and check who is who. Do let me know if the list of pay cuts needs updating.</span>
+<span id="cb4-125"><a href="#cb4-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-126"><a href="#cb4-126" aria-hidden="true" tabindex="-1"></a>::: {.callout-caution collapse="true"}</span>
+<span id="cb4-127"><a href="#cb4-127" aria-hidden="true" tabindex="-1"></a><span class="fu">## Caveats</span></span>
+<span id="cb4-128"><a href="#cb4-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-129"><a href="#cb4-129" aria-hidden="true" tabindex="-1"></a>Here are some caveats to my analysis:</span>
+<span id="cb4-130"><a href="#cb4-130" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-131"><a href="#cb4-131" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>Where vice chancellor/head of uni remuneration data is missing in HESA for this year, I have used previous years data</span>
+<span id="cb4-132"><a href="#cb4-132" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-133"><a href="#cb4-133" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>If it is still missing, I've looked up the VC salary e.g. for Bristol</span>
+<span id="cb4-134"><a href="#cb4-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-135"><a href="#cb4-135" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>I dropped Northumbria because the HESA figure seemed incorrect in comparison to light research (60k vs a few 100k). Also, the previous year of data was empty for them, and googling the salary came up with slightly out of date results</span>
+<span id="cb4-136"><a href="#cb4-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-137"><a href="#cb4-137" aria-hidden="true" tabindex="-1"></a><span class="ss">-   </span>I took the list <span class="co">[</span><span class="ot">Dr Kait Clark</span><span class="co">](https://twitter.com/DrKaitClark/status/1649038370029314052)</span> compiled and updated it for developments at Hertfordshire and QMUL</span>
+<span id="cb4-138"><a href="#cb4-138" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-139"><a href="#cb4-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-142"><a href="#cb4-142" aria-hidden="true" tabindex="-1"></a><span class="in">```{r}</span></span>
+<span id="cb4-143"><a href="#cb4-143" aria-hidden="true" tabindex="-1"></a><span class="co">#| message: false</span></span>
+<span id="cb4-144"><a href="#cb4-144" aria-hidden="true" tabindex="-1"></a><span class="co">#| warning: false</span></span>
+<span id="cb4-145"><a href="#cb4-145" aria-hidden="true" tabindex="-1"></a><span class="co">#| echo: false</span></span>
+<span id="cb4-146"><a href="#cb4-146" aria-hidden="true" tabindex="-1"></a><span class="fu">ojs_define</span>(<span class="at">remun_head_paycut_df_convert =</span> remun_head_paycut_df)</span>
+<span id="cb4-147"><a href="#cb4-147" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-148"><a href="#cb4-148" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-149"><a href="#cb4-149" aria-hidden="true" tabindex="-1"></a><span class="al">![](line.svg)</span>{width="70" height="5"}</span>
+<span id="cb4-150"><a href="#cb4-150" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a>::: {style="margin-top:-1.2rem;font-size: 22px;"}</span>
+<span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Wealthy vice chancellors are threatening</span><span class="co">]</span>{style="color: black;"} <span class="co">[</span><span class="ot">huge pay cuts</span><span class="co">]</span>{style="color: #a50f15;"} <span class="co">[</span><span class="ot">in response to the boycotts (MAB). On average, this group earns £300k and we are in a cost of living crisis</span><span class="co">]</span>{style="color: black"}</span>
+<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a>::: {style="color: #5a6570; margin-bottom: -0.7rem;font-size: 0.9em;"}</span>
+<span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a>**Hover** to see institution names.</span>
+<span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-161"><a href="#cb4-161" aria-hidden="true" tabindex="-1"></a><span class="in">```{ojs}</span></span>
+<span id="cb4-162"><a href="#cb4-162" aria-hidden="true" tabindex="-1"></a><span class="co">//| warning: false</span></span>
+<span id="cb4-163"><a href="#cb4-163" aria-hidden="true" tabindex="-1"></a><span class="co">//| echo: false</span></span>
+<span id="cb4-164"><a href="#cb4-164" aria-hidden="true" tabindex="-1"></a><span class="co">//| message: false</span></span>
+<span id="cb4-165"><a href="#cb4-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-166"><a href="#cb4-166" aria-hidden="true" tabindex="-1"></a><span class="co">// toggle</span></span>
+<span id="cb4-167"><a href="#cb4-167" aria-hidden="true" tabindex="-1"></a>viewof facet_cat <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">toggle</span>({<span class="dt">label</span><span class="op">:</span> <span class="st">"Combine together?"</span><span class="op">,</span> <span class="dt">values</span><span class="op">:</span> [<span class="kw">null</span><span class="op">,</span> <span class="st">"paycut_amount"</span>]})<span class="op">;</span></span>
+<span id="cb4-168"><a href="#cb4-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-169"><a href="#cb4-169" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> {Plot} <span class="im">from</span> <span class="st">"@mkfreeman/plot-tooltip"</span><span class="op">;</span></span>
+<span id="cb4-170"><a href="#cb4-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-171"><a href="#cb4-171" aria-hidden="true" tabindex="-1"></a>boxdata <span class="op">=</span> <span class="fu">transpose</span>(remun_head_paycut_df_convert)<span class="op">;</span></span>
+<span id="cb4-172"><a href="#cb4-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-173"><a href="#cb4-173" aria-hidden="true" tabindex="-1"></a>Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb4-174"><a href="#cb4-174" aria-hidden="true" tabindex="-1"></a>  <span class="dt">height</span><span class="op">:</span> <span class="dv">610</span><span class="op">,</span></span>
+<span id="cb4-175"><a href="#cb4-175" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marginBottom</span><span class="op">:</span> <span class="dv">60</span><span class="op">,</span></span>
+<span id="cb4-176"><a href="#cb4-176" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-177"><a href="#cb4-177" aria-hidden="true" tabindex="-1"></a>  <span class="dt">x</span><span class="op">:</span> {</span>
+<span id="cb4-178"><a href="#cb4-178" aria-hidden="true" tabindex="-1"></a>    <span class="dt">className</span><span class="op">:</span> <span class="st">"axis-lab"</span><span class="op">,</span></span>
+<span id="cb4-179"><a href="#cb4-179" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Head of University Salary (£000s)→"</span><span class="op">,</span></span>
+<span id="cb4-180"><a href="#cb4-180" aria-hidden="true" tabindex="-1"></a>    <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb4-181"><a href="#cb4-181" aria-hidden="true" tabindex="-1"></a>    <span class="dt">nice</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb4-182"><a href="#cb4-182" aria-hidden="true" tabindex="-1"></a>    <span class="dt">ticks</span><span class="op">:</span> <span class="dv">5</span><span class="op">,</span></span>
+<span id="cb4-183"><a href="#cb4-183" aria-hidden="true" tabindex="-1"></a>    <span class="dt">labelOffset</span><span class="op">:</span> <span class="dv">55</span></span>
+<span id="cb4-184"><a href="#cb4-184" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb4-185"><a href="#cb4-185" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-186"><a href="#cb4-186" aria-hidden="true" tabindex="-1"></a>  <span class="dt">y</span><span class="op">:</span> {</span>
+<span id="cb4-187"><a href="#cb4-187" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Pay cuts"</span><span class="op">,</span></span>
+<span id="cb4-188"><a href="#cb4-188" aria-hidden="true" tabindex="-1"></a>    <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb4-189"><a href="#cb4-189" aria-hidden="true" tabindex="-1"></a>    <span class="dt">ticks</span><span class="op">:</span> <span class="kw">null</span></span>
+<span id="cb4-190"><a href="#cb4-190" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb4-191"><a href="#cb4-191" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-192"><a href="#cb4-192" aria-hidden="true" tabindex="-1"></a>  <span class="dt">facet</span><span class="op">:</span> {<span class="dt">data</span><span class="op">:</span> boxdata<span class="op">,</span> <span class="dt">y</span><span class="op">:</span> facet_cat<span class="op">,</span> <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">70</span>}<span class="op">,</span></span>
+<span id="cb4-193"><a href="#cb4-193" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-194"><a href="#cb4-194" aria-hidden="true" tabindex="-1"></a>  <span class="dt">sort</span><span class="op">:</span> {<span class="dt">fy</span><span class="op">:</span> <span class="st">"y"</span>}<span class="op">,</span></span>
+<span id="cb4-195"><a href="#cb4-195" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-196"><a href="#cb4-196" aria-hidden="true" tabindex="-1"></a>  <span class="dt">fy</span><span class="op">:</span> {<span class="dt">label</span><span class="op">:</span><span class="st">"Pay cuts"</span><span class="op">,</span><span class="dt">domain</span><span class="op">:</span> [<span class="st">"100%"</span><span class="op">,</span> <span class="st">"80%"</span><span class="op">,</span> <span class="st">"60%"</span><span class="op">,</span> <span class="st">"50%"</span><span class="op">,</span> <span class="st">"25%"</span><span class="op">,</span> <span class="st">"20%"</span>]}<span class="op">,</span></span>
+<span id="cb4-197"><a href="#cb4-197" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-198"><a href="#cb4-198" aria-hidden="true" tabindex="-1"></a>  <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb4-199"><a href="#cb4-199" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-200"><a href="#cb4-200" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">frame</span>()<span class="op">,</span></span>
+<span id="cb4-201"><a href="#cb4-201" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-202"><a href="#cb4-202" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">dot</span>(boxdata<span class="op">,</span> </span>
+<span id="cb4-203"><a href="#cb4-203" aria-hidden="true" tabindex="-1"></a>    </span>
+<span id="cb4-204"><a href="#cb4-204" aria-hidden="true" tabindex="-1"></a>    Plot<span class="op">.</span><span class="fu">dodgeY</span>({</span>
+<span id="cb4-205"><a href="#cb4-205" aria-hidden="true" tabindex="-1"></a>      <span class="dt">x</span><span class="op">:</span> <span class="st">"imput_tot_remun_b4_sal_sac"</span><span class="op">,</span> </span>
+<span id="cb4-206"><a href="#cb4-206" aria-hidden="true" tabindex="-1"></a>      <span class="dt">fill</span><span class="op">:</span> <span class="st">"paycut_amount"</span><span class="op">,</span></span>
+<span id="cb4-207"><a href="#cb4-207" aria-hidden="true" tabindex="-1"></a>      <span class="dt">stroke</span><span class="op">:</span> <span class="st">"black"</span><span class="op">,</span></span>
+<span id="cb4-208"><a href="#cb4-208" aria-hidden="true" tabindex="-1"></a>      <span class="dt">anchor</span><span class="op">:</span> <span class="st">"middle"</span><span class="op">,</span> </span>
+<span id="cb4-209"><a href="#cb4-209" aria-hidden="true" tabindex="-1"></a>      <span class="dt">r</span><span class="op">:</span> <span class="fl">5.5</span><span class="op">,</span></span>
+<span id="cb4-210"><a href="#cb4-210" aria-hidden="true" tabindex="-1"></a>      <span class="dt">fillOpacity</span><span class="op">:</span> <span class="fl">0.8</span><span class="op">,</span></span>
+<span id="cb4-211"><a href="#cb4-211" aria-hidden="true" tabindex="-1"></a>      <span class="dt">padding</span><span class="op">:</span> <span class="fl">0.5</span><span class="op">,</span></span>
+<span id="cb4-212"><a href="#cb4-212" aria-hidden="true" tabindex="-1"></a>      <span class="dt">title</span><span class="op">:</span> (d) <span class="kw">=&gt;</span><span class="vs">`</span><span class="sc">${</span>d<span class="op">.</span><span class="at">he_provider</span><span class="sc">}</span><span class="vs"> </span><span class="sc">\n</span><span class="vs"> VC Salary: £</span><span class="sc">${</span>d<span class="op">.</span><span class="at">imput_tot_remun_b4_sal_sac</span><span class="sc">}</span><span class="vs">,000 </span><span class="sc">\n</span><span class="vs"> Pay cuts: </span><span class="sc">${</span>d<span class="op">.</span><span class="at">paycut_amount</span><span class="sc">}</span><span class="vs">`</span></span>
+<span id="cb4-213"><a href="#cb4-213" aria-hidden="true" tabindex="-1"></a>      }))</span>
+<span id="cb4-214"><a href="#cb4-214" aria-hidden="true" tabindex="-1"></a>      </span>
+<span id="cb4-215"><a href="#cb4-215" aria-hidden="true" tabindex="-1"></a>  ]<span class="op">,</span></span>
+<span id="cb4-216"><a href="#cb4-216" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-217"><a href="#cb4-217" aria-hidden="true" tabindex="-1"></a>  <span class="dt">color</span><span class="op">:</span> {</span>
+<span id="cb4-218"><a href="#cb4-218" aria-hidden="true" tabindex="-1"></a>  <span class="dt">legend</span><span class="op">:</span> <span class="kw">false</span><span class="op">,</span></span>
+<span id="cb4-219"><a href="#cb4-219" aria-hidden="true" tabindex="-1"></a>  <span class="dt">domain</span><span class="op">:</span> [<span class="st">"100%"</span><span class="op">,</span> <span class="st">"80%"</span><span class="op">,</span> <span class="st">"60%"</span><span class="op">,</span> <span class="st">"50%"</span><span class="op">,</span> <span class="st">"25%"</span><span class="op">,</span> <span class="st">"20%"</span>]<span class="op">,</span></span>
+<span id="cb4-220"><a href="#cb4-220" aria-hidden="true" tabindex="-1"></a>  <span class="dt">scheme</span><span class="op">:</span> <span class="st">"Reds"</span><span class="op">,</span></span>
+<span id="cb4-221"><a href="#cb4-221" aria-hidden="true" tabindex="-1"></a>  <span class="dt">reverse</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span></span>
+<span id="cb4-222"><a href="#cb4-222" aria-hidden="true" tabindex="-1"></a>  <span class="dt">style</span><span class="op">:</span> {</span>
+<span id="cb4-223"><a href="#cb4-223" aria-hidden="true" tabindex="-1"></a>  <span class="dt">fontSize</span><span class="op">:</span> <span class="st">"1em"</span>}</span>
+<span id="cb4-224"><a href="#cb4-224" aria-hidden="true" tabindex="-1"></a>  }<span class="op">,</span></span>
+<span id="cb4-225"><a href="#cb4-225" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb4-226"><a href="#cb4-226" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb4-227"><a href="#cb4-227" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-228"><a href="#cb4-228" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-229"><a href="#cb4-229" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-230"><a href="#cb4-230" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-231"><a href="#cb4-231" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-232"><a href="#cb4-232" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">axis-lab</span><span class="dt">&gt;</span></span>
-<span id="cb4-233"><a href="#cb4-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-234"><a href="#cb4-234" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
-<span id="cb4-235"><a href="#cb4-235" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;style&gt; text { font-size: 2em; color: #5a6570; } &lt;/style&gt;</span></span>
-<span id="cb4-236"><a href="#cb4-236" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb4-237"><a href="#cb4-237" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">axis-lab</span><span class="dt">&gt;</span></span>
-<span id="cb4-238"><a href="#cb4-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-239"><a href="#cb4-239" aria-hidden="true" tabindex="-1"></a>::: {style="color: #5a6570; margin-top: -0.2rem;font-size: 0.7em;"}</span>
-<span id="cb4-240"><a href="#cb4-240" aria-hidden="true" tabindex="-1"></a>University head salary vs. proposed pay cuts in response to marking and assessment boycott <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span> Broken down by pay cut amount and institution.<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span> Source: <span class="co">[</span><span class="ot">List of salary deductions - \@DrKaitClark</span><span class="co">](https://twitter.com/DrKaitClark/status/1649038370029314052)</span>. <span class="co">[</span><span class="ot">Head of university salary data from HESA</span><span class="co">](https://www.hesa.ac.uk/data-and-analysis/finances/statements/senior-pay)</span>. <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span> Graphic: Yusuf Imaad Khan / @yusuf_i_k <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span> Rogue Analysis📈</span>
-<span id="cb4-241"><a href="#cb4-241" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb4-229"><a href="#cb4-229" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-230"><a href="#cb4-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-231"><a href="#cb4-231" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;</span><span class="kw">axis-lab</span><span class="dt">&gt;</span></span>
+<span id="cb4-232"><a href="#cb4-232" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-233"><a href="#cb4-233" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
+<span id="cb4-234"><a href="#cb4-234" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;style&gt; text { font-size: 2em; color: #5a6570; } &lt;/style&gt;</span></span>
+<span id="cb4-235"><a href="#cb4-235" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb4-236"><a href="#cb4-236" aria-hidden="true" tabindex="-1"></a><span class="dt">&lt;/</span><span class="kw">axis-lab</span><span class="dt">&gt;</span></span>
+<span id="cb4-237"><a href="#cb4-237" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-238"><a href="#cb4-238" aria-hidden="true" tabindex="-1"></a>::: {style="color: #5a6570; margin-top: -0.2rem;font-size: 0.7em;"}</span>
+<span id="cb4-239"><a href="#cb4-239" aria-hidden="true" tabindex="-1"></a>University head salary vs. proposed pay cuts in response to marking and assessment boycott <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span> Broken down by pay cut amount and institution.<span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span> Source: <span class="co">[</span><span class="ot">List of salary deductions - \@DrKaitClark</span><span class="co">](https://twitter.com/DrKaitClark/status/1649038370029314052)</span>. <span class="co">[</span><span class="ot">Head of university salary data from HESA</span><span class="co">](https://www.hesa.ac.uk/data-and-analysis/finances/statements/senior-pay)</span>. <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span> Graphic: Yusuf Imaad Khan / @yusuf_i_k <span class="dt">&lt;</span><span class="kw">br</span><span class="dt">&gt;</span> Rogue Analysis📈</span>
+<span id="cb4-240"><a href="#cb4-240" aria-hidden="true" tabindex="-1"></a>:::</span>
 </code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->

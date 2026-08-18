@@ -152,11 +152,8 @@ h1, h2, h3, h4,
     margin-right: auto !important;
 }
 
-/* links match the navbar blue — one hue across the site (decided 2026-08-11).
-   nav#TOC is named separately because `toc-location: left` moves the TOC out of
-   #quarto-margin-sidebar and into #quarto-sidebar, where the first rule misses it. */
-#quarto-margin-sidebar a,
-nav#TOC a {
+/* links match the navbar blue — one hue across the site (decided 2026-08-11) */
+#quarto-margin-sidebar a {
     color: #446E9C;
 }
 
