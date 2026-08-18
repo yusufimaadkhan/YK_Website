@@ -1,5 +1,11 @@
 project:
   type: website
+  # PAUSED 2026-08-18 — social cards parked until the og:image sizes are fixed.
+  # Uncomment these four blocks (here, open-graph, twitter-card, filters) to resume.
+  # og:description is fixed at front-matter time, before filters run — this
+  # copies the filter-derived <meta name="description"> into the social tags
+  # post-render:
+  #   - python3 _sync-social-description.py
   resources:
     - audio.mp3
     - fonts          # whole dir so the licence ships with the woff2 files
@@ -29,6 +35,9 @@ website:
         text: Resources
       - href: watermelon.html
         text: 🍉
+      # quotes are load-bearing: bare &c. is a YAML anchor and fails the build
+      - href: https://yusufimaadkhan.github.io
+        text: "&c."
     right:
       - text: "Connect"
         menu:
@@ -54,6 +63,9 @@ website:
           - icon: rss
             href: blog.xml
   #reader-mode: true
+  # open-graph: true            # PAUSED — see note above
+  # twitter-card:
+  #   card-style: summary_large_image
   page-footer:
     left: "Built with [Quarto](https://quarto.org/), [GitHub](https://github.com/), [Netlify](https://netlify.com/), and [☕](/tea.qmd). [License: CC BY-SA 4.0.](https://creativecommons.org/licenses/by-sa/4.0/)"
     right:
@@ -79,6 +91,11 @@ format:
       #dark: cyborg #darkly
     css: styles.css
     toc: true
+    # PAUSED — see note above
+    # derives `description` from the opening paragraph so social cards carry a
+    # real summary; Quarto finds og:image itself but never reads the body text
+    # filters:
+    #   - _first-para-description.lua
     # preload the above-the-fold fonts — otherwise they aren't discovered until
     # styles.css has been fetched and parsed. crossorigin is required for fonts.
     include-in-header:
