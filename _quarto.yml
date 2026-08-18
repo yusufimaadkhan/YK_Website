@@ -35,7 +35,7 @@ website:
           - icon: envelope
             text: Email
             href: mailto:yusuf.imaad.khan@gmail.com
-          - icon: cloud
+          - icon: bluesky
             text: Bluesky
             href: https://bsky.app/profile/yusufimaadkhan.com
           - icon: github
@@ -59,7 +59,7 @@ website:
     right:
       - icon: envelope
         href: mailto:yusuf.imaad.khan@gmail.com
-      - icon: cloud
+      - icon: bluesky
         href: https://bsky.app/profile/yusufimaadkhan.com
       - icon: github
         href: https://github.com/yusufimaadkhan
@@ -79,6 +79,7 @@ format:
       #dark: cyborg #darkly
     css: styles.css
     toc: true
+    toc-location: left
     # preload the above-the-fold fonts — otherwise they aren't discovered until
     # styles.css has been fetched and parsed. crossorigin is required for fonts.
     include-in-header:
@@ -88,5 +89,9 @@ format:
     include-after-body:
       - _nav-sparkline.html
     
+# the TOC heading on website pages; Quarto's default is "On this page"
+language:
+  toc-title-website: "Contents"
+
 editor: visual
 
