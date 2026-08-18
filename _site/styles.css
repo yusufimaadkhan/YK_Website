@@ -172,6 +172,19 @@ main.content a:hover {
     text-decoration-color: #446E9C;
 }
 
+/* Footnote markers (2026-08-18): an underline under a 0.7em superscript rides
+   up into the line above and reads as line noise; the raised position is the
+   whole affordance. Same for the ↩︎ backlink. */
+main.content a.footnote-ref,
+main.content a.footnote-back {
+    text-decoration: none;
+}
+main.content a.footnote-ref:hover,
+main.content a.footnote-back:hover {
+    text-decoration: underline;
+    text-decoration-color: #446E9C;
+}
+
 /* ── blog listing (2026-08-18) ─────────────────────────────────────────────
    No underline on titles: it sat 11.5px above the row rule, giving two lines
    under every entry. The row rule already separates them; hover restores it.
@@ -231,3 +244,39 @@ main.content a:hover {
   .yk-nav-spark { display: none; }   /* collapsed navbar: no hover, no chart */
 }
 
+
+/* Quarto animates #quarto-header itself with `all 200ms linear` on headroom
+   unpin; this replaces the easing only. */
+header.headroom, #quarto-header.headroom {
+    transition: transform .38s cubic-bezier(.25, .8, .25, 1) !important;
+}
+
+@media (max-width: 991.98px) {
+    /* trestles gives .about-entity padding-right with no padding-left, which
+       throws the photo off-centre once the columns stack. The leading `div` is
+       load-bearing — Quarto's own selector has it and outranks us without it. */
+    div.quarto-about-trestles .about-entity {
+        padding-right: 0;
+    }
+    /* .about-entity .title is hidden (2026-08-11) but its <header> still sits in
+       the flow carrying margin-bottom:1em, unbalancing the space under the photo */
+    div.quarto-about-trestles .about-entity > header.quarto-title-block {
+        margin: 0 !important;
+    }
+    /* 20em is wider than a 320px phone. Content starts at the header's bottom
+       edge, so these two equal margins own the gap above and below. */
+    .quarto-about-trestles .about-entity .about-image {
+        display: block;
+        max-width: 100%;
+        height: auto;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1.5em;
+        margin-bottom: 1.5em;
+    }
+    .navbar-collapse { width: 100%; }
+    /* Quarto caps the brand at calc(100% - 115px) and ellipsises the overflow,
+       which clips the name at 320px. The toggler needs ~56px, not 115. */
+    .navbar-brand-container { max-width: calc(100% - 56px) !important; }
+    .navbar-brand { overflow: visible; text-overflow: clip; }
+}

@@ -4,18 +4,11 @@ image: profile_large.jpg
 about:
   template: trestles 
   #image-width: 10em
-  image-shape: round 
+  image-shape: rounded 
 ---
 
 ```{=html}
 <style>
-/* Add padding to the top of the image on smaller screens */
-@media only screen and (max-width: 990px) {
-  .about-image {
-    padding-top: 1em; /* Adjust the value as needed */
-  }
-}
-
 /* Purple "question" callout — match the green tip styling, but purple */
 .callout.question-purple{
   /* if Quarto uses vars, set them */
